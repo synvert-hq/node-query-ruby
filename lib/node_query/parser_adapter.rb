@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class NodeQuery::ParserAdapter
+  def is_node?(node)
+    node.is_a?(Parser::AST::Node)
+  end
+
   def get_node_type(node)
     node.type
   end
@@ -10,7 +14,7 @@ class NodeQuery::ParserAdapter
   end
 
   def get_children(node)
-    node.is_a?(Parser::AST::Node) ? node.children : []
+    node.children
   end
 
   def get_siblings(node)
