@@ -1,0 +1,9 @@
+class NodeQuery::Adapter
+  def get_node_type: (node: Node) -> String
+
+  def get_source: (node: Node) -> String
+
+  def get_children: (node: Node) -> Array[Node]
+
+  def get_siblings: (node: Node) -> Array[Node]
+end
