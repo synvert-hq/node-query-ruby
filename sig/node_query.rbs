@@ -1,0 +1,11 @@
+class NodeQuery
+  VERSION: String
+
+  def self.configure: (options: { adapter: NodeQuery::Adapter }) -> void
+
+  def self.get_adapter: () -> NodeQuery::Adapter
+
+  def initialize: (nql: String) -> NodeQuery
+
+  def parse: (node: Node) -> Array[Node]
+end

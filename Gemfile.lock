@@ -1,0 +1,97 @@
+PATH
+  remote: .
+  specs:
+    node-query (0.1.0)
+      activesupport
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (7.0.3)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+    ast (2.4.2)
+    coderay (1.1.3)
+    concurrent-ruby (1.1.10)
+    diff-lcs (1.5.0)
+    ffi (1.15.5)
+    formatador (1.1.0)
+    guard (2.18.0)
+      formatador (>= 0.2.4)
+      listen (>= 2.7, < 4.0)
+      lumberjack (>= 1.0.12, < 2.0)
+      nenv (~> 0.1)
+      notiffany (~> 0.0)
+      pry (>= 0.13.0)
+      shellany (~> 0.0)
+      thor (>= 0.18.1)
+    guard-compat (1.2.1)
+    guard-rake (1.0.0)
+      guard
+      rake
+    guard-rspec (4.7.3)
+      guard (~> 2.1)
+      guard-compat (~> 1.1)
+      rspec (>= 2.99.0, < 4.0)
+    i18n (1.10.0)
+      concurrent-ruby (~> 1.0)
+    listen (3.7.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
+    lumberjack (1.2.8)
+    method_source (1.0.0)
+    minitest (5.16.1)
+    nenv (0.3.0)
+    notiffany (0.1.3)
+      nenv (~> 0.1)
+      shellany (~> 0.0)
+    oedipus_lex (2.6.0)
+    parser (3.1.2.0)
+      ast (~> 2.4.1)
+    parser_node_ext (0.1.0)
+      parser
+    pry (0.14.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    racc (1.6.0)
+    rake (13.0.6)
+    rb-fsevent (0.11.1)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
+    rspec (3.11.0)
+      rspec-core (~> 3.11.0)
+      rspec-expectations (~> 3.11.0)
+      rspec-mocks (~> 3.11.0)
+    rspec-core (3.11.0)
+      rspec-support (~> 3.11.0)
+    rspec-expectations (3.11.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-mocks (3.11.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-support (3.11.0)
+    shellany (0.0.1)
+    thor (1.2.1)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+
+PLATFORMS
+  x86_64-darwin-21
+
+DEPENDENCIES
+  guard
+  guard-rake
+  guard-rspec
+  node-query!
+  oedipus_lex
+  parser
+  parser_node_ext
+  racc
+  rake (~> 13.0)
+  rspec (~> 3.0)
+
+BUNDLED WITH
+   2.3.7
