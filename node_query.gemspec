@@ -3,7 +3,7 @@
 require_relative "lib/node_query/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "node-query"
+  spec.name = "node_query"
   spec.version = NodeQuery::VERSION
   spec.authors = ["Richard Huang"]
   spec.email = ["flyerhzm@gmail.com"]

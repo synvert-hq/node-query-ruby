@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    node-query (0.1.0)
+    node_query (0.1.0)
       activesupport
 
 GEM
@@ -86,7 +86,7 @@ DEPENDENCIES
   guard
   guard-rake
   guard-rspec
-  node-query!
+  node_query!
   oedipus_lex
   parser
   parser_node_ext
