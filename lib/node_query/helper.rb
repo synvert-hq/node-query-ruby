@@ -9,10 +9,13 @@ class NodeQuery::Helper
     return unless node
 
     first_key, rest_keys = keys.to_s.split('.', 2)
-    if (node.is_a?(Array) && first_key === "*")
+    if node.is_a?(Array) && first_key === "*"
       return node.map { |child_node| get_target_node(child_node, rest_keys) }
     end
 
+    if node.is_a?(Array) && first_key =~ /\d+/
+      child_node = node[first_key.to_i]
+    end
     if node.respond_to?(first_key)
       child_node = node.send(first_key)
     end

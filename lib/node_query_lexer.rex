@@ -10,7 +10,7 @@ macros
   OPEN_DYNAMIC_ATTRIBUTE   /{{/
   CLOSE_DYNAMIC_ATTRIBUTE  /}}/
   NODE_TYPE                /\.[a-z]+/
-  IDENTIFIER               /[\.\w]+/
+  IDENTIFIER               /[\*\.\w]*\w/
   IDENTIFIER_VALUE         /[\.\w!&:\?<>=]+/
   FALSE                    /false/
   FLOAT                    /\d+\.\d+/

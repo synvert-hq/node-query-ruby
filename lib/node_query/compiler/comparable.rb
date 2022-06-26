@@ -46,9 +46,17 @@ module NodeQuery::Compiler
       when '<='
         actual_value(node) <= expected_value
       when 'in'
-        expected_value.any? { |expected| expected.match?(node, '==') }
+        if node.is_a?(Array)
+          node.all? { |child| expected_value.any? { |expected| expected.match?(child, '==') } }
+        else
+          expected_value.any? { |expected| expected.match?(node, '==') }
+        end
       when 'not_in'
-        expected_value.all? { |expected| expected.match?(node, '!=') }
+        if node.is_a?(Array)
+          node.all? { |child| expected_value.all? { |expected| expected.match?(child, '!=') } }
+        else
+          expected_value.all? { |expected| expected.match?(node, '!=') }
+        end
       when 'includes'
         actual_value(node).any? { |actual| actual == expected_value }
       else

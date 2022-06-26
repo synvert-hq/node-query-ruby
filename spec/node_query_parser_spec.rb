@@ -130,6 +130,11 @@ RSpec.describe NodeQueryParser do
       expect(parser.parse(source).to_s).to eq source
     end
 
+    it 'parses * in key' do
+      source = '.def[arguments.*.name in (foo bar)]'
+      expect(parser.parse(source).to_s).to eq source
+    end
+
     it 'parses ,' do
       source = '.send[message=foo], .send[message=bar]'
       expect(parser.parse(source).to_s).to eq source
@@ -235,6 +240,11 @@ RSpec.describe NodeQueryParser do
 
       expression = parser.parse('.def[arguments!=(b a)]')
       expect(expression.query_nodes(node)).to eq [node.body.first, node.body.second, node.body.last]
+    end
+
+    it 'matches * in attribute key' do
+      expression = parser.parse('.def[arguments.*.name NOT IN (a)]')
+      expect(expression.query_nodes(node)).to eq [node.body.first, node.body.second]
     end
 
     it 'matches descendant node' do

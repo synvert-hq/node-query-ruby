@@ -481,6 +481,22 @@ RSpec.describe NodeQueryLexer do
       ]
       assert_tokens source, expected_tokens
     end
+
+    it 'matches * in attribute key' do
+      source = '.def[arguments.*.name IN (foo bar)]'
+      expected_tokens = [
+        [:tNODE_TYPE, "def"],
+        [:tOPEN_ATTRIBUTE, "["],
+        [:tKEY, "arguments.*.name"],
+        [:tOPERATOR, "in"],
+        [:tOPEN_ARRAY, "("],
+        [:tIDENTIFIER_VALUE, "foo"],
+        [:tIDENTIFIER_VALUE, "bar"],
+        [:tCLOSE_ARRAY, ")"],
+        [:tCLOSE_ATTRIBUTE, "]"]
+      ]
+      assert_tokens source, expected_tokens
+    end
   end
 
   context 'nested attribute' do
