@@ -5,6 +5,11 @@ RSpec.describe NodeQueryParser do
   let(:parser) { described_class.new }
 
   describe '#toString' do
+    it 'parses node ype' do
+      source = '.send'
+      expect(parser.parse(source).to_s).to eq source
+    end
+
     it 'parses one selector' do
       source = '.send[message=:create]'
       expect(parser.parse(source).to_s).to eq source
@@ -25,23 +30,13 @@ RSpec.describe NodeQueryParser do
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses scope' do
-      source = '.block body > .send'
-      expect(parser.parse(source).to_s).to eq source
-    end
-
-    it 'parses :has selector' do
+    it 'parses :has pseduo class selector' do
       source = '.class :has(> .def)'
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses :not_has selector' do
+    it 'parses :not_has pseduo class selector' do
       source = '.class :not_has(> .def)'
-      expect(parser.parse(source).to_s).to eq source
-    end
-
-    it 'parses root :has selector' do
-      source = ':has(.def)'
       expect(parser.parse(source).to_s).to eq source
     end
 
@@ -50,7 +45,7 @@ RSpec.describe NodeQueryParser do
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses nested attributes' do
+    it 'parses nested selector' do
       source = '.send[receiver.message=:create]'
       expect(parser.parse(source).to_s).to eq source
     end
@@ -60,42 +55,42 @@ RSpec.describe NodeQueryParser do
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses start with operator' do
+    it 'parses ^= operator' do
       source = '.def[name^=synvert]'
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses end with operator' do
+    it 'parses $= operator' do
       source = '.def[name$=synvert]'
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses contain operator' do
+    it 'parses *= operator' do
       source = '.def[name*=synvert]'
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses not equal operator' do
+    it 'parses != operator' do
       source = '.send[receiver=.send[message!=:create]]'
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses greater than operator' do
+    it 'parses > operator' do
       source = '.send[receiver=.send[arguments.size>1]]'
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses greater than or equal operator' do
+    it 'parses >= operator' do
       source = '.send[receiver=.send[arguments.size>=1]]'
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses less than operator' do
+    it 'parses < operator' do
       source = '.send[receiver=.send[arguments.size<1]]'
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses less than or equal operator' do
+    it 'parses <= operator' do
       source = '.send[receiver=.send[arguments.size<=1]]'
       expect(parser.parse(source).to_s).to eq source
     end
@@ -105,7 +100,7 @@ RSpec.describe NodeQueryParser do
       expect(parser.parse(source).to_s).to eq source
     end
 
-    it 'parses not_in operator' do
+    it 'parses not in operator' do
       source = '.def[name not in (foo bar)]'
       expect(parser.parse(source).to_s).to eq source
     end
@@ -127,6 +122,16 @@ RSpec.describe NodeQueryParser do
 
     it 'parses :[]' do
       source = '.send[message=:[]]'
+      expect(parser.parse(source).to_s).to eq source
+    end
+
+    it 'parses goto scope' do
+      source = '.block body > .send'
+      expect(parser.parse(source).to_s).to eq source
+    end
+
+    it 'parses ,' do
+      source = '.send[message=foo], .send[message=bar]'
       expect(parser.parse(source).to_s).to eq source
     end
   end
@@ -161,34 +166,44 @@ RSpec.describe NodeQueryParser do
       EOS
     }
 
-    it 'matches class node' do
-      expression = parser.parse('.class[name=Synvert]')
-      expect(expression.query_nodes(node)).to eq [node]
-    end
-
-    it 'matches def node' do
+    it 'matches node type' do
       expression = parser.parse('.def')
       expect(expression.query_nodes(node)).to eq node.body
     end
 
-    it 'matches start with' do
+    it 'matches node type and one attribute' do
+      expression = parser.parse('.class[name=Synvert]')
+      expect(expression.query_nodes(node)).to eq [node]
+    end
+
+    it 'matches ^=' do
       expression = parser.parse('.def[name^=foo]')
       expect(expression.query_nodes(node)).to eq [node.body.first, node.body.last]
     end
 
-    it 'matches end with' do
+    it 'matches $=' do
       expression = parser.parse('.def[name$=bar]')
       expect(expression.query_nodes(node)).to eq [node.body.second, node.body.last]
     end
 
-    it 'matches contain' do
+    it 'matches *=' do
       expression = parser.parse('.def[name*=oob]')
       expect(expression.query_nodes(node)).to eq [node.body.last]
     end
 
-    it 'matches not equal' do
+    it 'matches !=' do
       expression = parser.parse('.def[name!=foobar]')
       expect(expression.query_nodes(node)).to eq [node.body.first, node.body.second]
+    end
+
+    it 'matches =~' do
+      expression = parser.parse('.def[name=~/foo/]')
+      expect(expression.query_nodes(node)).to eq [node.body.first, node.body.last]
+    end
+
+    it 'matches !~' do
+      expression = parser.parse('.def[name!~/bar/]')
+      expect(expression.query_nodes(node)).to eq [node.body.first]
     end
 
     it 'matches in' do
@@ -275,20 +290,32 @@ RSpec.describe NodeQueryParser do
       expect(expression.query_nodes(node)).to eq [node]
     end
 
-    it 'matches arguments.size' do
-      expression = parser.parse('.def .send[arguments.size=2]')
+    it 'matches >=' do
+      expression = parser.parse('.def[arguments.size>=2]')
       expect(expression.query_nodes(node)).to eq [
-        node.body.first.body.last,
-        node.body.second.body.last,
-        node.body.third.body.third
+        node.body.third
       ]
-      expression = parser.parse('.def .send[arguments.size>2]')
+    end
+
+    it 'matches >' do
+      expression = parser.parse('.def[arguments.size>2]')
       expect(expression.query_nodes(node)).to eq []
-      expression = parser.parse('.def .send[arguments.size>=2]')
+    end
+
+    it 'matches <=' do
+      expression = parser.parse('.def[arguments.size<=2]')
       expect(expression.query_nodes(node)).to eq [
-        node.body.first.body.last,
-        node.body.second.body.last,
-        node.body.third.body.third
+        node.body.first,
+        node.body.second,
+        node.body.third
+      ]
+    end
+
+    it 'matches <' do
+      expression = parser.parse('.def[arguments.size<2]')
+      expect(expression.query_nodes(node)).to eq [
+        node.body.first,
+        node.body.second
       ]
     end
 
@@ -297,16 +324,14 @@ RSpec.describe NodeQueryParser do
       expect(expression.query_nodes(node)).to eq [node.body.first.body.last, node.body.second.body.last]
     end
 
-    it 'matches regexp value' do
-      expression = parser.parse('.def[name=~/foo/]')
-      expect(expression.query_nodes(node)).to eq [node.body.first, node.body.last]
-      expression = parser.parse('.def[name!~/bar/]')
-      expect(expression.query_nodes(node)).to eq [node.body.first]
-    end
-
-    it 'matches attribute value' do
+    it 'matches evaluated value' do
       expression = parser.parse('.pair[key={{value}}]')
       expect(expression.query_nodes(node)).to eq node.body.last.body.first.children
+    end
+
+    it 'matches ,' do
+      expression = parser.parse('.def[name=foo], .def[name=bar]')
+      expect(expression.query_nodes(node)).to eq [node.body.first, node.body.second]
     end
 
     it 'matches []' do
