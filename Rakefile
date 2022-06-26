@@ -6,11 +6,11 @@ RSpec::Core::RakeTask.new(:spec)
 require 'oedipus_lex'
 Rake.application.rake_require "oedipus_lex"
 
-file "lib/lexer.rex.rb" => "lib/lexer.rex"
-file "lib/parser.racc.rb" => "lib/parser.y"
+file "lib/node_query_lexer.rex.rb" => "lib/node_query_lexer.rex"
+file "lib/node_query_parser.racc.rb" => "lib/node_query_parser.y"
 
-task :lexer  => "lib/lexer.rex.rb"
-task :parser => "lib/parser.racc.rb"
+task :lexer  => "lib/node_query_lexer.rex.rb"
+task :parser => "lib/node_query_parser.racc.rb"
 task :generate  => [:lexer, :parser]
 
 rule '.racc.rb' => '.y' do |t|

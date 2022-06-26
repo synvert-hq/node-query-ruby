@@ -6,8 +6,8 @@ require_relative "node_query/version"
 require_relative "node_query/parser_adapter"
 require_relative "node_query/compiler"
 require_relative "node_query/helper"
-require_relative "./lexer.rex"
-require_relative "./parser.racc"
+require_relative "./node_query_lexer.rex"
+require_relative "./node_query_parser.racc"
 
 class NodeQuery
   # Configure NodeQuery

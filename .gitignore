@@ -10,6 +10,6 @@
 # rspec failure tracking
 .rspec_status
 
-lib/lexer.rex.rb
-lib/parser.racc.rb
-lib/parser.output
+lib/node_query_lexer.rex.rb
+lib/node_query_parser.racc.rb
+lib/node_query_parser.output

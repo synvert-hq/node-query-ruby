@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "parser"
-require "parser_node_ext"
-
 class NodeQuery::ParserAdapter
   def get_node_type(node)
     node.type
