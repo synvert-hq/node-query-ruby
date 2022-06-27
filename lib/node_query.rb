@@ -3,13 +3,15 @@
 require 'active_support/core_ext/array'
 
 require_relative "node_query/version"
-require_relative "node_query/parser_adapter"
-require_relative "node_query/compiler"
-require_relative "node_query/helper"
 require_relative "./node_query_lexer.rex"
 require_relative "./node_query_parser.racc"
 
 class NodeQuery
+  autoload :Adapter, "node_query/adapter"
+  autoload :ParserAdapter, "node_query/parser_adapter"
+  autoload :Compiler, "node_query/compiler"
+  autoload :Helper, "node_query/helper"
+
   # Configure NodeQuery
   # @param [Hash] options options to configure
   # @option options [NodeQuery::Adapter] :adapter the adpater
