@@ -1,4 +1,4 @@
-class NodeQuery
+class NodeQuery[T]
   VERSION: String
 
   def self.configure: (options: { adapter: NodeQuery::Adapter }) -> void
@@ -7,5 +7,5 @@ class NodeQuery
 
   def initialize: (nql: String) -> NodeQuery
 
-  def parse: (node: Node) -> Array[Node]
+  def parse: (node: T) -> Array[T]
 end

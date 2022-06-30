@@ -1,11 +1,11 @@
-class NodeQuery::Adapter
-  def is_node?: (node: Node) -> bool
+class NodeQuery::Adapter[T]
+  def is_node?: (node: T) -> bool
 
-  def get_node_type: (node: Node) -> String
+  def get_node_type: (node: T) -> String
 
-  def get_source: (node: Node) -> String
+  def get_source: (node: T) -> String
 
-  def get_children: (node: Node) -> Array[Node]
+  def get_children: (node: T) -> Array[T]
 
-  def get_siblings: (node: Node) -> Array[Node]
+  def get_siblings: (node: T) -> Array[T]
 end
