@@ -1,5 +1,5 @@
 class NodeQuery::Adapter
-  def is_node?: (node: Node) -> Boolean
+  def is_node?: (node: Node) -> bool
 
   def get_node_type: (node: Node) -> String
 
