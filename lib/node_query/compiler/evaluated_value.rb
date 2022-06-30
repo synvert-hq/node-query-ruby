@@ -20,7 +20,7 @@ module NodeQuery::Compiler
     # @return [String] if node is a {Node}, return the node source code, otherwise return the node itself.
     def actual_value(node)
       if node.is_a?(::Parser::AST::Node)
-        NodeQuery.get_adapter.get_source(node)
+        NodeQuery.adapter.get_source(node)
       else
         node
       end
@@ -31,7 +31,7 @@ module NodeQuery::Compiler
     def expected_value
       node = NodeQuery::Helper.get_target_node(base_node, @value)
       if node.is_a?(::Parser::AST::Node)
-        NodeQuery.get_adapter.get_source(node)
+        NodeQuery.adapter.get_source(node)
       else
         node
       end

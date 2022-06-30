@@ -75,9 +75,9 @@ module NodeQuery::Compiler
     # @return the node value, could be integer, float, string, boolean, nil, range, and etc.
     def actual_value(node)
       if node.is_a?(::Parser::AST::Node)
-        case NodeQuery.get_adapter.get_node_type(node)
+        case NodeQuery.adapter.get_node_type(node)
         when :int, :float, :str, :sym
-          NodeQuery.get_adapter.get_children(node).last
+          NodeQuery.adapter.get_children(node).last
         when :true
           true
         when :false
@@ -85,13 +85,13 @@ module NodeQuery::Compiler
         when :nil
           nil
         when :array
-          NodeQuery.get_adapter.get_children(node).map { |child_node| actual_value(child_node) }
+          NodeQuery.adapter.get_children(node).map { |child_node| actual_value(child_node) }
         when :irange
-          actual_value(NodeQuery.get_adapter.get_children(node).first)..actual_value(NodeQuery.get_adapter.get_children(node).last)
+          actual_value(NodeQuery.adapter.get_children(node).first)..actual_value(NodeQuery.adapter.get_children(node).last)
         when :erange
-          actual_value(NodeQuery.get_adapter.get_children(node).first)...actual_value(NodeQuery.get_adapter.get_children(node).last)
+          actual_value(NodeQuery.adapter.get_children(node).first)...actual_value(NodeQuery.adapter.get_children(node).last)
         when :begin
-          actual_value(NodeQuery.get_adapter.get_children(node).first)
+          actual_value(NodeQuery.adapter.get_children(node).first)
         else
           node
         end

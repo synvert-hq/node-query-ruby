@@ -18,7 +18,7 @@ module NodeQuery::Compiler
     def match?(node, operator = '=~')
       match =
         if node.is_a?(::Parser::AST::Node)
-          @value.match(NodeQuery.get_adapter.get_source(node))
+          @value.match(NodeQuery.adapter.get_source(node))
         else
           @value.match(node.to_s)
         end

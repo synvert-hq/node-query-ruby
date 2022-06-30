@@ -20,7 +20,7 @@ module NodeQuery::Compiler
     # otherwise, return the String value.
     def actual_value(node)
       if node.is_a?(::Parser::AST::Node)
-        NodeQuery.get_adapter.get_source(node)
+        NodeQuery.adapter.get_source(node)
       elsif node.is_a?(::Array)
         node.map { |n| actual_value(n) }
       else

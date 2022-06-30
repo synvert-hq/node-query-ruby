@@ -17,7 +17,7 @@ module NodeQuery::Compiler
     def match?(node, _operator = '==')
       return false unless node
 
-      @node_type.to_sym == NodeQuery.get_adapter.get_node_type(node) && (!@attribute_list || @attribute_list.match?(node))
+      @node_type.to_sym == NodeQuery.adapter.get_node_type(node) && (!@attribute_list || @attribute_list.match?(node))
     end
 
     def to_s

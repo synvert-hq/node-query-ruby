@@ -21,7 +21,7 @@ class NodeQuery
 
   # Get the adapter
   # @return [NodeQuery::Adapter] current adapter, by default is {NodeQuery::ParserAdapter}
-  def self.get_adapter
+  def self.adapter
     @adapter ||= ParserAdapter.new
   end
 

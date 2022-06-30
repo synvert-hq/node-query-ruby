@@ -3,7 +3,7 @@ class NodeQuery
 
   def self.configure: (options: { adapter: NodeQuery::Adapter }) -> void
 
-  def self.get_adapter: () -> NodeQuery::Adapter
+  def self.adapter: () -> NodeQuery::Adapter
 
   def initialize: (nql: String) -> NodeQuery
 
