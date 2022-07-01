@@ -28,7 +28,7 @@ rule
 
   attribute
     : tKEY tOPERATOR value { NodeQuery::Compiler::Attribute.new(key: val[0], value: val[2], operator: val[1]) }
-    | tKEY tOPERATOR tOPEN_ARRAY tCLOSE_ARRAY { NodeQuery::Compiler::Attribute.new(key: val[0], value: NodeQuery::Compiler::Array.new, operator: val[1]) }
+    | tKEY tOPERATOR tOPEN_ARRAY tCLOSE_ARRAY { NodeQuery::Compiler::Attribute.new(key: val[0], value: NodeQuery::Compiler::ArrayValue.new, operator: val[1]) }
     | tKEY tOPERATOR tOPEN_ARRAY array_value tCLOSE_ARRAY { NodeQuery::Compiler::Attribute.new(key: val[0], value: val[3], operator: val[1]) }
 
   array_value
