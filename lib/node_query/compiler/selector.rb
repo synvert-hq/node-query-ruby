@@ -33,8 +33,9 @@ module NodeQuery::Compiler
     # * If relationship is next sibling, it try to match next sibling node.
     # * If relationship is subsequent sibling, it will match in all sibling nodes.
     # @param node [Node] node to match
+    # @params including_self [boolean] if query the current node.
     # @return [Array<Node>] matching nodes.
-    def query_nodes(node)
+    def query_nodes(node, including_self = true)
       return find_nodes_by_relationship(node) if @relationship
 
       if node.is_a?(::Array)
@@ -44,7 +45,9 @@ module NodeQuery::Compiler
       return find_nodes_by_goto_scope(node) if @goto_scope
 
       nodes = []
-      nodes << node if match?(node)
+      if including_self && match?(node)
+        nodes << node
+      end
       if @basic_selector
         NodeQuery::Helper.handle_recursive_child(node) do |child_node|
           nodes << child_node if match?(child_node)

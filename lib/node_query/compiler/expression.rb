@@ -13,13 +13,14 @@ module NodeQuery::Compiler
 
     # Query nodes by the selector and the rest expression.
     # @param node [Node] node to match
+    # @params including_self [boolean] if query the current node.
     # @return [Array<Node>] matching nodes.
-    def query_nodes(node)
-      matching_nodes = @selector.query_nodes(node)
+    def query_nodes(node, including_self = true)
+      matching_nodes = @selector.query_nodes(node, including_self)
       return matching_nodes if @rest.nil?
 
       matching_nodes.flat_map do |matching_node|
-        @rest.query_nodes(matching_node)
+        @rest.query_nodes(matching_node, including_self)
       end
     end
 
