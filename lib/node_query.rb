@@ -11,6 +11,7 @@ class NodeQuery
   autoload :ParserAdapter, "node_query/parser_adapter"
   autoload :Compiler, "node_query/compiler"
   autoload :Helper, "node_query/helper"
+  autoload :NodeRules, "node_query/node_rules"
 
   # Configure NodeQuery
   # @param [Hash] options options to configure

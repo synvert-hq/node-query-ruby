@@ -3,7 +3,7 @@
 class NodeQuery::Helper
   # Get target node by the keys.
   # @param node [Node] ast node
-  # @param keys [String] keys of child node.
+  # @param keys [String|Array] keys of child node.
   # @return [Node|] the target node.
   def self.get_target_node(node, keys)
     return unless node
@@ -15,9 +15,10 @@ class NodeQuery::Helper
 
     if node.is_a?(Array) && first_key =~ /\d+/
       child_node = node[first_key.to_i]
-    end
-    if node.respond_to?(first_key)
+    elsif node.respond_to?(first_key)
       child_node = node.send(first_key)
+    elsif first_key == "nodeType"
+      child_node = NodeQuery.adapter.get_node_type(node)
     end
 
     return child_node unless rest_keys

@@ -4,6 +4,12 @@ require 'spec_helper'
 
 RSpec.describe NodeQuery::Helper do
   describe '.get_target_node' do
+    it 'checks nodeType' do
+      node = parse('Factory.define :user do |user|; end')
+      child_node = described_class.get_target_node(node, 'nodeType')
+      expect(child_node).to eq :block
+    end
+
     context 'block node' do
       it 'checks caller' do
         node = parse('Factory.define :user do |user|; end')
