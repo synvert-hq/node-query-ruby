@@ -8,4 +8,6 @@ class NodeQuery[T]
   def initialize: (nql: String) -> NodeQuery
 
   def query_nodes: (node: T, including_self: boolean) -> Array[T]
+
+  def match_node?: (node: T) -> boolean
 end

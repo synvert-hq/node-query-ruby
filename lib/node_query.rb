@@ -49,4 +49,17 @@ class NodeQuery
       []
     end
   end
+
+  # Check if the node matches the nql or rules.
+  # @param node [Node] the node
+  # @return [Boolean]
+  def match_node?(node)
+    if @expression
+      @expression.match_node?(node)
+    elsif @rules
+      @rules.match_node?(node)
+    else
+      false
+    end
+  end
 end

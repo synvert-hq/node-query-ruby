@@ -3,24 +3,33 @@
 class NodeQuery::NodeRules
   KEYWORDS = %i[any includes not in not_in gt gte lt lte]
 
+  # Initialize a NodeRules.
+  # @param rules [Hash] the nod rules
   def initialize(rules)
     @rules = rules
   end
 
+  # Query nodes by the rules.
+  # @param node [Node] node to query
+  # @params including_self [boolean] if query the current node.
+  # @return [Array<Node>] matching nodes.
   def query_nodes(node, including_self = true)
     matching_nodes  = []
-    if (including_self && match?(node))
+    if (including_self && match_node?(node))
       matching_nodes.push(node)
     end
     NodeQuery::Helper.handle_recursive_child(node) do |child_node|
-      if (match?(child_node))
+      if (match_node?(child_node))
         matching_nodes.push(child_node)
       end
     end
     matching_nodes
   end
 
-  def match?(node)
+  # Check if the node matches the rules.
+  # @param node [Node] the node
+  # @return [Boolean]
+  def match_node?(node)
     flat_hash(@rules).keys.all? do |multi_keys|
       last_key = multi_keys.last
       actual = KEYWORDS.include?(last_key) ?
