@@ -21,6 +21,13 @@ module NodeQuery::Compiler
       matching_nodes + @rest.query_nodes(node)
     end
 
+    # Check if the node matches the expression list.
+    # @param node [Node] the node
+    # @return [Boolean]
+    def match?(node)
+      !query_nodes(node).empty?
+    end
+
     def to_s
       [@expression, @rest].compact.join(', ')
     end

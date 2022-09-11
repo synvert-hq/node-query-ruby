@@ -11,13 +11,6 @@ module NodeQuery::Compiler
       @rest = rest
     end
 
-    # Check if the node matches the expression.
-    # @param node [Node] the node
-    # @return [Boolean]
-    def match?(node)
-      !query_nodes(node).empty?
-    end
-
     # Query nodes by the selector and the rest expression.
     # @param node [Node] node to match
     # @return [Array<Node>] matching nodes.
