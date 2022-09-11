@@ -46,7 +46,7 @@ RSpec.describe NodeQueryParser do
     end
 
     it 'parses nested selector' do
-      source = '.send[receiver.message=:create]'
+      source = '.def[body.0=.send[message=create]]'
       expect(parser.parse(source).to_s).to eq source
     end
 
@@ -144,7 +144,7 @@ RSpec.describe NodeQueryParser do
   describe '#query_nodes' do
     let(:node) {
       parse(<<~EOS)
-        class Synvert
+        class Synvert < Base
           def foo
             FactoryBot.create(:user, name: 'foo')
           end
@@ -178,6 +178,16 @@ RSpec.describe NodeQueryParser do
 
     it 'matches node type and one attribute' do
       expression = parser.parse('.class[name=Synvert]')
+      expect(expression.query_nodes(node)).to eq [node]
+    end
+
+    it 'matches multiple attributes' do
+      expression = parser.parse('.def[arguments.size=2][arguments.0=a][arguments.1=b]')
+      expect(expression.query_nodes(node)).to eq [node.body.last]
+    end
+
+    it 'matches nested attribute' do
+      expression = parser.parse('.class[parent_class.name=Base]')
       expect(expression.query_nodes(node)).to eq [node]
     end
 
@@ -240,6 +250,11 @@ RSpec.describe NodeQueryParser do
 
       expression = parser.parse('.def[arguments!=(b a)]')
       expect(expression.query_nodes(node)).to eq [node.body.first, node.body.second, node.body.last]
+    end
+
+    it 'matches nested selector' do
+      expression = parser.parse('.def[body.0=.send[message=create]]')
+      expect(expression.query_nodes(node)).to eq [node.body.first, node.body.second]
     end
 
     it 'matches * in attribute key' do
