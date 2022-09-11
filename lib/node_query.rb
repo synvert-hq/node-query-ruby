@@ -34,7 +34,7 @@ class NodeQuery
   # Parse ast node.
   # @param node [Node] ast node
   # @return [Array<Node>] matching child nodes
-  def parse(node)
+  def query_nodes(node)
     @expression.query_nodes(node)
   end
 end

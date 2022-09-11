@@ -23,8 +23,8 @@ RSpec.describe NodeQuery do
     EOS
   }
 
-  it "#parse" do
+  it "#query_nodes" do
     query = described_class.new('.class[name=Synvert]')
-    expect(query.parse(node)).to eq [node]
+    expect(query.query_nodes(node)).to eq [node]
   end
 end
