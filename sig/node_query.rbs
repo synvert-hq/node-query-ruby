@@ -7,5 +7,5 @@ class NodeQuery[T]
 
   def initialize: (nql: String) -> NodeQuery
 
-  def query_nodes: (node: T) -> Array[T]
+  def query_nodes: (node: T, including_self: boolean) -> Array[T]
 end

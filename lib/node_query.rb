@@ -27,15 +27,26 @@ class NodeQuery
   end
 
   # Initialize a NodeQuery.
-  # @param nql [String] node query language
-  def initialize(nql)
-    @expression = NodeQueryParser.new.parse(nql)
+  # @param nqlOrRules [String | Hash] node query language or node rules
+  def initialize(nqlOrRules)
+    if nqlOrRules.is_a?(String)
+      @expression = NodeQueryParser.new.parse(nqlOrRules)
+    else
+      @rules = NodeRules.new(nqlOrRules)
+    end
   end
 
-  # Parse ast node.
+  # Query matching nodes.
   # @param node [Node] ast node
+  # @param including_self [boolean] if check the node itself
   # @return [Array<Node>] matching child nodes
-  def query_nodes(node)
-    @expression.query_nodes(node)
+  def query_nodes(node, including_self = true)
+    if @expression
+      @expression.query_nodes(node, including_self)
+    elsif @rules
+      @rules.query_nodes(node, including_self)
+    else
+      []
+    end
   end
 end
