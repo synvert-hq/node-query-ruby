@@ -7,8 +7,8 @@ macros
   CLOSE_ARRAY              /\)/
   OPEN_SELECTOR            /\(/
   CLOSE_SELECTOR           /\)/
-  OPEN_DYNAMIC_ATTRIBUTE   /{{/
-  CLOSE_DYNAMIC_ATTRIBUTE  /}}/
+  OPEN_EVALUATED_VALUE     /{{/
+  CLOSE_EVALUATED_VALUE    /}}/
   NODE_TYPE                /\.[a-z]+/
   IDENTIFIER               /[\*\.\w]*\w/
   IDENTIFIER_VALUE         /[\.\w!&:\?<>=]+/
@@ -59,7 +59,7 @@ rules
 :VALUE              /\[\]/                        { [:tIDENTIFIER_VALUE, text] }
 :VALUE              /:\[\]=/                      { [:tSYMBOL, text[1..-1].to_sym] }
 :VALUE              /:\[\]/                       { [:tSYMBOL, text[1..-1].to_sym] }
-:VALUE              /{{#{IDENTIFIER}}}/           { [:tDYNAMIC_ATTRIBUTE, text[2..-3]] }
+:VALUE              /{{#{IDENTIFIER}}}/           { [:tEVALUATED_VALUE, text[2..-3]] }
 :VALUE              /#{OPEN_ARRAY}/               { @state = :ARRAY_VALUE; [:tOPEN_ARRAY, text] }
 :VALUE              /#{CLOSE_ATTRIBUTE}/          { @nested_count -= 1; @state = @nested_count == 0 ? nil : :VALUE; [:tCLOSE_ATTRIBUTE, text] }
 :VALUE              /#{NIL}\?/                    { [:tIDENTIFIER_VALUE, text] }

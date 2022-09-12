@@ -237,14 +237,14 @@ RSpec.describe NodeQueryLexer do
       assert_tokens source, expected_tokens
     end
 
-    it 'matches attribute value' do
+    it 'matches evaluated value' do
       source = '.pair[key={{value}}]'
       expected_tokens = [
         [:tNODE_TYPE, "pair"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "key"],
         [:tOPERATOR, "=="],
-        [:tDYNAMIC_ATTRIBUTE, "value"],
+        [:tEVALUATED_VALUE, "value"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
       assert_tokens source, expected_tokens

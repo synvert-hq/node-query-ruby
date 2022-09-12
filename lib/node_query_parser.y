@@ -2,7 +2,7 @@ class NodeQueryParser
 options no_result_var
 token tCOMMA tNODE_TYPE tGOTO_SCOPE tATTRIBUTE tKEY tIDENTIFIER tIDENTIFIER_VALUE tPSEUDO_CLASS tRELATIONSHIP
       tOPEN_ATTRIBUTE tCLOSE_ATTRIBUTE tOPEN_ARRAY tCLOSE_ARRAY tOPEN_SELECTOR tCLOSE_SELECTOR
-      tOPERATOR tARRAY_VALUE tDYNAMIC_ATTRIBUTE tBOOLEAN tFLOAT tINTEGER tNIL tREGEXP tSTRING tSYMBOL
+      tOPERATOR tARRAY_VALUE tEVALUATED_VALUE tBOOLEAN tFLOAT tINTEGER tNIL tREGEXP tSTRING tSYMBOL
 rule
   expression_list
     : expression tCOMMA expression_list { NodeQuery::Compiler::ExpressionList.new(expression: val[0], rest: val[2]) }
@@ -37,7 +37,7 @@ rule
 
   value
     : basic_selector
-    | tDYNAMIC_ATTRIBUTE { NodeQuery::Compiler::EvaluatedValue.new(value: val[0]) }
+    | tEVALUATED_VALUE { NodeQuery::Compiler::EvaluatedValue.new(value: val[0]) }
     | tBOOLEAN { NodeQuery::Compiler::Boolean.new(value: val[0]) }
     | tFLOAT { NodeQuery::Compiler::Float.new(value: val[0]) }
     | tINTEGER { NodeQuery::Compiler::Integer.new(value: val[0])}
