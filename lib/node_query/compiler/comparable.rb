@@ -25,7 +25,7 @@ module NodeQuery::Compiler
           !actual.is_a?(::Array) || actual.size != expected_value.size ||
             actual.zip(expected_value).any? { |actual_node, expected_node| expected_node.match?(actual_node, '!=') }
         else
-          actual_value(node) != expected_value
+          !is_equal?(node)
         end
       when '=~'
         actual_value(node) =~ expected_value
@@ -65,9 +65,16 @@ module NodeQuery::Compiler
           actual.is_a?(::Array) && actual.size == expected_value.size &&
             actual.zip(expected_value).all? { |actual_node, expected_node| expected_node.match?(actual_node, '==') }
         else
-          actual_value(node) == expected_value
+          is_equal?(node)
         end
       end
+    end
+
+    # Check if the actual value equals to the node value.
+    # @param node [Node] the node
+    # @return [Boolean] true if the actual value equals to the node value.
+    def is_equal?(node)
+      actual_value(node) == expected_value
     end
 
     # Get the actual value from ast node.

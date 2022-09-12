@@ -13,8 +13,21 @@ module NodeQuery::Compiler
       @value = value
     end
 
+    # Get the expected value.
+    # @example
+    #     if the source code of the node is @id = id,
+    #     and the @value is "@{{right_vaue}}",
+    #     then it returns "@id".
+    # @return [String] the expected string, if it contains evaluated value, evaluate the node value.
     def expected_value
       NodeQuery::Helper.evaluate_node_value(base_node, @value)
+    end
+
+    # Check if the actual value equals to the node value.
+    # @param node [Node] the node
+    # @return [Boolean] true if the actual value equals to the node value.
+    def is_equal?(node)
+      actual_value(node).to_s == expected_value
     end
 
     # Get valid operators.
