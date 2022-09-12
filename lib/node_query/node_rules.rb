@@ -74,14 +74,16 @@ class NodeQuery::NodeRules
     case expected
     when Symbol
       if actual.is_a?(Parser::AST::Node)
-        actual.to_source == ":#{expected}" || actual.to_source == expected.to_s
+        actual_source = NodeQuery.adapter.get_source(actual)
+        actual_source == ":#{expected}" || actual_source == expected.to_s
       else
         actual.to_sym == expected
       end
     when String
       if actual.is_a?(Parser::AST::Node)
-        actual.to_source == expected || actual.to_source == unwrap_quote(expected) ||
-          unwrap_quote(actual.to_source) == expected || unwrap_quote(actual.to_source) == unwrap_quote(expected)
+        actual_source = NodeQuery.adapter.get_source(actual)
+        actual_source == expected || actual_source == unwrap_quote(expected) ||
+          unwrap_quote(actual_source) == expected || unwrap_quote(actual_source) == unwrap_quote(expected)
       else
         actual.to_s == expected || wrap_quote(actual.to_s) == expected
       end
