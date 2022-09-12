@@ -238,13 +238,26 @@ RSpec.describe NodeQueryLexer do
     end
 
     it 'matches evaluated value' do
-      source = '.pair[key={{value}}]'
+      source = '.pair[key="{{value}}"]'
       expected_tokens = [
         [:tNODE_TYPE, "pair"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "key"],
         [:tOPERATOR, "=="],
-        [:tEVALUATED_VALUE, "value"],
+        [:tSTRING, "{{value}}"],
+        [:tCLOSE_ATTRIBUTE, "]"]
+      ]
+      assert_tokens source, expected_tokens
+    end
+
+    it 'matches evaluated value with identifier value' do
+      source = '.ivasgn[left_value="@{{right_value}}"]'
+      expected_tokens = [
+        [:tNODE_TYPE, "ivasgn"],
+        [:tOPEN_ATTRIBUTE, "["],
+        [:tKEY, "left_value"],
+        [:tOPERATOR, "=="],
+        [:tSTRING, "@{{right_value}}"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
       assert_tokens source, expected_tokens

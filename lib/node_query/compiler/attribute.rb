@@ -17,7 +17,7 @@ module NodeQuery::Compiler
     # @param node [Node] the node
     # @return [Boolean]
     def match?(node)
-      @value.base_node = node if @value.is_a?(EvaluatedValue)
+      @value.base_node = node if @value.is_a?(String)
       node && @value.match?(NodeQuery::Helper.get_target_node(node, @key), @operator)
     end
 

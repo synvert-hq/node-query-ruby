@@ -5,10 +5,16 @@ module NodeQuery::Compiler
   class String
     include Comparable
 
+    attr_accessor :base_node
+
     # Initialize a String.
     # @param value [String] the string value
     def initialize(value:)
       @value = value
+    end
+
+    def expected_value
+      NodeQuery::Helper.evaluate_node_value(base_node, @value)
     end
 
     # Get valid operators.

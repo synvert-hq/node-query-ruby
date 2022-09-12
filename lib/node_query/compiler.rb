@@ -15,7 +15,6 @@ module NodeQuery::Compiler
 
   autoload :ArrayValue, 'node_query/compiler/array_value'
   autoload :Boolean, 'node_query/compiler/boolean'
-  autoload :EvaluatedValue, 'node_query/compiler/evaluated_value'
   autoload :Float, 'node_query/compiler/float'
   autoload :Identifier, 'node_query/compiler/identifier'
   autoload :Integer, 'node_query/compiler/integer'
