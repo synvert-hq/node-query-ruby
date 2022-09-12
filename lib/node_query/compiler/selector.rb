@@ -23,7 +23,7 @@ module NodeQuery::Compiler
     # Check if node matches the selector.
     # @param node [Parser::AST::Node] the node
     def match?(node)
-      node.is_a?(::Parser::AST::Node) && (!@basic_selector || @basic_selector.match?(node)) && match_pseudo_class?(node)
+      NodeQuery.adapter.is_node?(node) && (!@basic_selector || @basic_selector.match?(node)) && match_pseudo_class?(node)
     end
 
     # Query nodes by the selector.
@@ -89,7 +89,13 @@ module NodeQuery::Compiler
           end
         else
           node.children.each do |child_node|
-            nodes << child_node if @rest.match?(child_node)
+            if NodeQuery.adapter.is_node?(child_node) && :begin == NodeQuery.adapter.get_node_type(child_node)
+              child_node.children.each do |child_child_node|
+                nodes << child_child_node if @rest.match?(child_child_node)
+              end
+            elsif @rest.match?(child_node)
+              nodes << child_node
+            end
           end
         end
       when '+'

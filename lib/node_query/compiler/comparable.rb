@@ -74,7 +74,7 @@ module NodeQuery::Compiler
     # @param node [Node] ast node
     # @return the node value, could be integer, float, string, boolean, nil, range, and etc.
     def actual_value(node)
-      if node.is_a?(::Parser::AST::Node)
+      if NodeQuery.adapter.is_node?(node)
         case NodeQuery.adapter.get_node_type(node)
         when :int, :float, :str, :sym
           NodeQuery.adapter.get_children(node).last

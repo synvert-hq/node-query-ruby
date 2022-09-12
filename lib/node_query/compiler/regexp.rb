@@ -17,7 +17,7 @@ module NodeQuery::Compiler
     # @return [Boolean] true if the regexp value matches the node value, otherwise, false.
     def match?(node, operator = '=~')
       match =
-        if node.is_a?(::Parser::AST::Node)
+        if NodeQuery.adapter.is_node?(node)
           @value.match(NodeQuery.adapter.get_source(node))
         else
           @value.match(node.to_s)
