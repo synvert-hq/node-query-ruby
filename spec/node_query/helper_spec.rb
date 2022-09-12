@@ -62,4 +62,12 @@ RSpec.describe NodeQuery::Helper do
       expect(children).to be_include :ivar
     end
   end
+
+  describe '.evaluate_node_value' do
+    it 'returns an evaluated string' do
+      node = parse('@id = id')
+      value = described_class.evaluate_node_value(node, "@{{right_value}}")
+      expect(value).to eq '@id'
+    end
+  end
 end

@@ -36,12 +36,7 @@ class NodeQuery::NodeRules
         NodeQuery::Helper.get_target_node(node, multi_keys[0...-1].join('.')) :
         NodeQuery::Helper.get_target_node(node, multi_keys.join('.'))
       expected = expected_value(@rules, multi_keys)
-      if expected.is_a?(String)
-        expected.scan(/{{(.*)}}/).each do |match_data|
-          target_node = NodeQuery::Helper.get_target_node(node, match_data.first)
-          expected = expected.sub("{{#{match_data.first}}}", NodeQuery.adapter.get_source(target_node))
-        end
-      end
+      expected = NodeQuery::Helper.evaluate_node_value(node, expected) if expected.is_a?(String)
       case last_key
       when :any, :includes
         actual.any? { |actual_value| match_value?(actual_value, expected) }
