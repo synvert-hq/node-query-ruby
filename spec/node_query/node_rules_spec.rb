@@ -4,107 +4,91 @@ RSpec.describe NodeQuery::NodeRules do
   describe '#query_nodes' do
     let(:node) {
       parse(<<~EOS)
-        class Synvert < Base
-          def foo
-            FactoryBot.create(:user, name: 'foo')
-          end
-
-          def bar
-            FactoryBot.create(:user, name: 'bar')
-          end
-
-          def foobar(a, b)
-            { a: a, b: b }
-            arr[index]
-            arr[index] = value
-            nil?
-            call('')
+        class User < Base
+          def initialize(id, name)
+            @id = id
+            @name = name
           end
         end
-      EOS
-    }
 
-    let(:test_node) {
-      parse(<<~EOS)
-        RSpec.describe Synvert do
-        end
+        user = User.new(1, "Murphy")
       EOS
     }
 
     it 'matches node type' do
       rules = described_class.new({ nodeType: 'def' })
-      expect(rules.query_nodes(node)).to eq node.body
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches node type and one attribute' do
-      rules = described_class.new({ nodeType: 'class', name: 'Synvert' })
-      expect(rules.query_nodes(node)).to eq [node]
+      rules = described_class.new({ nodeType: 'class', name: 'User' })
+      expect(rules.query_nodes(node)).to eq [node.body.first]
     end
 
     it 'matches multiple attributes' do
-      rules = described_class.new({ nodeType: 'def', arguments: { size: 2, '0': 'a', '1': 'b' } })
-      expect(rules.query_nodes(node)).to eq [node.body.last]
+      rules = described_class.new({ nodeType: 'def', arguments: { size: 2, '0': 'id', '1': 'name' } })
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches nested attribute' do
       rules = described_class.new({ nodeType: 'class', parent_class: { name: 'Base' } })
-      expect(rules.query_nodes(node)).to eq [node]
+      expect(rules.query_nodes(node)).to eq [node.body.first]
     end
 
     it 'matches not' do
       rules = described_class.new({ nodeType: 'def', name: { not: 'foobar' } })
-      expect(rules.query_nodes(node)).to eq [node.body.first, node.body.second]
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches regex' do
-      rules = described_class.new({ nodeType: 'def', name: /foo/ })
-      expect(rules.query_nodes(node)).to eq [node.body.first, node.body.last]
+      rules = described_class.new({ nodeType: 'def', name: /init/ })
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches regex not' do
-      rules = described_class.new({ nodeType: 'def', name: { not: /bar/ } })
-      expect(rules.query_nodes(node)).to eq [node.body.first]
+      rules = described_class.new({ nodeType: 'def', name: { not: /foobar/ } })
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches in' do
-      rules = described_class.new({ nodeType: 'def', name: { in: ['foo', 'bar'] } })
-      expect(rules.query_nodes(node)).to eq [node.body.first, node.body.second]
+      rules = described_class.new({ nodeType: 'ivasgn', left_value: { in: ['@id', '@name'] } })
+      expect(rules.query_nodes(node)).to eq node.body.first.body.first.body
     end
 
     it 'matches not_in' do
-      rules = described_class.new({ nodeType: 'def', name: { not_in: ['foo', 'bar'] } })
-      expect(rules.query_nodes(node)).to eq [node.body.last]
+      rules = described_class.new({ nodeType: 'ivasgn', left_value: { not_in: ['@id', '@name'] } })
+      expect(rules.query_nodes(node)).to eq []
     end
 
     it 'matches includes' do
-      rules = described_class.new({ nodeType: 'def', arguments: { includes: 'a' } })
-      expect(rules.query_nodes(node)).to eq [node.body.last]
+      rules = described_class.new({ nodeType: 'def', arguments: { includes: 'id' } })
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches equal array' do
-      rules = described_class.new({ nodeType: 'def', arguments: ['a', 'b'] })
-      expect(rules.query_nodes(node)).to eq [node.body.last]
+      rules = described_class.new({ nodeType: 'def', arguments: ['id', 'name'] })
+      expect(rules.query_nodes(node)).to eq node.body.first.body
 
-      rules = described_class.new({ nodeType: 'def', arguments: ['b', 'a'] })
+      rules = described_class.new({ nodeType: 'def', arguments: ['name', 'id'] })
       expect(rules.query_nodes(node)).to eq []
     end
 
     it 'matches not equal array' do
-      rules = described_class.new({ nodeType: 'def', arguments: { not: ['a', 'b'] } })
-      expect(rules.query_nodes(node)).to eq [node.body.first, node.body.second]
+      rules = described_class.new({ nodeType: 'def', arguments: { not: ['id', 'name'] } })
+      expect(rules.query_nodes(node)).to eq []
 
-      rules = described_class.new({ nodeType: 'def', arguments: { not: ['b', 'a'] } })
-      expect(rules.query_nodes(node)).to eq [node.body.first, node.body.second, node.body.last]
+      rules = described_class.new({ nodeType: 'def', arguments: { not: ['name', 'id'] } })
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches nested selector' do
-      rules = described_class.new({ nodeType: 'def', body: { '0': { nodeType: 'send', message: 'create' } } })
-      expect(rules.query_nodes(node)).to eq [node.body.first, node.body.second]
+      rules = described_class.new({ nodeType: 'def', body: { '0': { nodeType: 'ivasgn' } } })
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches gte' do
       rules = described_class.new({ nodeType: 'def', arguments: { size: { gte: 2 } } })
-      expect(rules.query_nodes(node)).to eq [node.body.third]
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches gt' do
@@ -114,49 +98,46 @@ RSpec.describe NodeQuery::NodeRules do
 
     it 'matches lte' do
       rules = described_class.new({ nodeType: 'def', arguments: { size: { lte: 2 } } })
-      expect(rules.query_nodes(node)).to eq [
-        node.body.first,
-        node.body.second,
-        node.body.third
-      ]
+      expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches lt' do
       rules = described_class.new({ nodeType: 'def', arguments: { size: { lt: 2 } } })
-      expect(rules.query_nodes(node)).to eq [
-        node.body.first,
-        node.body.second
-      ]
+      expect(rules.query_nodes(node)).to eq []
     end
 
     it 'matches arguments' do
-      rules = described_class.new({ nodeType: 'send', arguments: { size: 2, first: { nodeType: 'sym' }, last: { nodeType: 'hash' } } })
-      expect(rules.query_nodes(node)).to eq [node.body.first.body.last, node.body.second.body.last]
+      rules = described_class.new({ nodeType: 'send', arguments: { size: 2, first: { nodeType: 'int' }, last: { nodeType: 'str' } } })
+      expect(rules.query_nodes(node)).to eq [node.body.last.right_value]
     end
 
     it 'matches evaluated value' do
-      rules = described_class.new({ nodeType: 'pair', key: '{{value}}' })
-      expect(rules.query_nodes(node)).to eq node.body.last.body.first.children
+      rules = described_class.new({ nodeType: 'ivasgn', left_value: '@{{right_value}}' })
+      expect(rules.query_nodes(node)).to eq node.body.first.body.first.body
     end
 
     it 'matches []' do
+      node = parse("user[:error]")
       rules = described_class.new({ nodeType: 'send', message: :[] })
-      expect(rules.query_nodes(node)).to eq [node.body.last.body.second]
+      expect(rules.query_nodes(node)).to eq [node]
     end
 
     it 'matches []=' do
+      node = parse("user[:error] = 'error'")
       rules = described_class.new({ nodeType: 'send', message: :[]= })
-      expect(rules.query_nodes(node)).to eq [node.body.last.body.third]
+      expect(rules.query_nodes(node)).to eq [node]
     end
 
     it 'matches nil and nil?' do
+      node = parse("nil.nil?")
       rules = described_class.new({ nodeType: 'send', reciever: nil, message: :nil? })
-      expect(rules.query_nodes(node)).to eq [node.body.last.body.fourth]
+      expect(rules.query_nodes(node)).to eq [node]
     end
 
     it 'matches empty string' do
+      node = parse("call('')")
       rules = described_class.new({ nodeType: 'send', message: :call, arguments: { first: '' } })
-      expect(rules.query_nodes(node)).to eq [node.body.last.body.last]
+      expect(rules.query_nodes(node)).to eq [node]
     end
   end
 end
