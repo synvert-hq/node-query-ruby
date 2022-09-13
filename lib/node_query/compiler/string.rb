@@ -23,9 +23,9 @@ module NodeQuery::Compiler
       NodeQuery::Helper.evaluate_node_value(base_node, @value)
     end
 
-    # Check if the actual value equals to the node value.
+    # Check if the actual value equals the node value.
     # @param node [Node] the node
-    # @return [Boolean] true if the actual value equals to the node value.
+    # @return [Boolean] true if the actual value equals the node value.
     def is_equal?(node)
       actual_value(node).to_s == expected_value
     end

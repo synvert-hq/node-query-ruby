@@ -165,14 +165,19 @@ RSpec.describe NodeQueryParser do
       expect(expression.query_nodes(node)).to eq [node.body.first]
     end
 
-    it 'matches multiple attributes' do
-      expression = parser.parse('.def[arguments.size=2][arguments.0=id][arguments.1=name]')
-      expect(expression.query_nodes(node)).to eq node.body.first.body
-    end
-
     it 'matches nested attribute' do
       expression = parser.parse('.class[parent_class.name=Base]')
       expect(expression.query_nodes(node)).to eq [node.body.first]
+    end
+
+    it 'matches method result' do
+      expression = parser.parse('.def[arguments.size=2]')
+      expect(expression.query_nodes(node)).to eq node.body.first.body
+    end
+
+    it 'matches multiple attributes' do
+      expression = parser.parse('.def[arguments.size=2][arguments.0=id][arguments.1=name]')
+      expect(expression.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches ^=' do
@@ -242,7 +247,7 @@ RSpec.describe NodeQueryParser do
     end
 
     it 'matches * in attribute key' do
-      expression = parser.parse('.def[arguments.*.name IN (id name)]')
+      expression = parser.parse('.def[arguments.*.name=(id name)]')
       expect(expression.query_nodes(node)).to eq node.body.first.body
     end
 

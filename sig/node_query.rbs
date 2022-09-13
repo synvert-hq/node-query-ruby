@@ -5,7 +5,7 @@ class NodeQuery[T]
 
   def self.adapter: () -> NodeQuery::Adapter
 
-  def initialize: (nql: String) -> NodeQuery
+  def initialize: (nqlOrRues: String | Hash) -> NodeQuery
 
   def query_nodes: (node: T, including_self: boolean) -> Array[T]
 

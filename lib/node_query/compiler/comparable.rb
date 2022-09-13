@@ -70,9 +70,9 @@ module NodeQuery::Compiler
       end
     end
 
-    # Check if the actual value equals to the node value.
+    # Check if the actual value equals the node value.
     # @param node [Node] the node
-    # @return [Boolean] true if the actual value equals to the node value.
+    # @return [Boolean] true if the actual value equals the node value.
     def is_equal?(node)
       actual_value(node) == expected_value
     end
