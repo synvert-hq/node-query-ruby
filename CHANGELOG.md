@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.3.0 (2022-09-13)
+
+* Rename `NodeQuery#parse` to `NodeQuery#query_nodes`
+* `NodeQuery#query_ndoes` accepts `including_self` argument
+* `NodeQuery#query_ndoes` supports both nql and rules
+* Add `NodeQuery#match_node?`
+* Add `NdoeRules`
+* Drop `EvaluatedValue`, use `String` instead
+* Write better test cases
+
 ## 1.2.0 (2022-07-01)
 
 * Rename `NodeQuery.get_adapter` to `NodeQuery.adapter`
