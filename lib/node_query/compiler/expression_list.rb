@@ -13,13 +13,16 @@ module NodeQuery::Compiler
 
     # Query nodes by the current and the rest expression.
     # @param node [Node] node to match
-    # @params including_self [boolean] if query the current node.
+    # @param options [Hash] if query the current node
+    # @option options [boolean] :including_self if query the current node, default is ture
+    # @option options [boolean] :stop_on_match if stop on first match, default is false
+    # @option options [boolean] :recursive if stop on first match, default is true
     # @return [Array<Node>] matching nodes.
-    def query_nodes(node, including_self = true)
-      matching_nodes = @expression.query_nodes(node, including_self)
+    def query_nodes(node, options = {})
+      matching_nodes = @expression.query_nodes(node, options)
       return matching_nodes if @rest.nil?
 
-      matching_nodes + @rest.query_nodes(node, including_self)
+      matching_nodes + @rest.query_nodes(node, options)
     end
 
     # Check if the node matches the expression list.

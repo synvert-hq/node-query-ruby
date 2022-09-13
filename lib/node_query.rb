@@ -38,13 +38,16 @@ class NodeQuery
 
   # Query matching nodes.
   # @param node [Node] ast node
-  # @param including_self [boolean] if check the node itself
+  # @param options [Hash] if query the current node
+  # @option options [boolean] :including_self if query the current node, default is ture
+  # @option options [boolean] :stop_on_match if stop on first match, default is false
+  # @option options [boolean] :recursive if stop on first match, default is true
   # @return [Array<Node>] matching child nodes
-  def query_nodes(node, including_self = true)
+  def query_nodes(node, options = {})
     if @expression
-      @expression.query_nodes(node, including_self)
+      @expression.query_nodes(node, options)
     elsif @rules
-      @rules.query_nodes(node, including_self)
+      @rules.query_nodes(node, options)
     else
       []
     end

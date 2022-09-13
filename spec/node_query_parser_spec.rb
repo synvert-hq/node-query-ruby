@@ -363,5 +363,26 @@ RSpec.describe NodeQueryParser do
       expression = parser.parse('.send[message=call][arguments.first=""]')
       expect(expression.query_nodes(node)).to eq [node]
     end
+
+    it 'sets option including_self to false' do
+      expression = parser.parse('.class')
+      expect(expression.query_nodes(node.children.first, { including_self: false })).to eq []
+
+      expect(expression.query_nodes(node.children.first)).to eq [node.children.first]
+    end
+
+    it 'sets options stop_on_match to true' do
+      expression = parser.parse('.ivasgn')
+      expect(expression.query_nodes(node.children.first, { stop_on_match: true })).to eq [node.children.first.body.first.body.first]
+
+      expect(expression.query_nodes(node.children.first)).to eq node.children.first.body.first.body
+    end
+
+    it 'sets options recursive to false' do
+      expression = parser.parse('.def')
+      expect(expression.query_nodes(node, { recursive: false })).to eq []
+
+      expect(expression.query_nodes(node)).to eq [node.children.first.body.first]
+    end
   end
 end

@@ -33,9 +33,13 @@ module NodeQuery::Compiler
     # * If relationship is next sibling, it try to match next sibling node.
     # * If relationship is subsequent sibling, it will match in all sibling nodes.
     # @param node [Node] node to match
-    # @params including_self [boolean] if query the current node.
+    # @param options [Hash] if query the current node
+    # @option options [boolean] :including_self if query the current node, default is ture
+    # @option options [boolean] :stop_on_match if stop on first match, default is false
+    # @option options [boolean] :recursive if stop on first match, default is true
     # @return [Array<Node>] matching nodes.
-    def query_nodes(node, including_self = true)
+    def query_nodes(node, options = {})
+      options = { including_self: true, stop_on_match: false, recursive: true }.merge(options)
       return find_nodes_by_relationship(node) if @relationship
 
       if node.is_a?(::Array)
@@ -45,12 +49,25 @@ module NodeQuery::Compiler
       return find_nodes_by_goto_scope(node) if @goto_scope
 
       nodes = []
-      if including_self && match?(node)
+      if options[:including_self] && match?(node)
         nodes << node
+        return matching_nodes if options[:stop_on_match]
       end
       if @basic_selector
-        NodeQuery::Helper.handle_recursive_child(node) do |child_node|
-          nodes << child_node if match?(child_node)
+        if options[:recursive]
+          NodeQuery::Helper.handle_recursive_child(node) do |child_node|
+            if match?(child_node)
+              nodes << child_node
+              break if options[:stop_on_match]
+            end
+          end
+        else
+          NodeQuery.adapter.get_children(node).each do |child_node|
+            if match?(child_node)
+              nodes << child_node
+              break if options[:stop_on_match]
+            end
+          end
         end
       end
       nodes

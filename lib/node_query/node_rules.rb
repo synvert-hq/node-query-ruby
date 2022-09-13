@@ -11,16 +11,31 @@ class NodeQuery::NodeRules
 
   # Query nodes by the rules.
   # @param node [Node] node to query
-  # @params including_self [boolean] if query the current node.
+  # @param options [Hash] if query the current node
+  # @option options [boolean] :including_self if query the current node, default is ture
+  # @option options [boolean] :stop_on_match if stop on first match, default is false
+  # @option options [boolean] :recursive if stop on first match, default is true
   # @return [Array<Node>] matching nodes.
-  def query_nodes(node, including_self = true)
+  def query_nodes(node, options = {})
+    options = { including_self: true, stop_on_match: false, recursive: true }.merge(options)
     matching_nodes  = []
-    if (including_self && match_node?(node))
+    if options[:including_self] && match_node?(node)
       matching_nodes.push(node)
+      return matching_nodes if options[:stop_on_match]
     end
-    NodeQuery::Helper.handle_recursive_child(node) do |child_node|
-      if (match_node?(child_node))
-        matching_nodes.push(child_node)
+    if options[:recursive]
+      NodeQuery::Helper.handle_recursive_child(node) do |child_node|
+        if match_node?(child_node)
+          matching_nodes.push(child_node)
+          break if options[:stop_on_match]
+        end
+      end
+    else
+      NodeQuery.adapter.get_children(node).each do |child_node|
+        if match_node?(child_node)
+          matching_nodes.push(child_node)
+          break if options[:stop_on_match]
+        end
       end
     end
     matching_nodes

@@ -7,7 +7,7 @@ class NodeQuery[T]
 
   def initialize: (nqlOrRues: String | Hash) -> NodeQuery
 
-  def query_nodes: (node: T, including_self: boolean) -> Array[T]
+  def query_nodes: (node: T, options: Hash) -> Array[T]
 
   def match_node?: (node: T) -> boolean
 end

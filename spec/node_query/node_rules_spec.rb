@@ -139,5 +139,26 @@ RSpec.describe NodeQuery::NodeRules do
       rules = described_class.new({ nodeType: 'send', message: :call, arguments: { first: '' } })
       expect(rules.query_nodes(node)).to eq [node]
     end
+
+    it 'sets option including_self to false' do
+      rules = described_class.new({ nodeType: 'class' })
+      expect(rules.query_nodes(node.children.first, { including_self: false })).to eq []
+
+      expect(rules.query_nodes(node.children.first)).to eq [node.children.first]
+    end
+
+    it 'sets options stop_on_match to true' do
+      rules = described_class.new({ nodeType: 'ivasgn' })
+      expect(rules.query_nodes(node.children.first, { stop_on_match: true })).to eq [node.children.first.body.first.body.first]
+
+      expect(rules.query_nodes(node.children.first)).to eq node.children.first.body.first.body
+    end
+
+    it 'sets options recursive to true' do
+      rules = described_class.new({ nodeType: 'def' })
+      expect(rules.query_nodes(node, { recursive: false })).to eq []
+
+      expect(rules.query_nodes(node)).to eq [node.children.first.body.first]
+    end
   end
 end
