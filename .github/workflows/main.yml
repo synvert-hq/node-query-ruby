@@ -1,27 +1,24 @@
-name: Ruby
+name: CI
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-    name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
-        ruby:
-          - '3.1.2'
+        ruby-version: ['2.6', '2.7', '3.0', '3.1']
 
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby }}
+        ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true
-    - name: Run the default task
+    - name: Run tests
       run: bundle exec rake
