@@ -70,4 +70,15 @@ RSpec.describe NodeQuery::Helper do
       expect(value).to eq '@id'
     end
   end
+
+  describe '.to_string' do
+    it 'gets source code of the node' do
+      node = parse('@id = id')
+      expect(described_class.to_string(node)).to eq '@id = id'
+    end
+
+    it 'gets string' do
+      expect(described_class.to_string(true)).to eq 'true'
+    end
+  end
 end

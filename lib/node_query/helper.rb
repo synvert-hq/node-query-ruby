@@ -50,9 +50,17 @@ class NodeQuery::Helper
     def evaluate_node_value(node, str)
       str.scan(/{{(.*?)}}/).each do |match_data|
         target_node = NodeQuery::Helper.get_target_node(node, match_data.first)
-        str = str.sub("{{#{match_data.first}}}", NodeQuery.adapter.get_source(target_node))
+        str = str.sub("{{#{match_data.first}}}", to_string(target_node))
       end
       str
+    end
+
+    def to_string(node)
+      if NodeQuery.adapter.is_node?(node)
+        return NodeQuery.adapter.get_source(node)
+      end
+
+      node.to_s
     end
   end
 end
