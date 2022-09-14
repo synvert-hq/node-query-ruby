@@ -48,6 +48,10 @@ module NodeQuery::Compiler
 
       return find_nodes_by_goto_scope(node) if @goto_scope
 
+      if options[:including_self] && !options[:recursive]
+        return match?(node) ? [node] : []
+      end
+
       nodes = []
       if options[:including_self] && match?(node)
         nodes << node

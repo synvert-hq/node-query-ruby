@@ -18,6 +18,10 @@ class NodeQuery::NodeRules
   # @return [Array<Node>] matching nodes.
   def query_nodes(node, options = {})
     options = { including_self: true, stop_on_match: false, recursive: true }.merge(options)
+    if options[:including_self] && !options[:recursive]
+      return match_node?(node) ? [node] : []
+    end
+
     matching_nodes  = []
     if options[:including_self] && match_node?(node)
       matching_nodes.push(node)
