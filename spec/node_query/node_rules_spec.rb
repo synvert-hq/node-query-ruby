@@ -154,7 +154,7 @@ RSpec.describe NodeQuery::NodeRules do
       expect(rules.query_nodes(node.children.first)).to eq node.children.first.body.first.body
     end
 
-    it 'sets options recursive to true' do
+    it 'sets options recursive to false' do
       rules = described_class.new({ nodeType: 'def' })
       expect(rules.query_nodes(node, { recursive: false })).to eq []
 

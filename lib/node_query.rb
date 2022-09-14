@@ -41,7 +41,7 @@ class NodeQuery
   # @param options [Hash] if query the current node
   # @option options [boolean] :including_self if query the current node, default is ture
   # @option options [boolean] :stop_on_match if stop on first match, default is false
-  # @option options [boolean] :recursive if stop on first match, default is true
+  # @option options [boolean] :recursive if recursively query child nodes, default is true
   # @return [Array<Node>] matching child nodes
   def query_nodes(node, options = {})
     if @expression
