@@ -27,7 +27,7 @@ module NodeQuery::Compiler
     # @param node [Node] the node
     # @return [Boolean] true if the actual value equals the node value.
     def is_equal?(node)
-      actual_value(node).to_s == expected_value
+      NodeQuery::Helper.to_string(actual_value(node)) == expected_value
     end
 
     # Get valid operators.
