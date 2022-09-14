@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.4.0 (2022-09-14)
+
+* Add options `including_self`, `stop_on_match` and `recursive`
+* Fix regex to match evaluated value
+
 ## 1.3.0 (2022-09-13)
 
 * Rename `NodeQuery#parse` to `NodeQuery#query_nodes`
