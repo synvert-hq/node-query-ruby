@@ -18,7 +18,7 @@ class NodeQuery::Helper
         child_node = node[first_key.to_i]
       elsif node.respond_to?(first_key)
         child_node = node.send(first_key)
-      elsif first_key == "nodeType"
+      elsif first_key == "node_type"
         child_node = NodeQuery.adapter.get_node_type(node)
       end
 

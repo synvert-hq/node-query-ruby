@@ -30,7 +30,7 @@ RSpec.describe NodeQuery do
     end
 
     it "matches rules" do
-      query = described_class.new({ nodeType: 'class', name: 'Synvert' })
+      query = described_class.new({ node_type: 'class', name: 'Synvert' })
       expect(query.query_nodes(node)).to eq [node]
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe NodeQuery do
     end
 
     it "matches rules" do
-      query = described_class.new({ nodeType: 'class', name: 'Synvert' })
+      query = described_class.new({ node_type: 'class', name: 'Synvert' })
       expect(query.match_node?(node)).to be_truthy
     end
   end

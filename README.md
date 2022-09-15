@@ -83,7 +83,7 @@ node = Parser::CurrentRuby.parse(source)
 
 # It will get the node of initialize.
 NodeQuery.new('.def[name=initialize]').query_nodes(node)
-NodeQuery.new({ nodeType: 'def', name: 'initialize' }).query_nodes(node)
+NodeQuery.new({ node_type: 'def', name: 'initialize' }).query_nodes(node)
 ```
 
 ## Node Query Language
@@ -313,7 +313,7 @@ It matches ivasgn node whose left value is either @id or @name.
 ### rules matches node type
 
 ```
-{ nodeType: 'class' }
+{ node_type: 'class' }
 ```
 
 It matches class node
@@ -321,13 +321,13 @@ It matches class node
 ### rules matches attribute
 
 ```
-{ nodeType: 'def', name: 'initialize' }
+{ node_type: 'def', name: 'initialize' }
 ```
 
 It matches def node whose name is initialize
 
 ```
-{ nodeType: 'def', arguments: { "0": 1, "1": "Murphy" } }
+{ node_type: 'def', arguments: { "0": 1, "1": "Murphy" } }
 ```
 
 It matches def node whose arguments are 1 and Murphy.
@@ -335,7 +335,7 @@ It matches def node whose arguments are 1 and Murphy.
 ### rules matches nested attribute
 
 ```
-{ nodeType: 'class', parent_class: { name: 'Base' } }
+{ node_type: 'class', parent_class: { name: 'Base' } }
 ```
 
 It matches class node whose parent class name is Base
@@ -343,7 +343,7 @@ It matches class node whose parent class name is Base
 ### rules matches evaluated value
 
 ```
-{ nodeType: 'ivasgn', left_value: '@{{right_value}}' }
+{ node_type: 'ivasgn', left_value: '@{{right_value}}' }
 ```
 
 It matches ivasgn node whose left value equals '@' plus the evaluated value of right value.
@@ -351,7 +351,7 @@ It matches ivasgn node whose left value equals '@' plus the evaluated value of r
 ### rules matches nested selector
 
 ```
-{ nodeType: 'def', body: { "0": { nodeType: 'ivasgn' } } }
+{ node_type: 'def', body: { "0": { node_type: 'ivasgn' } } }
 ```
 
 It matches def node whose first child node is an ivasgn node.
@@ -359,7 +359,7 @@ It matches def node whose first child node is an ivasgn node.
 ### rules matches method result
 
 ```
-{ nodeType: 'def', arguments: { size: 2 } }
+{ node_type: 'def', arguments: { size: 2 } }
 ```
 
 It matches def node whose arguments size is 2.
@@ -367,73 +367,73 @@ It matches def node whose arguments size is 2.
 ### rules matches operators
 
 ```
-{ nodeType: 'class', name: 'User' }
+{ node_type: 'class', name: 'User' }
 ```
 
 Value of name is equal to User
 
 ```
-{ nodeType: 'def', arguments: { size { not: 2 } }
+{ node_type: 'def', arguments: { size { not: 2 } }
 ```
 
 Size of arguments is not equal to 2
 
 ```
-{ nodeType: 'def', arguments: { size { gte: 2 } }
+{ node_type: 'def', arguments: { size { gte: 2 } }
 ```
 
 Size of arguments is greater than or equal to 2
 
 ```
-{ nodeType: 'def', arguments: { size { gt: 2 } }
+{ node_type: 'def', arguments: { size { gt: 2 } }
 ```
 
 Size of arguments is greater than 2
 
 ```
-{ nodeType: 'def', arguments: { size { lte: 2 } }
+{ node_type: 'def', arguments: { size { lte: 2 } }
 ```
 
 Size of arguments is less than or equal to 2
 
 ```
-{ nodeType: 'def', arguments: { size { lt: 2 } }
+{ node_type: 'def', arguments: { size { lt: 2 } }
 ```
 
 Size of arguments is less than 2
 
 ```
-{ nodeType: 'class', name: { in: ['User', 'Account'] } }
+{ node_type: 'class', name: { in: ['User', 'Account'] } }
 ```
 
 Value of name is either User or Account
 
 ```
-{ nodeType: 'class', name: { not_in: ['User', 'Account'] } }
+{ node_type: 'class', name: { not_in: ['User', 'Account'] } }
 ```
 
 Value of name is neither User nor Account
 
 ```
-{ nodeType: 'def', arguments: { includes: 'id' } }
+{ node_type: 'def', arguments: { includes: 'id' } }
 ```
 
 Value of arguments includes id
 
 ```
-{ nodeType: 'class', name: /User/ }
+{ node_type: 'class', name: /User/ }
 ```
 
 Value of name matches User
 
 ```
-{ nodeType: 'class', name: { not: /User/ } }
+{ node_type: 'class', name: { not: /User/ } }
 ```
 
 Value of name does not match User
 
 ```
-{ nodeType: 'class', name: { in: [/User/, /Account/] } }
+{ node_type: 'class', name: { in: [/User/, /Account/] } }
 ```
 
 Value of name matches either /User/ or /Account/
@@ -441,7 +441,7 @@ Value of name matches either /User/ or /Account/
 ### rules matches array nodes attribute
 
 ```
-{ nodeType: 'def', arguments: ['id', 'name'] }
+{ node_type: 'def', arguments: ['id', 'name'] }
 ```
 
 It matches def node whose arguments are id and name.
