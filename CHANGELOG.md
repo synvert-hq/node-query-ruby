@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.5.0 (2022-09-15)
+
+* Add `Helper.to_string`
+* Only check the current node if `including_self` is true and `recursive` is false
+* Fix `Regexp#match?` and `String#match?`
+* Rename `stop_on_match` to `stop_at_first_match`
+
 ## 1.4.0 (2022-09-14)
 
 * Add options `including_self`, `stop_on_match` and `recursive`
