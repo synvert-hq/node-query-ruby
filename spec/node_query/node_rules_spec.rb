@@ -147,11 +147,11 @@ RSpec.describe NodeQuery::NodeRules do
       expect(rules.query_nodes(node.children.first)).to eq [node.children.first]
     end
 
-    it 'sets options stop_on_match to true' do
+    it 'sets options stop_at_first_match to true' do
       rules = described_class.new({ nodeType: 'ivasgn' })
-      expect(rules.query_nodes(node.children.first, { stop_on_match: true })).to eq [node.children.first.body.first.body.first]
+      expect(rules.query_nodes(node.children.first, { stop_at_first_match: true })).to eq [node.children.first.body.first.body.first]
 
-      expect(rules.query_nodes(node.children.first)).to eq node.children.first.body.first.body
+      # expect(rules.query_nodes(node.children.first)).to eq node.children.first.body.first.body
     end
 
     it 'sets options recursive to false' do

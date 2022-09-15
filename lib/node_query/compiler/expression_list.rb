@@ -15,7 +15,7 @@ module NodeQuery::Compiler
     # @param node [Node] node to match
     # @param options [Hash] if query the current node
     # @option options [boolean] :including_self if query the current node, default is ture
-    # @option options [boolean] :stop_on_match if stop on first match, default is false
+    # @option options [boolean] :stop_at_first_match if stop at first match, default is false
     # @option options [boolean] :recursive if recursively query child nodes, default is true
     # @return [Array<Node>] matching nodes.
     def query_nodes(node, options = {})

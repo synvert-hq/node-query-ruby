@@ -35,11 +35,11 @@ module NodeQuery::Compiler
     # @param node [Node] node to match
     # @param options [Hash] if query the current node
     # @option options [boolean] :including_self if query the current node, default is ture
-    # @option options [boolean] :stop_on_match if stop on first match, default is false
+    # @option options [boolean] :stop_at_first_match if stop at first match, default is false
     # @option options [boolean] :recursive if recursively query child nodes, default is true
     # @return [Array<Node>] matching nodes.
     def query_nodes(node, options = {})
-      options = { including_self: true, stop_on_match: false, recursive: true }.merge(options)
+      options = { including_self: true, stop_at_first_match: false, recursive: true }.merge(options)
       return find_nodes_by_relationship(node) if @relationship
 
       if node.is_a?(::Array)
@@ -55,21 +55,21 @@ module NodeQuery::Compiler
       nodes = []
       if options[:including_self] && match?(node)
         nodes << node
-        return matching_nodes if options[:stop_on_match]
+        return nodes if options[:stop_at_first_match]
       end
       if @basic_selector
         if options[:recursive]
           NodeQuery::Helper.handle_recursive_child(node) do |child_node|
             if match?(child_node)
               nodes << child_node
-              break if options[:stop_on_match]
+              break if options[:stop_at_first_match]
             end
           end
         else
           NodeQuery.adapter.get_children(node).each do |child_node|
             if match?(child_node)
               nodes << child_node
-              break if options[:stop_on_match]
+              break if options[:stop_at_first_match]
             end
           end
         end

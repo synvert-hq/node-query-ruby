@@ -371,9 +371,9 @@ RSpec.describe NodeQueryParser do
       expect(expression.query_nodes(node.children.first)).to eq [node.children.first]
     end
 
-    it 'sets options stop_on_match to true' do
+    it 'sets options stop_at_first_match to true' do
       expression = parser.parse('.ivasgn')
-      expect(expression.query_nodes(node.children.first, { stop_on_match: true })).to eq [node.children.first.body.first.body.first]
+      expect(expression.query_nodes(node.children.first, { stop_at_first_match: true })).to eq [node.children.first.body.first.body.first]
 
       expect(expression.query_nodes(node.children.first)).to eq node.children.first.body.first.body
     end

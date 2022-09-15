@@ -62,7 +62,7 @@ It provides two apis: `query_nodes` and `match_node?`
 
 ```ruby
 node_query = NodeQuery.new(nqlOrRules: String | Hash) # Initialize NodeQuery
-node_query.query_nodes(node: Node, options = { including_self: true, stop_on_match: false, recursive: true }): Node[] # Get the matching nodes.
+node_query.query_nodes(node: Node, options = { including_self: true, stop_at_first_match: false, recursive: true }): Node[] # Get the matching nodes.
 node_query.match_node?(node: Node): boolean # Check if the node matches nql or rules.
 ```
 
