@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.6.0 (2022-09-16)
+
+* Rename `nodeType` to `node_type`
+
 ## 1.5.0 (2022-09-15)
 
 * Add `Helper.to_string`
