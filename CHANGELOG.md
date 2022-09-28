@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.6.1 (2022-09-28)
+
+* Do not handle `erange` and `irange` in `actual_value`
+
 ## 1.6.0 (2022-09-16)
 
 * Rename `nodeType` to `node_type`
