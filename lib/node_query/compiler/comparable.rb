@@ -93,10 +93,6 @@ module NodeQuery::Compiler
           nil
         when :array
           NodeQuery.adapter.get_children(node).map { |child_node| actual_value(child_node) }
-        when :irange
-          actual_value(NodeQuery.adapter.get_children(node).first)..actual_value(NodeQuery.adapter.get_children(node).last)
-        when :erange
-          actual_value(NodeQuery.adapter.get_children(node).first)...actual_value(NodeQuery.adapter.get_children(node).last)
         when :begin
           actual_value(NodeQuery.adapter.get_children(node).first)
         else
