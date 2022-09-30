@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: NodeQuery::Compiler::Selector
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "NodeQuery::Compiler::Selector";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Compiler.html" title="NodeQuery::Compiler (module)">Compiler</a></span></span>
+     &raquo; 
+    <span class="title">Selector</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: NodeQuery::Compiler::Selector
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">NodeQuery::Compiler::Selector</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/node_query/compiler/selector.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Selector used to match nodes, it combines by node type and/or attribute list, plus index or has expression.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(goto_scope: nil, relationship: nil, rest: nil, basic_selector: nil, pseudo_class: nil, pseudo_selector: nil)  &#x21d2; Selector </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initialize a Selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#match%3F-instance_method" title="#match? (instance method)">#<strong>match?</strong>(node, base_node)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Check if node matches the selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_nodes-instance_method" title="#query_nodes (instance method)">#<strong>query_nodes</strong>(node, options = {})  &#x21d2; Array&lt;Node&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Query nodes by the selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(goto_scope: nil, relationship: nil, rest: nil, basic_selector: nil, pseudo_class: nil, pseudo_selector: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="NodeQuery::Compiler::Selector (class)">Selector</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initialize a Selector.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>goto_scope</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="NodeQuery::Compiler::String (class)">String</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>goto scope</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>relationship</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="NodeQuery::Compiler::String (class)">String</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the relationship between the selectors, it can be descendant <code>nil</code>, child <code>&gt;</code>, next sibling <code>+</code> or subsequent sibing <code>~</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rest</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="NodeQuery::Compiler::Selector (class)">NodeQuery::Compiler::Selector</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the rest selector</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>basic_selector</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BasicSelector.html" title="NodeQuery::Compiler::BasicSelector (class)">NodeQuery::Compiler::BasicSelector</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the simple selector</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>attribute_list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AttributeList.html" title="NodeQuery::Compiler::AttributeList (class)">NodeQuery::Compiler::AttributeList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the attribute list</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pseudo_class</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="NodeQuery::Compiler::String (class)">String</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the pseudo class, can be <code>has</code> or <code>not_has</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pseudo_selector</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Expression.html" title="NodeQuery::Compiler::Expression (class)">NodeQuery::Compiler::Expression</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the pseudo selector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16
+17
+18
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>goto_scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>relationship:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>rest:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>basic_selector:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>pseudo_class:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>pseudo_selector:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='ivar'>@goto_scope</span> <span class='op'>=</span> <span class='id identifier rubyid_goto_scope'>goto_scope</span>
+  <span class='ivar'>@relationship</span> <span class='op'>=</span> <span class='id identifier rubyid_relationship'>relationship</span>
+  <span class='ivar'>@rest</span> <span class='op'>=</span> <span class='id identifier rubyid_rest'>rest</span>
+  <span class='ivar'>@basic_selector</span> <span class='op'>=</span> <span class='id identifier rubyid_basic_selector'>basic_selector</span>
+  <span class='ivar'>@pseudo_class</span> <span class='op'>=</span> <span class='id identifier rubyid_pseudo_class'>pseudo_class</span>
+  <span class='ivar'>@pseudo_selector</span> <span class='op'>=</span> <span class='id identifier rubyid_pseudo_selector'>pseudo_selector</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="match?-instance_method">
+  
+    #<strong>match?</strong>(node, base_node)  &#x21d2; <tt><span class='object_link'><a href="Boolean.html" title="NodeQuery::Compiler::Boolean (class)">Boolean</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Check if node matches the selector.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node</span>
+      
+      
+        <span class='type'>(<tt>Parser::AST::Node</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the node</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>base_node</span>
+      
+      
+        <span class='type'>(<tt>Parser::AST::Node</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the base node for evaluated node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Boolean.html" title="NodeQuery::Compiler::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_adapter'><span class='object_link'><a href="../../NodeQuery.html#adapter-class_method" title="NodeQuery.adapter (method)">adapter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_is_node?'><span class='object_link'><a href="../Adapter.html#is_node%3F-instance_method" title="NodeQuery::Adapter#is_node? (method)">is_node?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span><span class='ivar'>@basic_selector</span> <span class='op'>||</span> <span class='ivar'>@basic_selector</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_match_pseudo_class?'>match_pseudo_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_nodes-instance_method">
+  
+    #<strong>query_nodes</strong>(node, options = {})  &#x21d2; <tt>Array&lt;Node&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Query nodes by the selector.</p>
+<ul><li>
+<p>If relationship is nil, it will match in all recursive child nodes and return matching nodes.</p>
+</li><li>
+<p>If relationship is decendant, it will match in all recursive child nodes.</p>
+</li><li>
+<p>If relationship is child, it will match in direct child nodes.</p>
+</li><li>
+<p>If relationship is next sibling, it try to match next sibling node.</p>
+</li><li>
+<p>If relationship is subsequent sibling, it will match in all sibling nodes.</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node</span>
+      
+      
+        <span class='type'>(<tt>Node</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>node to match</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if query the current node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>options</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:including_self</span>
+          <span class="type">(<tt>boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>if query the current node, default is ture</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:stop_at_first_match</span>
+          <span class="type">(<tt>boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>if stop at first match, default is false</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:recursive</span>
+          <span class="type">(<tt>boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>if recursively query child nodes, default is true</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Node&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>matching nodes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_query_nodes'>query_nodes</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>including_self:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>stop_at_first_match:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>recursive:</span> <span class='kw'>true</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_find_nodes_by_relationship'>find_nodes_by_relationship</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@relationship</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Array</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_flat_map'>flat_map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_child_node'>child_node</span><span class='op'>|</span> <span class='id identifier rubyid_query_nodes'>query_nodes</span><span class='lparen'>(</span><span class='id identifier rubyid_child_node'>child_node</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_find_nodes_by_goto_scope'>find_nodes_by_goto_scope</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@goto_scope</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:including_self</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:recursive</span><span class='rbracket'>]</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='lbracket'>[</span><span class='id identifier rubyid_node'>node</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:including_self</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_node'>node</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_nodes'>nodes</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:stop_at_first_match</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='ivar'>@basic_selector</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:recursive</span><span class='rbracket'>]</span>
+      <span class='const'><span class='object_link'><a href="../../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Helper.html" title="NodeQuery::Helper (class)">Helper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_handle_recursive_child'><span class='object_link'><a href="../Helper.html#handle_recursive_child-class_method" title="NodeQuery::Helper.handle_recursive_child (method)">handle_recursive_child</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_child_node'>child_node</span><span class='op'>|</span>
+        <span class='kw'>if</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_child_node'>child_node</span><span class='comma'>,</span> <span class='id identifier rubyid_child_node'>child_node</span><span class='rparen'>)</span>
+          <span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_child_node'>child_node</span>
+          <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:stop_at_first_match</span><span class='rbracket'>]</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+    <span class='kw'>else</span>
+      <span class='const'><span class='object_link'><a href="../../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_adapter'><span class='object_link'><a href="../../NodeQuery.html#adapter-class_method" title="NodeQuery.adapter (method)">adapter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_children'><span class='object_link'><a href="../Adapter.html#get_children-instance_method" title="NodeQuery::Adapter#get_children (method)">get_children</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_child_node'>child_node</span><span class='op'>|</span>
+        <span class='kw'>if</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_child_node'>child_node</span><span class='comma'>,</span> <span class='id identifier rubyid_child_node'>child_node</span><span class='rparen'>)</span>
+          <span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_child_node'>child_node</span>
+          <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:stop_at_first_match</span><span class='rbracket'>]</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_nodes'>nodes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_s-instance_method">
+  
+    #<strong>to_s</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@goto_scope</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@goto_scope</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@relationship</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@relationship</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@rest</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='kw'>if</span> <span class='ivar'>@rest</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@basic_selector</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='kw'>if</span> <span class='ivar'>@basic_selector</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='ivar'>@pseudo_class</span><span class='embexpr_end'>}</span><span class='tstring_content'>(</span><span class='embexpr_beg'>#{</span><span class='ivar'>@pseudo_selector</span><span class='embexpr_end'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@pseudo_class</span>
+  <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Sep 30 23:13:42 2022 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-3.1.2).
+</div>
+
+    </div>
+  </body>
+</html>
