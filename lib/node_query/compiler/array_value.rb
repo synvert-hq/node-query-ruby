@@ -15,10 +15,10 @@ module NodeQuery::Compiler
 
     # Get the expected value.
     # @return [Array]
-    def expected_value
+    def expected_value(base_node)
       expected = []
       expected.push(@value) if @value
-      expected += @rest.expected_value if @rest
+      expected += @rest.expected_value(base_node) if @rest
       expected
     end
 

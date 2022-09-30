@@ -13,9 +13,10 @@ module NodeQuery::Compiler
 
     # Check if the regexp value matches the node value.
     # @param node [Node] the node
+    # @param _base_node [Node] the base node for evaluated value
     # @param operator [String] the operator
     # @return [Boolean] true if the regexp value matches the node value, otherwise, false.
-    def match?(node, operator = '=~')
+    def match?(node, _base_node, operator = '=~')
       match =
         if NodeQuery.adapter.is_node?(node)
           @value.match(NodeQuery.adapter.get_source(node))

@@ -5,8 +5,6 @@ module NodeQuery::Compiler
   class String
     include Comparable
 
-    attr_accessor :base_node
-
     # Initialize a String.
     # @param value [String] the string value
     def initialize(value:)
@@ -18,16 +16,18 @@ module NodeQuery::Compiler
     #     if the source code of the node is @id = id,
     #     and the @value is "@{{right_vaue}}",
     #     then it returns "@id".
+    # @param base_node [Node] the base node for evaluated value
     # @return [String] the expected string, if it contains evaluated value, evaluate the node value.
-    def expected_value
+    def expected_value(base_node)
       NodeQuery::Helper.evaluate_node_value(base_node, @value)
     end
 
     # Check if the actual value equals the node value.
     # @param node [Node] the node
+    # @param base_node [Node] the base node for evaluated value
     # @return [Boolean] true if the actual value equals the node value.
-    def is_equal?(node)
-      NodeQuery::Helper.to_string(actual_value(node)) == expected_value
+    def is_equal?(actual, expected)
+      NodeQuery::Helper.to_string(actual) == expected
     end
 
     # Get valid operators.

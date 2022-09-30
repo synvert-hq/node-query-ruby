@@ -116,6 +116,11 @@ RSpec.describe NodeQuery::NodeRules do
       expect(rules.query_nodes(node)).to eq node.body.first.body.first.body
     end
 
+    it 'matches evaluated value from base node' do
+      rules = described_class.new({ node_type: 'def', name: 'initialize', body: { '0': { left_value: "@{{body.0.right_value}}" } }})
+      expect(rules.query_nodes(node)).to eq node.body.first.body
+    end
+
     it 'matches []' do
       node = parse("user[:error]")
       rules = described_class.new({ node_type: 'send', message: :[] })

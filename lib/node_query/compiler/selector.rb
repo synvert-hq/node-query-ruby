@@ -22,8 +22,9 @@ module NodeQuery::Compiler
 
     # Check if node matches the selector.
     # @param node [Parser::AST::Node] the node
-    def match?(node)
-      NodeQuery.adapter.is_node?(node) && (!@basic_selector || @basic_selector.match?(node)) && match_pseudo_class?(node)
+    # @param base_node [Parser::AST::Node] the base node for evaluated node
+    def match?(node, base_node)
+      NodeQuery.adapter.is_node?(node) && (!@basic_selector || @basic_selector.match?(node, base_node)) && match_pseudo_class?(node)
     end
 
     # Query nodes by the selector.
@@ -49,25 +50,25 @@ module NodeQuery::Compiler
       return find_nodes_by_goto_scope(node) if @goto_scope
 
       if options[:including_self] && !options[:recursive]
-        return match?(node) ? [node] : []
+        return match?(node, node) ? [node] : []
       end
 
       nodes = []
-      if options[:including_self] && match?(node)
+      if options[:including_self] && match?(node, node)
         nodes << node
         return nodes if options[:stop_at_first_match]
       end
       if @basic_selector
         if options[:recursive]
           NodeQuery::Helper.handle_recursive_child(node) do |child_node|
-            if match?(child_node)
+            if match?(child_node, child_node)
               nodes << child_node
               break if options[:stop_at_first_match]
             end
           end
         else
           NodeQuery.adapter.get_children(node).each do |child_node|
-            if match?(child_node)
+            if match?(child_node, child_node)
               nodes << child_node
               break if options[:stop_at_first_match]
             end
@@ -106,25 +107,25 @@ module NodeQuery::Compiler
       when '>'
         if node.is_a?(::Array)
           node.each do |child_node|
-            nodes << child_node if @rest.match?(child_node)
+            nodes << child_node if @rest.match?(child_node, child_node)
           end
         else
           node.children.each do |child_node|
             if NodeQuery.adapter.is_node?(child_node) && :begin == NodeQuery.adapter.get_node_type(child_node)
               child_node.children.each do |child_child_node|
-                nodes << child_child_node if @rest.match?(child_child_node)
+                nodes << child_child_node if @rest.match?(child_child_node, child_child_node)
               end
-            elsif @rest.match?(child_node)
+            elsif @rest.match?(child_node, child_node)
               nodes << child_node
             end
           end
         end
       when '+'
         next_sibling = node.siblings.first
-        nodes << next_sibling if @rest.match?(next_sibling)
+        nodes << next_sibling if @rest.match?(next_sibling, next_sibling)
       when '~'
         node.siblings.each do |sibling_node|
-          nodes << sibling_node if @rest.match?(sibling_node)
+          nodes << sibling_node if @rest.match?(sibling_node, sibling_node)
         end
       end
       nodes

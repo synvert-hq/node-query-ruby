@@ -12,69 +12,71 @@ module NodeQuery::Compiler
     # Check if the actual value matches the expected value.
     #
     # @param node [Node] node to calculate actual value
+    # @param base_node [Node] the base node for evaluated value
     # @param operator [String] operator to compare with expected value, operator can be <code>'=='</code>, <code>'!='</code>, <code>'>'</code>, <code>'>='</code>, <code>'<'</code>, <code>'<='</code>, <code>'includes'</code>, <code>'in'</code>, <code>'not_in'</code>, <code>'=~'</code>, <code>'!~'</code>
     # @return [Boolean] true if actual value matches the expected value
     # @raise [NodeQuery::Compiler::InvalidOperatorError] if operator is invalid
-    def match?(node, operator)
+    def match?(node, base_node, operator)
       raise InvalidOperatorError, "invalid operator #{operator}" unless valid_operator?(operator)
 
+      actual = actual_value(node)
+      expected = expected_value(base_node)
       case operator
       when '!='
-        if expected_value.is_a?(::Array)
-          actual = actual_value(node)
-          !actual.is_a?(::Array) || actual.size != expected_value.size ||
-            actual.zip(expected_value).any? { |actual_node, expected_node| expected_node.match?(actual_node, '!=') }
+        if expected.is_a?(::Array)
+          !actual.is_a?(::Array) || actual.size != expected.size ||
+            actual.zip(expected).any? { |actual_child, expected_child| expected_child.match?(actual_child, base_node, '!=') }
         else
-          !is_equal?(node)
+          !is_equal?(actual, expected)
         end
       when '=~'
-        actual_value(node) =~ expected_value
+        actual =~ expected
       when '!~'
-        actual_value(node) !~ expected_value
+        actual !~ expected
       when '^='
-        actual_value(node).start_with?(expected_value)
+        actual.start_with?(expected)
       when '$='
-        actual_value(node).end_with?(expected_value)
+        actual.end_with?(expected)
       when '*='
-        actual_value(node).include?(expected_value)
+        actual.include?(expected)
       when '>'
-        actual_value(node) > expected_value
+        actual > expected
       when '>='
-        actual_value(node) >= expected_value
+        actual >= expected
       when '<'
-        actual_value(node) < expected_value
+        actual < expected
       when '<='
-        actual_value(node) <= expected_value
+        actual <= expected
       when 'in'
         if node.is_a?(Array)
-          node.all? { |child| expected_value.any? { |expected| expected.match?(child, '==') } }
+          node.all? { |child| expected.any? { |expected_child| expected_child.match?(child, base_node, '==') } }
         else
-          expected_value.any? { |expected| expected.match?(node, '==') }
+          expected.any? { |expected_child| expected_child.match?(node, base_node, '==') }
         end
       when 'not_in'
         if node.is_a?(Array)
-          node.all? { |child| expected_value.all? { |expected| expected.match?(child, '!=') } }
+          node.all? { |child| expected.all? { |expected_child| expected_child.match?(child, base_node, '!=') } }
         else
-          expected_value.all? { |expected| expected.match?(node, '!=') }
+          expected.all? { |expected_child| expected_child.match?(node, base_node, '!=') }
         end
       when 'includes'
-        actual_value(node).any? { |actual| actual == expected_value }
+        actual.any? { |actual_child| actual_child == expected }
       else
-        if expected_value.is_a?(::Array)
-          actual = actual_value(node)
-          actual.is_a?(::Array) && actual.size == expected_value.size &&
-            actual.zip(expected_value).all? { |actual_node, expected_node| expected_node.match?(actual_node, '==') }
+        if expected.is_a?(::Array)
+          actual.is_a?(::Array) && actual.size == expected.size &&
+            actual.zip(expected).all? { |actual_child, expected_child| expected_child.match?(actual_child, base_node, '==') }
         else
-          is_equal?(node)
+          is_equal?(actual, expected)
         end
       end
     end
 
-    # Check if the actual value equals the node value.
-    # @param node [Node] the node
-    # @return [Boolean] true if the actual value equals the node value.
-    def is_equal?(node)
-      actual_value(node) == expected_value
+    # Check if the actual value equals the expected value.
+    # @param acutal
+    # @param expected
+    # @return [Boolean] true if the actual value equals the expected value.
+    def is_equal?(actual, expected)
+      actual == expected
     end
 
     # Get the actual value from ast node.
@@ -104,8 +106,9 @@ module NodeQuery::Compiler
     end
 
     # Get the expected value
+    # @param base_node [Node] the base node for evaluated value
     # @return expected value, could be integer, float, string, boolean, nil, range, and etc.
-    def expected_value
+    def expected_value(base_node)
       @value
     end
 

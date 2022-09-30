@@ -15,10 +15,10 @@ module NodeQuery::Compiler
 
     # Check if the node matches the attribute.
     # @param node [Node] the node
+    # @param base_node [Node] the bae node for evaluated value
     # @return [Boolean]
-    def match?(node)
-      @value.base_node = node if @value.is_a?(String)
-      node && @value.match?(NodeQuery::Helper.get_target_node(node, @key), @operator)
+    def match?(node, base_node)
+      node && @value.match?(NodeQuery::Helper.get_target_node(node, @key), base_node, @operator)
     end
 
     def to_s

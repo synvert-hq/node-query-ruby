@@ -335,6 +335,11 @@ RSpec.describe NodeQueryParser do
       expect(expression.query_nodes(node)).to eq node.body.first.body.first.body
     end
 
+    it 'matches evaluated value from base node' do
+      expression = parser.parse('.def[name=initialize][body.0.left_value="@{{body.0.right_value}}"]')
+      expect(expression.query_nodes(node)).to eq node.body.first.body
+    end
+
     it 'matches ,' do
       expression = parser.parse('.ivasgn[left_value=@id], .ivasgn[left_value=@name]')
       expect(expression.query_nodes(node)).to eq node.body.first.body.first.body

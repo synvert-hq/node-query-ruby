@@ -13,9 +13,10 @@ module NodeQuery::Compiler
 
     # Check if the node matches the attribute list.
     # @param node [Node] the node
+    # @param base_node [Node] the base node for evaluated value
     # @return [Boolean]
-    def match?(node)
-      @attribute.match?(node) && (!@rest || @rest.match?(node))
+    def match?(node, base_node)
+      @attribute.match?(node, base_node) && (!@rest || @rest.match?(node, base_node))
     end
 
     def to_s
