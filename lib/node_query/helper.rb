@@ -48,7 +48,7 @@ class NodeQuery::Helper
     # @param str [String] string to be evaluated
     # @return [String] evaluated string
     def evaluate_node_value(node, str)
-      str.scan(/{{(.*?)}}/).each do |match_data|
+      str.scan(/{{(.+?)}}/).each do |match_data|
         target_node = NodeQuery::Helper.get_target_node(node, match_data.first)
         str = str.sub("{{#{match_data.first}}}", to_string(target_node))
       end
