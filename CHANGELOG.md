@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.7.0 (2022-10-01)
+
+* Better regexp to match evaluated value
+* Make `base_node` as the root matching node
+
 ## 1.6.1 (2022-09-28)
 
 * Do not handle `erange` and `irange` in `actual_value`
