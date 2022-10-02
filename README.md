@@ -1,7 +1,6 @@
 # NodeQuery
 
-NodeQuery defines an AST node query language, which is a css like syntax for matching nodes,
-it supports other ast parser if it implements `NodeQuery::Adapter`.
+NodeQuery defines a NQL (node query language) and node rules to query AST nodes.
 
 ## Table of Contents
 
