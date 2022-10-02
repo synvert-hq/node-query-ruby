@@ -27,12 +27,12 @@ class NodeQuery
   end
 
   # Initialize a NodeQuery.
-  # @param nqlOrRules [String | Hash] node query language or node rules
-  def initialize(nqlOrRules)
-    if nqlOrRules.is_a?(String)
-      @expression = NodeQueryParser.new.parse(nqlOrRules)
+  # @param nql_or_ruls [String | Hash] node query language or node rules
+  def initialize(nql_or_ruls)
+    if nql_or_ruls.is_a?(String)
+      @expression = NodeQueryParser.new.parse(nql_or_ruls)
     else
-      @rules = NodeRules.new(nqlOrRules)
+      @rules = NodeRules.new(nql_or_ruls)
     end
   end
 
