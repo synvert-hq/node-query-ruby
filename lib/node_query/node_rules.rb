@@ -144,8 +144,8 @@ class NodeQuery::NodeRules
   # Convert a hash to flat one.
   #
   # @example
-  #   flat_hash(type: 'block', caller: {type: 'send', receiver: 'RSpec'})
-  #     # {[:type] => 'block', [:caller, :type] => 'send', [:caller, :receiver] => 'RSpec'}
+  #   flat_hash(node_type: 'block', caller: { node_type: 'send', receiver: 'RSpec' })
+  #     # {[:node_type] => 'block', [:caller, :node_type] => 'send', [:caller, :receiver] => 'RSpec'}
   # @param h [Hash] original hash.
   # @return flatten hash.
   def flat_hash(h, k = [])
