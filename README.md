@@ -24,7 +24,8 @@ NodeQuery defines a NQL (node query language) and node rules to query AST nodes.
       - [Adjacent sibling combinator](#adjacent-sibling-combinator)
       - [General sibling combinator](#general-sibling-combinator)
     - [nql matches goto scope](#nql-matches-goto-scope)
-    - [nql matches pseudo selector](#nql-matches-pseudo-selector)
+    - [nql matches :has and :not_has pseudo selector](#nql-matches-has-and-not_has-pseudo-selector)
+    - [nql matches :first-child and :last-child pseudo selector](#nql-matches-first-child-and-last-child-pseudo-selector)
     - [nql matches multiple expressions](#nql-matches-multiple-expressions)
   - [Node Rules](#node-rules)
     - [rules matches node type](#rules-matches-node-type)
@@ -285,7 +286,7 @@ It matches send node only if it is follows the send node whose left value is @id
 
 It matches send node who is in the body of def node.
 
-### nql matches pseudo selector
+### nql matches :has and :not_has pseudo selector
 
 ```
 .class:has(.def[name=initialize])
@@ -298,6 +299,20 @@ It matches class node who has an initialize def node.
 ```
 
 It matches class node who does not have an initialize def node.
+
+### nql matches :first-child and :last-child pseudo selector
+
+```
+.def:first-child
+```
+
+It matches the first def node.
+
+```
+.def:last-child
+```
+
+It matches the last def node.
 
 ### nql matches multiple expressions
 
