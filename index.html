@@ -104,7 +104,9 @@
 </li><li>
 <p><a href="#nql-matches-goto-scope">nql matches goto scope</a></p>
 </li><li>
-<p><a href="#nql-matches-pseudo-selector">nql matches pseudo selector</a></p>
+<p><a href="#nql-matches-has-and-not_has-pseudo-selector">nql matches :has and :not_has pseudo selector</a></p>
+</li><li>
+<p><a href="#nql-matches-first-child-and-last-child-pseudo-selector">nql matches :first-child and :last-child pseudo selector</a></p>
 </li><li>
 <p><a href="#nql-matches-multiple-expressions">nql matches multiple expressions</a></p>
 </li></ul>
@@ -352,7 +354,7 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 
 <p>It matches send node who is in the body of def node.</p>
 
-<h3 id="label-nql+matches+pseudo+selector">nql matches pseudo selector</h3>
+<h3 id="label-nql+matches+-3Ahas+and+-3Anot_has+pseudo+selector">nql matches :has and :not_has pseudo selector</h3>
 
 <pre class="code ruby"><code class="ruby">.class:has(.def[name=initialize])
 </code></pre>
@@ -363,6 +365,18 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 </code></pre>
 
 <p>It matches class node who does not have an initialize def node.</p>
+
+<h3 id="label-nql+matches+-3Afirst-child+and+-3Alast-child+pseudo+selector">nql matches :first-child and :last-child pseudo selector</h3>
+
+<pre class="code ruby"><code class="ruby">.def:first-child
+</code></pre>
+
+<p>It matches the first def node.</p>
+
+<pre class="code ruby"><code class="ruby">.def:last-child
+</code></pre>
+
+<p>It matches the last def node.</p>
 
 <h3 id="label-nql+matches+multiple+expressions">nql matches multiple expressions</h3>
 
@@ -512,7 +526,7 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 </div></div>
 
       <div id="footer">
-  Generated on Thu Oct  6 14:19:20 2022 by
+  Generated on Fri Oct 14 13:04:29 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

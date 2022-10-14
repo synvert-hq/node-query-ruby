@@ -128,7 +128,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(goto_scope: nil, relationship: nil, rest: nil, basic_selector: nil, pseudo_class: nil, pseudo_selector: nil)  &#x21d2; Selector </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(goto_scope: nil, relationship: nil, rest: nil, basic_selector: nil, position: nil, pseudo_class: nil, pseudo_selector: nil)  &#x21d2; Selector </a>
     
 
     
@@ -230,7 +230,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(goto_scope: nil, relationship: nil, rest: nil, basic_selector: nil, pseudo_class: nil, pseudo_selector: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="NodeQuery::Compiler::Selector (class)">Selector</a></span></tt> 
+    #<strong>initialize</strong>(goto_scope: nil, relationship: nil, rest: nil, basic_selector: nil, position: nil, pseudo_class: nil, pseudo_selector: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="NodeQuery::Compiler::Selector (class)">Selector</a></span></tt> 
   
 
   
@@ -322,6 +322,24 @@
   
     <li>
       
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="NodeQuery::Compiler::String (class)">String</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the position of the node</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>attribute_list</span>
       
       
@@ -381,23 +399,25 @@
       <pre class="lines">
 
 
-14
 15
 16
 17
 18
 19
 20
-21</pre>
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 15</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>goto_scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>relationship:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>rest:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>basic_selector:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>pseudo_class:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>pseudo_selector:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>goto_scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>relationship:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>rest:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>basic_selector:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>position:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>pseudo_class:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>pseudo_selector:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@goto_scope</span> <span class='op'>=</span> <span class='id identifier rubyid_goto_scope'>goto_scope</span>
   <span class='ivar'>@relationship</span> <span class='op'>=</span> <span class='id identifier rubyid_relationship'>relationship</span>
   <span class='ivar'>@rest</span> <span class='op'>=</span> <span class='id identifier rubyid_rest'>rest</span>
   <span class='ivar'>@basic_selector</span> <span class='op'>=</span> <span class='id identifier rubyid_basic_selector'>basic_selector</span>
+  <span class='ivar'>@position</span> <span class='op'>=</span> <span class='id identifier rubyid_position'>position</span>
   <span class='ivar'>@pseudo_class</span> <span class='op'>=</span> <span class='id identifier rubyid_pseudo_class'>pseudo_class</span>
   <span class='ivar'>@pseudo_selector</span> <span class='op'>=</span> <span class='id identifier rubyid_pseudo_selector'>pseudo_selector</span>
 <span class='kw'>end</span></pre>
@@ -488,12 +508,12 @@
       <pre class="lines">
 
 
-26
-27
-28</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_adapter'><span class='object_link'><a href="../../NodeQuery.html#adapter-class_method" title="NodeQuery.adapter (method)">adapter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_is_node?'><span class='object_link'><a href="../Adapter.html#is_node%3F-instance_method" title="NodeQuery::Adapter#is_node? (method)">is_node?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span><span class='ivar'>@basic_selector</span> <span class='op'>||</span> <span class='ivar'>@basic_selector</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_match_pseudo_class?'>match_pseudo_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
@@ -646,8 +666,6 @@
       <pre class="lines">
 
 
-42
-43
 44
 45
 46
@@ -683,10 +701,12 @@
 76
 77
 78
-79</pre>
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_nodes'>query_nodes</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>including_self:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>stop_at_first_match:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>recursive:</span> <span class='kw'>true</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -724,7 +744,7 @@
       <span class='kw'>end</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_nodes'>nodes</span>
+  <span class='id identifier rubyid_filter_by_position'>filter_by_position</span><span class='lparen'>(</span><span class='id identifier rubyid_nodes'>nodes</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -746,18 +766,19 @@
       <pre class="lines">
 
 
-81
-82
 83
 84
 85
 86
 87
 88
-89</pre>
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -765,6 +786,7 @@
   <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@relationship</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@relationship</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@rest</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='kw'>if</span> <span class='ivar'>@rest</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@basic_selector</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='kw'>if</span> <span class='ivar'>@basic_selector</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='ivar'>@position</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@position</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='ivar'>@pseudo_class</span><span class='embexpr_end'>}</span><span class='tstring_content'>(</span><span class='embexpr_beg'>#{</span><span class='ivar'>@pseudo_selector</span><span class='embexpr_end'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@pseudo_class</span>
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -778,7 +800,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct  6 14:19:21 2022 by
+  Generated on Fri Oct 14 13:04:30 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
