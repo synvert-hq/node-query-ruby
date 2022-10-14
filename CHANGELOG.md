@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.8.0 (2022-10-14)
+
+* Support `:first-child` and `:last-child`
+
 ## 1.7.0 (2022-10-01)
 
 * Better regexp to match evaluated value
