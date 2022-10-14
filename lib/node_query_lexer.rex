@@ -26,6 +26,8 @@ rules
 # [:state]          pattern                       [actions]
                     /\s+/
                     /,/                           { [:tCOMMA, text] }
+                    /:first-child/                { [:tPOSITION, text[1..-1]] }
+                    /:last-child/                 { [:tPOSITION, text[1..-1]] }
                     /:has/                        { [:tPSEUDO_CLASS, text[1..-1]] }
                     /:not_has/                    { [:tPSEUDO_CLASS, text[1..-1]] }
                     /#{NODE_TYPE}/                { [:tNODE_TYPE, text[1..]] }

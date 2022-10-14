@@ -139,6 +139,16 @@ RSpec.describe NodeQueryParser do
       source = '.send[message=foo], .send[message=bar]'
       expect(parser.parse(source).to_s).to eq source
     end
+
+    it 'parses :first-child' do
+      source = '.send[message=foo]:first-child'
+      expect(parser.parse(source).to_s).to eq source
+    end
+
+    it 'parses :last-child' do
+      source = '.send[message=foo]:last-child'
+      expect(parser.parse(source).to_s).to eq source
+    end
   end
 
   describe '#query_nodes' do
@@ -343,6 +353,22 @@ RSpec.describe NodeQueryParser do
     it 'matches ,' do
       expression = parser.parse('.ivasgn[left_value=@id], .ivasgn[left_value=@name]')
       expect(expression.query_nodes(node)).to eq node.body.first.body.first.body
+    end
+
+    it 'matches :first-child' do
+      expression = parser.parse('.ivasgn:first-child')
+      expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.first]
+
+      expression = parser.parse('.def > .ivasgn:first-child')
+      expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.first]
+    end
+
+    it 'matches :last-child' do
+      expression = parser.parse('.ivasgn:last-child')
+      expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.last]
+
+      expression = parser.parse('.def > .ivasgn:last-child')
+      expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.last]
     end
 
     it 'matches []' do

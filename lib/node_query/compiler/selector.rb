@@ -8,14 +8,16 @@ module NodeQuery::Compiler
     # @param relationship [String] the relationship between the selectors, it can be descendant <code>nil</code>, child <code>></code>, next sibling <code>+</code> or subsequent sibing <code>~</code>.
     # @param rest [NodeQuery::Compiler::Selector] the rest selector
     # @param basic_selector [NodeQuery::Compiler::BasicSelector] the simple selector
+    # @param position [String] the position of the node
     # @param attribute_list [NodeQuery::Compiler::AttributeList] the attribute list
     # @param pseudo_class [String] the pseudo class, can be <code>has</code> or <code>not_has</code>
     # @param pseudo_selector [NodeQuery::Compiler::Expression] the pseudo selector
-    def initialize(goto_scope: nil, relationship: nil, rest: nil, basic_selector: nil, pseudo_class: nil, pseudo_selector: nil)
+    def initialize(goto_scope: nil, relationship: nil, rest: nil, basic_selector: nil, position: nil, pseudo_class: nil, pseudo_selector: nil)
       @goto_scope = goto_scope
       @relationship = relationship
       @rest = rest
       @basic_selector = basic_selector
+      @position = position
       @pseudo_class = pseudo_class
       @pseudo_selector = pseudo_selector
     end
@@ -75,7 +77,7 @@ module NodeQuery::Compiler
           end
         end
       end
-      nodes
+      filter_by_position(nodes)
     end
 
     def to_s
@@ -84,8 +86,27 @@ module NodeQuery::Compiler
       result << "#{@relationship} " if @relationship
       result << @rest.to_s if @rest
       result << @basic_selector.to_s if @basic_selector
+      result << ":#{@position}" if @position
       result << ":#{@pseudo_class}(#{@pseudo_selector})" if @pseudo_class
       result.join('')
+    end
+
+    protected
+
+    # Filter nodes by position.
+    # @param nodes [Array<Node>] nodes to filter
+    # @return [Array<Node>|Node] first node or last node or nodes
+    def filter_by_position(nodes)
+      return nodes unless @position
+
+      case @position
+      when 'first-child'
+        [nodes.first]
+      when 'last-child'
+        [nodes.last]
+      else
+        nodes
+      end
     end
 
     private
@@ -128,7 +149,7 @@ module NodeQuery::Compiler
           nodes << sibling_node if @rest.match?(sibling_node, sibling_node)
         end
       end
-      nodes
+      @rest.filter_by_position(nodes)
     end
 
     # Check if it matches pseudo class.

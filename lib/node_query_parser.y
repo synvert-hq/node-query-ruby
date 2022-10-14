@@ -1,7 +1,7 @@
 class NodeQueryParser
 options no_result_var
 token tCOMMA tNODE_TYPE tGOTO_SCOPE tATTRIBUTE tKEY tIDENTIFIER tIDENTIFIER_VALUE tPSEUDO_CLASS tRELATIONSHIP
-      tOPEN_ATTRIBUTE tCLOSE_ATTRIBUTE tOPEN_ARRAY tCLOSE_ARRAY tOPEN_SELECTOR tCLOSE_SELECTOR
+      tOPEN_ATTRIBUTE tCLOSE_ATTRIBUTE tOPEN_ARRAY tCLOSE_ARRAY tOPEN_SELECTOR tCLOSE_SELECTOR tPOSITION
       tOPERATOR tARRAY_VALUE tBOOLEAN tFLOAT tINTEGER tNIL tREGEXP tSTRING tSYMBOL
 rule
   expression_list
@@ -13,7 +13,8 @@ rule
     | selector { NodeQuery::Compiler::Expression.new(selector: val[0]) }
 
   selector
-    : basic_selector { NodeQuery::Compiler::Selector.new(basic_selector: val[0]) }
+    : basic_selector tPOSITION { NodeQuery::Compiler::Selector.new(basic_selector: val[0], position: val[1] ) }
+    | basic_selector { NodeQuery::Compiler::Selector.new(basic_selector: val[0]) }
     | tPSEUDO_CLASS tOPEN_SELECTOR selector tCLOSE_SELECTOR { NodeQuery::Compiler::Selector.new(pseudo_class: val[0], pseudo_selector: val[2]) }
     | tRELATIONSHIP selector { NodeQuery::Compiler::Selector.new(relationship: val[0], rest: val[1]) }
     | tGOTO_SCOPE selector { NodeQuery::Compiler::Selector.new(goto_scope: val[0], rest: val[1]) }
