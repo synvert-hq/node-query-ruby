@@ -361,6 +361,9 @@ RSpec.describe NodeQueryParser do
 
       expression = parser.parse('.def > .ivasgn:first-child')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.first]
+
+      expression = parser.parse('.block:first-child')
+      expect(expression.query_nodes(node)).to eq []
     end
 
     it 'matches :last-child' do
@@ -369,6 +372,9 @@ RSpec.describe NodeQueryParser do
 
       expression = parser.parse('.def > .ivasgn:last-child')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.last]
+
+      expression = parser.parse('.block:last-child')
+      expect(expression.query_nodes(node)).to eq []
     end
 
     it 'matches []' do

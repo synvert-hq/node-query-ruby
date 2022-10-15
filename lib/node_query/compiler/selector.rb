@@ -98,6 +98,7 @@ module NodeQuery::Compiler
     # @return [Array<Node>|Node] first node or last node or nodes
     def filter_by_position(nodes)
       return nodes unless @position
+      return nodes if nodes.empty?
 
       case @position
       when 'first-child'
