@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.8.1 (2022-10-15)
+
+* Fix `filter_by_position` with empty nodes
+
 ## 1.8.0 (2022-10-14)
 
 * Support `:first-child` and `:last-child`
