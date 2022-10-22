@@ -111,7 +111,7 @@
         <dt id="KEYWORDS-constant" class="">KEYWORDS =
           
         </dt>
-        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='tstring_content'>any</span><span class='words_sep'> </span><span class='tstring_content'>includes</span><span class='words_sep'> </span><span class='tstring_content'>not</span><span class='words_sep'> </span><span class='tstring_content'>in</span><span class='words_sep'> </span><span class='tstring_content'>not_in</span><span class='words_sep'> </span><span class='tstring_content'>gt</span><span class='words_sep'> </span><span class='tstring_content'>gte</span><span class='words_sep'> </span><span class='tstring_content'>lt</span><span class='words_sep'> </span><span class='tstring_content'>lte</span><span class='tstring_end'>]</span></span></pre></dd>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='tstring_content'>not_includes</span><span class='words_sep'> </span><span class='tstring_content'>includes</span><span class='words_sep'> </span><span class='tstring_content'>not</span><span class='words_sep'> </span><span class='tstring_content'>in</span><span class='words_sep'> </span><span class='tstring_content'>not_in</span><span class='words_sep'> </span><span class='tstring_content'>gt</span><span class='words_sep'> </span><span class='tstring_content'>gte</span><span class='words_sep'> </span><span class='tstring_content'>lt</span><span class='words_sep'> </span><span class='tstring_content'>lte</span><span class='tstring_end'>]</span></span></pre></dd>
       
     </dl>
   
@@ -366,7 +366,9 @@
 77
 78
 79
-80</pre>
+80
+81
+82</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/node_query/node_rules.rb', line 51</span>
@@ -380,8 +382,10 @@
     <span class='id identifier rubyid_expected'>expected</span> <span class='op'>=</span> <span class='id identifier rubyid_expected_value'>expected_value</span><span class='lparen'>(</span><span class='ivar'>@rules</span><span class='comma'>,</span> <span class='id identifier rubyid_multi_keys'>multi_keys</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_expected'>expected</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Helper.html" title="NodeQuery::Helper (class)">Helper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_evaluate_node_value'><span class='object_link'><a href="Helper.html#evaluate_node_value-class_method" title="NodeQuery::Helper.evaluate_node_value (method)">evaluate_node_value</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_expected'>expected</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_expected'>expected</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
     <span class='kw'>case</span> <span class='id identifier rubyid_last_key'>last_key</span>
-    <span class='kw'>when</span> <span class='symbol'>:any</span><span class='comma'>,</span> <span class='symbol'>:includes</span>
+    <span class='kw'>when</span> <span class='symbol'>:includes</span>
       <span class='id identifier rubyid_actual'>actual</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_actual_value'>actual_value</span><span class='op'>|</span> <span class='id identifier rubyid_match_value?'>match_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value'>actual_value</span><span class='comma'>,</span> <span class='id identifier rubyid_expected'>expected</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='kw'>when</span> <span class='symbol'>:not_includes</span>
+      <span class='id identifier rubyid_actual'>actual</span><span class='period'>.</span><span class='id identifier rubyid_all?'>all?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_actual_value'>actual_value</span><span class='op'>|</span> <span class='op'>!</span><span class='id identifier rubyid_match_value?'>match_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_value'>actual_value</span><span class='comma'>,</span> <span class='id identifier rubyid_expected'>expected</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
     <span class='kw'>when</span> <span class='symbol'>:not</span>
       <span class='op'>!</span><span class='id identifier rubyid_match_value?'>match_value?</span><span class='lparen'>(</span><span class='id identifier rubyid_actual'>actual</span><span class='comma'>,</span> <span class='id identifier rubyid_expected'>expected</span><span class='rparen'>)</span>
     <span class='kw'>when</span> <span class='symbol'>:in</span>
@@ -608,7 +612,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct 15 03:19:35 2022 by
+  Generated on Sat Oct 22 15:16:26 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
