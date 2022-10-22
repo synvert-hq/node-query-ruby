@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NodeQuery::NodeRules
-  KEYWORDS = %i[any includes not in not_in gt gte lt lte]
+  KEYWORDS = %i[not_includes includes not in not_in gt gte lt lte]
 
   # Initialize a NodeRules.
   # @param rules [Hash] the nod rules
@@ -57,8 +57,10 @@ class NodeQuery::NodeRules
       expected = expected_value(@rules, multi_keys)
       expected = NodeQuery::Helper.evaluate_node_value(node, expected) if expected.is_a?(String)
       case last_key
-      when :any, :includes
+      when :includes
         actual.any? { |actual_value| match_value?(actual_value, expected) }
+      when :not_includes
+        actual.all? { |actual_value| !match_value?(actual_value, expected) }
       when :not
         !match_value?(actual, expected)
       when :in

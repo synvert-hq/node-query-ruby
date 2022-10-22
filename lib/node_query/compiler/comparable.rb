@@ -3,9 +3,9 @@
 module NodeQuery::Compiler
   # Compare acutal value with expected value.
   module Comparable
-    SIMPLE_VALID_OPERATORS = ['==', '!=', 'includes']
-    STRING_VALID_OPERATORS = ['==', '!=', '^=', '$=', '*=', 'includes']
-    NUMBER_VALID_OPERATORS = ['==', '!=', '>', '>=', '<', '<=', 'includes']
+    SIMPLE_VALID_OPERATORS = ['==', '!=', 'includes', 'not_includes']
+    STRING_VALID_OPERATORS = ['==', '!=', '^=', '$=', '*=', 'includes', 'not_includes']
+    NUMBER_VALID_OPERATORS = ['==', '!=', '>', '>=', '<', '<=', 'includes', 'not_includes']
     ARRAY_VALID_OPERATORS = ['==', '!=', 'in', 'not_in']
     REGEXP_VALID_OPERATORS = ['=~', '!~']
 
@@ -61,6 +61,8 @@ module NodeQuery::Compiler
         end
       when 'includes'
         actual.any? { |actual_child| actual_child == expected }
+      when 'not_includes'
+        actual.all? { |actual_child| actual_child != expected }
       else
         if expected.is_a?(::Array)
           actual.is_a?(::Array) && actual.size == expected.size &&

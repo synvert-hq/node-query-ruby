@@ -65,6 +65,11 @@ RSpec.describe NodeQuery::NodeRules do
       expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
+    it 'matches not_includes' do
+      rules = described_class.new({ node_type: 'def', arguments: { not_includes: 'foobar' } })
+      expect(rules.query_nodes(node)).to eq node.body.first.body
+    end
+
     it 'matches equal array' do
       rules = described_class.new({ node_type: 'def', arguments: ['id', 'name'] })
       expect(rules.query_nodes(node)).to eq node.body.first.body

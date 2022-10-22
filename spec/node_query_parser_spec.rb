@@ -110,6 +110,11 @@ RSpec.describe NodeQueryParser do
       expect(parser.parse(source).to_s).to eq source
     end
 
+    it 'parses not includes operator' do
+      source = '.def[arguments not includes &block]'
+      expect(parser.parse(source).to_s).to eq source
+    end
+
     it 'parses empty string' do
       source = '.send[arguments.first=""]'
       expect(parser.parse(source).to_s).to eq source
@@ -232,6 +237,11 @@ RSpec.describe NodeQueryParser do
 
     it 'matches includes' do
       expression = parser.parse('.def[arguments INCLUDES id]')
+      expect(expression.query_nodes(node)).to eq node.body.first.body
+    end
+
+    it 'matches not includes' do
+      expression = parser.parse('.def[arguments NOT INCLUDES foobar]')
       expect(expression.query_nodes(node)).to eq node.body.first.body
     end
 

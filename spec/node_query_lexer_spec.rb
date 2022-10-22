@@ -495,6 +495,19 @@ RSpec.describe NodeQueryLexer do
       assert_tokens source, expected_tokens
     end
 
+    it 'matches NOT INCLUDES' do
+      source = '.send[arguments NOT INCLUDES &block]'
+      expected_tokens = [
+        [:tNODE_TYPE, "send"],
+        [:tOPEN_ATTRIBUTE, "["],
+        [:tKEY, "arguments"],
+        [:tOPERATOR, "not_includes"],
+        [:tIDENTIFIER_VALUE, "&block"],
+        [:tCLOSE_ATTRIBUTE, "]"]
+      ]
+      assert_tokens source, expected_tokens
+    end
+
     it 'matches * in attribute key' do
       source = '.def[arguments.*.name IN (foo bar)]'
       expected_tokens = [

@@ -31,6 +31,8 @@ module NodeQuery::Compiler
         "#{@key} not in (#{@value})"
       when 'includes'
         "#{@key} includes #{@value}"
+      when 'not_includes'
+        "#{@key} not includes #{@value}"
       else
         "#{@key}=#{@value}"
       end

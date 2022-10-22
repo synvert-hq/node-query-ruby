@@ -50,6 +50,7 @@ rules
 :KEY                />/                           { @state = :VALUE; [:tOPERATOR, '>'] }
 :KEY                /</                           { @state = :VALUE; [:tOPERATOR, '<'] }
 :KEY                /=/                           { @state = :VALUE; [:tOPERATOR, '=='] }
+:KEY                /not includes/i               { @state = :VALUE; [:tOPERATOR, 'not_includes'] }
 :KEY                /includes/i                   { @state = :VALUE; [:tOPERATOR, 'includes'] }
 :KEY                /not in/i                     { @state = :VALUE; [:tOPERATOR, 'not_in'] }
 :KEY                /in/i                         { @state = :VALUE; [:tOPERATOR, 'in'] }
