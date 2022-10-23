@@ -240,8 +240,18 @@ RSpec.describe NodeQueryParser do
       expect(expression.query_nodes(node)).to eq node.body.first.body
     end
 
+    it 'matches includes with selector' do
+      expression = parser.parse('.def[arguments INCLUDES .arg[name=id]]')
+      expect(expression.query_nodes(node)).to eq node.body.first.body
+    end
+
     it 'matches not includes' do
       expression = parser.parse('.def[arguments NOT INCLUDES foobar]')
+      expect(expression.query_nodes(node)).to eq node.body.first.body
+    end
+
+    it 'matches not includes with selector' do
+      expression = parser.parse('.def[arguments NOT INCLUDES .arg[name=foobar]]')
       expect(expression.query_nodes(node)).to eq node.body.first.body
     end
 

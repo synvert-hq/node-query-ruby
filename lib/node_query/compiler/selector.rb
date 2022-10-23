@@ -25,8 +25,18 @@ module NodeQuery::Compiler
     # Check if node matches the selector.
     # @param node [Parser::AST::Node] the node
     # @param base_node [Parser::AST::Node] the base node for evaluated node
-    def match?(node, base_node)
-      NodeQuery.adapter.is_node?(node) && (!@basic_selector || @basic_selector.match?(node, base_node)) && match_pseudo_class?(node)
+    def match?(node, base_node, operator = "==")
+      if node.is_a?(::Array)
+        case operator
+        when "not_includes"
+          return node.none? { |child_node| match?(child_node, base_node) }
+        when "includes"
+          return node.any? { |child_node| match?(child_node, base_node) }
+        else
+          return false
+        end
+      end
+      NodeQuery.adapter.is_node?(node) && (!@basic_selector || (operator == "!=" ? !@basic_selector.match?(node, base_node) : @basic_selector.match?(node, base_node))) && match_pseudo_class?(node)
     end
 
     # Query nodes by the selector.

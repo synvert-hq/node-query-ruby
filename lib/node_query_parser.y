@@ -37,7 +37,7 @@ rule
     | value { NodeQuery::Compiler::ArrayValue.new(value: val[0]) }
 
   value
-    : basic_selector
+    : selector
     | tBOOLEAN { NodeQuery::Compiler::Boolean.new(value: val[0]) }
     | tFLOAT { NodeQuery::Compiler::Float.new(value: val[0]) }
     | tINTEGER { NodeQuery::Compiler::Integer.new(value: val[0])}

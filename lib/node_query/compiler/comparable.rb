@@ -60,9 +60,9 @@ module NodeQuery::Compiler
           expected.all? { |expected_child| expected_child.match?(node, base_node, '!=') }
         end
       when 'includes'
-        actual.any? { |actual_child| actual_child == expected }
+        actual.any? { |actual_child| expected.match?(actual_child) }
       when 'not_includes'
-        actual.all? { |actual_child| actual_child != expected }
+        actual.none? { |actual_child| expected.match?(actual_child) }
       else
         if expected.is_a?(::Array)
           actual.is_a?(::Array) && actual.size == expected.size &&
