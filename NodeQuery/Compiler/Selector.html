@@ -154,7 +154,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#match%3F-instance_method" title="#match? (instance method)">#<strong>match?</strong>(node, base_node)  &#x21d2; Boolean </a>
+      <a href="#match%3F-instance_method" title="#match? (instance method)">#<strong>match?</strong>(node, base_node, operator = &quot;==&quot;)  &#x21d2; Boolean </a>
     
 
     
@@ -436,7 +436,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="match?-instance_method">
   
-    #<strong>match?</strong>(node, base_node)  &#x21d2; <tt><span class='object_link'><a href="Boolean.html" title="NodeQuery::Compiler::Boolean (class)">Boolean</a></span></tt> 
+    #<strong>match?</strong>(node, base_node, operator = &quot;==&quot;)  &#x21d2; <tt><span class='object_link'><a href="Boolean.html" title="NodeQuery::Compiler::Boolean (class)">Boolean</a></span></tt> 
   
 
   
@@ -510,13 +510,33 @@
 
 28
 29
-30</pre>
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 28</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_adapter'><span class='object_link'><a href="../../NodeQuery.html#adapter-class_method" title="NodeQuery.adapter (method)">adapter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_is_node?'><span class='object_link'><a href="../Adapter.html#is_node%3F-instance_method" title="NodeQuery::Adapter#is_node? (method)">is_node?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span><span class='ivar'>@basic_selector</span> <span class='op'>||</span> <span class='ivar'>@basic_selector</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_match_pseudo_class?'>match_pseudo_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='comma'>,</span> <span class='id identifier rubyid_operator'>operator</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>==</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Array</span><span class='rparen'>)</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_operator'>operator</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>not_includes</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>return</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_child_node'>child_node</span><span class='op'>|</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_child_node'>child_node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>includes</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>return</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_child_node'>child_node</span><span class='op'>|</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_child_node'>child_node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='kw'>else</span>
+      <span class='kw'>return</span> <span class='kw'>false</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='const'><span class='object_link'><a href="../../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_adapter'><span class='object_link'><a href="../../NodeQuery.html#adapter-class_method" title="NodeQuery.adapter (method)">adapter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_is_node?'><span class='object_link'><a href="../Adapter.html#is_node%3F-instance_method" title="NodeQuery::Adapter#is_node? (method)">is_node?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span><span class='ivar'>@basic_selector</span> <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_operator'>operator</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>!=</span><span class='tstring_end'>&quot;</span></span> <span class='op'>?</span> <span class='op'>!</span><span class='ivar'>@basic_selector</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='ivar'>@basic_selector</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_base_node'>base_node</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_match_pseudo_class?'>match_pseudo_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -666,16 +686,6 @@
       <pre class="lines">
 
 
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
 54
 55
 56
@@ -703,10 +713,20 @@
 78
 79
 80
-81</pre>
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_nodes'>query_nodes</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>including_self:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>stop_at_first_match:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>recursive:</span> <span class='kw'>true</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -766,19 +786,19 @@
       <pre class="lines">
 
 
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92</pre>
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/compiler/selector.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -800,7 +820,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct 22 15:16:26 2022 by
+  Generated on Sun Oct 23 01:15:40 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
