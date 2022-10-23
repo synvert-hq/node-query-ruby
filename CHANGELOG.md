@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.9.0 (2022-10-23)
+
+* Support `NOT INCLUDES` operator
+* `includes` / `not_includes` a selector
+
 ## 1.8.1 (2022-10-15)
 
 * Fix `filter_by_position` with empty nodes
