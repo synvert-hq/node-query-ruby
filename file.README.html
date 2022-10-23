@@ -288,6 +288,11 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 
 <p>Value of arguments includes id</p>
 
+<pre class="code ruby"><code class="ruby">.def[arguments NOT INCLUDES id]
+</code></pre>
+
+<p>Value of arguments not includes id</p>
+
 <pre class="code ruby"><code class="ruby">.class[name=~/User/]
 </code></pre>
 
@@ -481,6 +486,11 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 
 <p>Value of arguments includes id</p>
 
+<pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span> <span class='label'>node_type:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>def</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='lbrace'>{</span> <span class='label'>not_includes:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
+</code></pre>
+
+<p>Value of arguments not includes id</p>
+
 <pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span> <span class='label'>node_type:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>name:</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>User</span><span class='regexp_end'>/</span></span> <span class='rbrace'>}</span>
 </code></pre>
 
@@ -526,7 +536,7 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 </div></div>
 
       <div id="footer">
-  Generated on Sun Oct 23 01:15:39 2022 by
+  Generated on Sun Oct 23 01:20:09 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
