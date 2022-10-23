@@ -211,6 +211,12 @@ Value of name is neither User nor Account
 Value of arguments includes id
 
 ```
+.def[arguments NOT INCLUDES id]
+```
+
+Value of arguments not includes id
+
+```
 .class[name=~/User/]
 ```
 
@@ -433,6 +439,12 @@ Value of name is neither User nor Account
 ```
 
 Value of arguments includes id
+
+```
+{ node_type: 'def', arguments: { not_includes: 'id' } }
+```
+
+Value of arguments not includes id
 
 ```
 { node_type: 'class', name: /User/ }
