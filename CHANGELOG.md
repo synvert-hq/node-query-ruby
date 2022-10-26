@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.10.0 (2022-10-26)
+
+* Add `NodeQuery::MethodNotSupported` error
+* Add `NodeQuery::AnyValue` to match any value in node rules
+
 ## 1.9.0 (2022-10-23)
 
 * Support `NOT INCLUDES` operator
