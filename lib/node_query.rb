@@ -7,6 +7,8 @@ require_relative "./node_query_lexer.rex"
 require_relative "./node_query_parser.racc"
 
 class NodeQuery
+  class MethodNotSupported < StandardError; end
+
   autoload :Adapter, "node_query/adapter"
   autoload :ParserAdapter, "node_query/parser_adapter"
   autoload :Compiler, "node_query/compiler"

@@ -88,7 +88,7 @@ class NodeQuery::NodeRules
   # @param actual [Object] actual value.
   # @param expected [Object] expected value.
   # @return [Boolean]
-  # @raise [Synvert::Core::MethodNotSupported] if expected class is not supported.
+  # @raise [NodeQuery::MethodNotSupported] if expected class is not supported.
   def match_value?(actual, expected)
     return true if actual == expected
 
@@ -139,7 +139,7 @@ class NodeQuery::NodeRules
     when Synvert::Core::Rewriter::AnyValue
       !actual.nil?
     else
-      raise Synvert::Core::MethodNotSupported, "#{expected.class} is not handled for match_value?"
+      raise NodeQuery::MethodNotSupported, "#{expected} is not supported"
     end
   end
 

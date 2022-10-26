@@ -150,6 +150,14 @@ RSpec.describe NodeQuery::NodeRules do
       expect(rules.query_nodes(node)).to eq [node]
     end
 
+    it 'raises error' do
+      node = parse("Orgs::OnboardingChecklist.stub :new, onboarding_checklist, &block")
+      rules = described_class.new({ node_type: 'send', message: 'stub', arguments: [ {type:'sym'}, { type: 'send'}, {type: 'block_pass'} ] })
+      expect {
+        rules.query_nodes(node)
+      }.to raise_error(NodeQuery::MethodNotSupported, '{:type=>"sym"} is not supported')
+    end
+
     it 'sets option including_self to false' do
       rules = described_class.new({ node_type: 'class' })
       expect(rules.query_nodes(node.children.first, { including_self: false })).to eq []
