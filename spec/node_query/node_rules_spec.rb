@@ -150,9 +150,15 @@ RSpec.describe NodeQuery::NodeRules do
       expect(rules.query_nodes(node)).to eq [node]
     end
 
+    it 'matches any_value' do
+      node = parse("Foobar.stub :new, &block")
+      rules = described_class.new({ node_type: 'send', message: 'stub', arguments: NodeQuery::AnyValue.new })
+      expect(rules.query_nodes(node)).to eq [node]
+    end
+
     it 'raises error' do
-      node = parse("Orgs::OnboardingChecklist.stub :new, onboarding_checklist, &block")
-      rules = described_class.new({ node_type: 'send', message: 'stub', arguments: [ {type:'sym'}, { type: 'send'}, {type: 'block_pass'} ] })
+      node = parse("Foobar.stub :new, &block")
+      rules = described_class.new({ node_type: 'send', message: 'stub', arguments: [ {type:'sym'}, {type: 'block_pass'} ] })
       expect {
         rules.query_nodes(node)
       }.to raise_error(NodeQuery::MethodNotSupported, '{:type=>"sym"} is not supported')
