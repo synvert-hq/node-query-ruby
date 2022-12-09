@@ -114,6 +114,9 @@ RSpec.describe NodeQuery::NodeRules do
     it 'matches arguments' do
       rules = described_class.new({ node_type: 'send', arguments: { size: 2, first: { node_type: 'int' }, last: { node_type: 'str' } } })
       expect(rules.query_nodes(node)).to eq [node.body.last.right_value]
+
+      rules = described_class.new({ node_type: 'send', arguments: { size: 2, '0': { node_type: 'int' }, '-1': { node_type: 'str' } } })
+      expect(rules.query_nodes(node)).to eq [node.body.last.right_value]
     end
 
     it 'matches evaluated value' do

@@ -8,7 +8,7 @@ macros
   OPEN_SELECTOR            /\(/
   CLOSE_SELECTOR           /\)/
   NODE_TYPE                /\.[a-z]+/
-  IDENTIFIER               /[@\*\.\w]*\w/
+  IDENTIFIER               /[@\*\-\.\w]*\w/
   IDENTIFIER_VALUE         /[@\.\w!&:\?<>=]+/
   FALSE                    /false/
   FLOAT                    /\-?\d+\.\d+/

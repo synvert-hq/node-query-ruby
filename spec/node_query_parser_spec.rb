@@ -358,6 +358,9 @@ RSpec.describe NodeQueryParser do
     it 'matches arguments' do
       expression = parser.parse('.send[arguments.size=2][arguments.first=.int][arguments.last=.str]')
       expect(expression.query_nodes(node)).to eq [node.body.last.right_value]
+
+      expression = parser.parse('.send[arguments.size=2][arguments.0=.int][arguments.-1=.str]')
+      expect(expression.query_nodes(node)).to eq [node.body.last.right_value]
     end
 
     it 'matches evaluated value' do
