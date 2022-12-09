@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.11.0 (2022-12-09)
+
+* Support negative index to fetch array element
+* Parse negative integer and float
+
 ## 1.10.0 (2022-10-26)
 
 * Add `NodeQuery::MethodNotSupported` error
