@@ -11,8 +11,8 @@ macros
   IDENTIFIER               /[@\*\.\w]*\w/
   IDENTIFIER_VALUE         /[@\.\w!&:\?<>=]+/
   FALSE                    /false/
-  FLOAT                    /\d+\.\d+/
-  INTEGER                  /\d+/
+  FLOAT                    /\-?\d+\.\d+/
+  INTEGER                  /\-?\d+/
   NIL                      /nil/
   REGEXP_BODY              /(?:[^\/]|\\\/)*/
   REGEXP                   /\/(#{REGEXP_BODY})(?<!\\)\/([imxo]*)/

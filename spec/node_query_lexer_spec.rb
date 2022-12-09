@@ -98,6 +98,18 @@ RSpec.describe NodeQueryLexer do
       assert_tokens source, expected_tokens
     end
 
+    it 'matches negative integer' do
+      source = '[value=-1]'
+      expected_tokens = [
+        [:tOPEN_ATTRIBUTE, "["],
+        [:tKEY, "value"],
+        [:tOPERATOR, "=="],
+        [:tINTEGER, -1],
+        [:tCLOSE_ATTRIBUTE, "]"]
+      ]
+      assert_tokens source, expected_tokens
+    end
+
     it 'matches float' do
       source = '.send[value=1.1]'
       expected_tokens = [
@@ -106,6 +118,19 @@ RSpec.describe NodeQueryLexer do
         [:tKEY, "value"],
         [:tOPERATOR, "=="],
         [:tFLOAT, 1.1],
+        [:tCLOSE_ATTRIBUTE, "]"]
+      ]
+      assert_tokens source, expected_tokens
+    end
+
+    it 'matches negative float' do
+      source = '.send[value=-1.1]'
+      expected_tokens = [
+        [:tNODE_TYPE, "send"],
+        [:tOPEN_ATTRIBUTE, "["],
+        [:tKEY, "value"],
+        [:tOPERATOR, "=="],
+        [:tFLOAT, -1.1],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
       assert_tokens source, expected_tokens
