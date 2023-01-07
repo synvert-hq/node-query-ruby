@@ -424,6 +424,12 @@ RSpec.describe NodeQueryParser do
       expect(expression.query_nodes(node)).to eq [node]
     end
 
+    it 'matches hash value' do
+      node = parse("{ foo: 'bar' }")
+      expression = parser.parse(".hash[foo_value='bar']")
+      expect(expression.query_nodes(node)).to eq [node]
+    end
+
     it 'sets option including_self to false' do
       expression = parser.parse('.class')
       expect(expression.query_nodes(node.children.first, { including_self: false })).to eq []

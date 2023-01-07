@@ -159,6 +159,12 @@ RSpec.describe NodeQuery::NodeRules do
       expect(rules.query_nodes(node)).to eq [node]
     end
 
+    it 'matches hash value' do
+      node = parse("{ foo: 'bar' }")
+      rules = described_class.new({ node_type: 'hash', foo_value: 'bar' })
+      expect(rules.query_nodes(node)).to eq [node]
+    end
+
     it 'raises error' do
       node = parse("Foobar.stub :new, &block")
       rules = described_class.new({ node_type: 'send', message: 'stub', arguments: [ {type:'sym'}, {type: 'block_pass'} ] })
