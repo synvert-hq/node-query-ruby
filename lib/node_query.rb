@@ -14,7 +14,6 @@ class NodeQuery
   autoload :Compiler, "node_query/compiler"
   autoload :Helper, "node_query/helper"
   autoload :NodeRules, "node_query/node_rules"
-  autoload :AnyValue, 'node_query/any_value'
 
   # Configure NodeQuery
   # @param [Hash] options options to configure

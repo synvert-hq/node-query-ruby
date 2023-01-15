@@ -136,8 +136,6 @@ class NodeQuery::NodeRules
       :false == actual.type
     when Parser::AST::Node
       actual == expected
-    when NodeQuery::AnyValue
-      !actual.nil?
     else
       raise NodeQuery::MethodNotSupported, "#{expected} is not supported"
     end
