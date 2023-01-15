@@ -109,7 +109,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="NodeQuery/Adapter.html" title="NodeQuery::Adapter (class)">Adapter</a></span>, <span class='object_link'><a href="NodeQuery/AnyValue.html" title="NodeQuery::AnyValue (class)">AnyValue</a></span>, <span class='object_link'><a href="NodeQuery/Helper.html" title="NodeQuery::Helper (class)">Helper</a></span>, <span class='object_link'><a href="NodeQuery/MethodNotSupported.html" title="NodeQuery::MethodNotSupported (class)">MethodNotSupported</a></span>, <span class='object_link'><a href="NodeQuery/NodeRules.html" title="NodeQuery::NodeRules (class)">NodeRules</a></span>, <span class='object_link'><a href="NodeQuery/ParserAdapter.html" title="NodeQuery::ParserAdapter (class)">ParserAdapter</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="NodeQuery/Adapter.html" title="NodeQuery::Adapter (class)">Adapter</a></span>, <span class='object_link'><a href="NodeQuery/Helper.html" title="NodeQuery::Helper (class)">Helper</a></span>, <span class='object_link'><a href="NodeQuery/MethodNotSupported.html" title="NodeQuery::MethodNotSupported (class)">MethodNotSupported</a></span>, <span class='object_link'><a href="NodeQuery/NodeRules.html" title="NodeQuery::NodeRules (class)">NodeRules</a></span>, <span class='object_link'><a href="NodeQuery/ParserAdapter.html" title="NodeQuery::ParserAdapter (class)">ParserAdapter</a></span>
     
   
 </p>
@@ -327,16 +327,16 @@
       <pre class="lines">
 
 
+33
 34
 35
 36
 37
 38
-39
-40</pre>
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_nql_or_ruls'>nql_or_ruls</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_nql_or_ruls'>nql_or_ruls</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
@@ -401,12 +401,12 @@
       <pre class="lines">
 
 
+27
 28
-29
-30</pre>
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_adapter'>adapter</span>
   <span class='ivar'>@adapter</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="NodeQuery/ParserAdapter.html" title="NodeQuery::ParserAdapter (class)">ParserAdapter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="NodeQuery#initialize (method)">new</a></span></span>
@@ -484,12 +484,12 @@
       <pre class="lines">
 
 
+21
 22
-23
-24</pre>
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
   <span class='ivar'>@adapter</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_adapter'>adapter</span>
@@ -564,6 +564,7 @@
       <pre class="lines">
 
 
+61
 62
 63
 64
@@ -571,11 +572,10 @@
 66
 67
 68
-69
-70</pre>
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_match_node?'>match_node?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@expression</span>
@@ -723,6 +723,7 @@
       <pre class="lines">
 
 
+48
 49
 50
 51
@@ -730,11 +731,10 @@
 53
 54
 55
-56
-57</pre>
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_nodes'>query_nodes</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@expression</span>
@@ -755,7 +755,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jan  8 09:12:08 2023 by
+  Generated on Sun Jan 15 09:09:47 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
