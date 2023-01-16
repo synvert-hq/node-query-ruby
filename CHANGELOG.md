@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.12.0 (2023-01-16)
+
+* Drop `activesupport`
+* Remove `NodeQuery::AnyValue`
+
 ## 1.11.0 (2022-12-09)
 
 * Support negative index to fetch array element
