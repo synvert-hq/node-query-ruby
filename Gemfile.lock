@@ -2,20 +2,12 @@ PATH
   remote: .
   specs:
     node_query (1.11.0)
-      activesupport (< 7.0.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.7)
-      concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (>= 1.6, < 2)
-      minitest (>= 5.1)
-      tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     ast (2.4.2)
     coderay (1.1.3)
-    concurrent-ruby (1.1.10)
     diff-lcs (1.5.0)
     ffi (1.15.5)
     formatador (1.1.0)
@@ -36,14 +28,11 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    i18n (1.12.0)
-      concurrent-ruby (~> 1.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     lumberjack (1.2.8)
     method_source (1.0.0)
-    minitest (5.16.3)
     nenv (0.3.0)
     notiffany (0.1.3)
       nenv (~> 0.1)
@@ -76,9 +65,6 @@ GEM
     rspec-support (3.11.0)
     shellany (0.0.1)
     thor (1.2.1)
-    tzinfo (2.0.5)
-      concurrent-ruby (~> 1.0)
-    zeitwerk (2.6.6)
 
 PLATFORMS
   x86_64-darwin-21

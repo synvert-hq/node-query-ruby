@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/array'
-
 require_relative "node_query/version"
 require_relative "./node_query_lexer.rex"
 require_relative "./node_query_parser.racc"

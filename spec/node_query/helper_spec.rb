@@ -45,8 +45,8 @@ RSpec.describe NodeQuery::Helper do
 
       it 'checks array by method' do
         node = parse('factory :admin, class: User do; end')
-        child_node = described_class.get_target_node(node, 'caller.arguments.second')
-        expect(child_node).to eq node.caller.arguments[1]
+        child_node = described_class.get_target_node(node, 'caller.arguments.first')
+        expect(child_node).to eq node.caller.arguments.first
       end
     end
   end
