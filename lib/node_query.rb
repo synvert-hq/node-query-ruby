@@ -22,9 +22,9 @@ class NodeQuery
 
   # Get the adapter
   # @return [NodeQuery::Adapter] current adapter, by default is {NodeQuery::ParserAdapter}
-  def self.adapter
-    @adapter ||= ParserAdapter.new
-  end
+  # def self.adapter
+  #   @adapter ||= ParserAdapter.new
+  # end
 
   # Initialize a NodeQuery.
   # @param nql_or_ruls [String | Hash] node query language or node rules

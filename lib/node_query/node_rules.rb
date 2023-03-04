@@ -5,8 +5,10 @@ class NodeQuery::NodeRules
 
   # Initialize a NodeRules.
   # @param rules [Hash] the nod rules
-  def initialize(rules)
+  def initialize(rules:, adapter:)
     @rules = rules
+    @adapter = adapter
+    @helper = NodeQuery::Helper.new(adapter)
   end
 
   # Query nodes by the rules.
@@ -28,14 +30,14 @@ class NodeQuery::NodeRules
       return matching_nodes if options[:stop_at_first_match]
     end
     if options[:recursive]
-      NodeQuery::Helper.handle_recursive_child(node) do |child_node|
+      @helper.handle_recursive_child(node) do |child_node|
         if match_node?(child_node)
           matching_nodes.push(child_node)
           break if options[:stop_at_first_match]
         end
       end
     else
-      NodeQuery.adapter.get_children(node).each do |child_node|
+      @adapter.get_children(node).each do |child_node|
         if match_node?(child_node)
           matching_nodes.push(child_node)
           break if options[:stop_at_first_match]
@@ -52,10 +54,10 @@ class NodeQuery::NodeRules
     flat_hash(@rules).keys.all? do |multi_keys|
       last_key = multi_keys.last
       actual = KEYWORDS.include?(last_key) ?
-        NodeQuery::Helper.get_target_node(node, multi_keys[0...-1].join('.')) :
-        NodeQuery::Helper.get_target_node(node, multi_keys.join('.'))
+        @helper.get_target_node(node, multi_keys[0...-1].join('.')) :
+        @helper.get_target_node(node, multi_keys.join('.'))
       expected = expected_value(@rules, multi_keys)
-      expected = NodeQuery::Helper.evaluate_node_value(node, expected) if expected.is_a?(String)
+      expected = @helper.evaluate_node_value(node, expected) if expected.is_a?(String)
       case last_key
       when :includes
         actual.any? { |actual_value| match_value?(actual_value, expected) }
@@ -95,14 +97,14 @@ class NodeQuery::NodeRules
     case expected
     when Symbol
       if actual.is_a?(Parser::AST::Node)
-        actual_source = NodeQuery.adapter.get_source(actual)
+        actual_source = @adapter.get_source(actual)
         actual_source == ":#{expected}" || actual_source == expected.to_s
       else
         actual.to_sym == expected
       end
     when String
       if actual.is_a?(Parser::AST::Node)
-        actual_source = NodeQuery.adapter.get_source(actual)
+        actual_source = @adapter.get_source(actual)
         actual_source == expected || actual_source == unwrap_quote(expected) ||
           unwrap_quote(actual_source) == expected || unwrap_quote(actual_source) == unwrap_quote(expected)
       else
