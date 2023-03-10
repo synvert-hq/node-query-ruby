@@ -226,12 +226,12 @@ RSpec.describe NodeQueryParser do
     end
 
     it 'matches in' do
-      expression = parser.parse('.ivasgn[left_value IN (@id @name)]')
+      expression = parser.parse('.ivasgn[variable IN (@id @name)]')
       expect(expression.query_nodes(node)).to eq node.body.first.body.first.body
     end
 
     it 'matches not in' do
-      expression = parser.parse('.ivasgn[left_value NOT IN (@id @name)]')
+      expression = parser.parse('.ivasgn[variable NOT IN (@id @name)]')
       expect(expression.query_nodes(node)).to eq []
     end
 
@@ -282,35 +282,35 @@ RSpec.describe NodeQueryParser do
     end
 
     it 'matches descendant node' do
-      expression = parser.parse('.class .ivasgn[left_value=@id]')
+      expression = parser.parse('.class .ivasgn[variable=@id]')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.first]
     end
 
     it 'matches three level descendant node' do
-      expression = parser.parse('.class .def .ivasgn[left_value=@id]')
+      expression = parser.parse('.class .def .ivasgn[variable=@id]')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.first]
     end
 
     it 'matches child node' do
-      expression = parser.parse('.def > .ivasgn[left_value=@id]')
+      expression = parser.parse('.def > .ivasgn[variable=@id]')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.first]
     end
 
     it 'matches next sibling node' do
-      expression = parser.parse('.ivasgn[left_value=@id] + .ivasgn[left_value=@name]')
+      expression = parser.parse('.ivasgn[variable=@id] + .ivasgn[variable=@name]')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body[1]]
     end
 
     it 'matches sebsequent sibling node' do
-      expression = parser.parse('.ivasgn[left_value=@id] ~ .ivasgn[left_value=@name]')
+      expression = parser.parse('.ivasgn[variable=@id] ~ .ivasgn[variable=@name]')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body[1]]
     end
 
     it 'matches goto scope' do
-      expression = parser.parse('.def body > .ivasgn[left_value=@id]')
+      expression = parser.parse('.def body > .ivasgn[variable=@id]')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.first]
 
-      expression = parser.parse('.def body .ivasgn[left_value=@id]')
+      expression = parser.parse('.def body .ivasgn[variable=@id]')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.first]
     end
 
@@ -321,12 +321,12 @@ RSpec.describe NodeQueryParser do
     end
 
     it 'matches has selector' do
-      expression = parser.parse('.def:has(> .ivasgn[left_value=@id])')
+      expression = parser.parse('.def:has(> .ivasgn[variable=@id])')
       expect(expression.query_nodes(node)).to eq [node.body.first.body.first]
     end
 
     it 'matches not_has selector' do
-      expression = parser.parse('.def:not_has(> .ivasgn[left_value=@id])')
+      expression = parser.parse('.def:not_has(> .ivasgn[variable=@id])')
       expect(expression.query_nodes(node)).to eq []
     end
 
@@ -357,24 +357,24 @@ RSpec.describe NodeQueryParser do
 
     it 'matches arguments' do
       expression = parser.parse('.send[arguments.size=2][arguments.first=.int][arguments.last=.str]')
-      expect(expression.query_nodes(node)).to eq [node.body.last.right_value]
+      expect(expression.query_nodes(node)).to eq [node.body.last.value]
 
       expression = parser.parse('.send[arguments.size=2][arguments.0=.int][arguments.-1=.str]')
-      expect(expression.query_nodes(node)).to eq [node.body.last.right_value]
+      expect(expression.query_nodes(node)).to eq [node.body.last.value]
     end
 
     it 'matches evaluated value' do
-      expression = parser.parse('.ivasgn[left_value="@{{right_value}}"]')
+      expression = parser.parse('.ivasgn[variable="@{{value}}"]')
       expect(expression.query_nodes(node)).to eq node.body.first.body.first.body
     end
 
     it 'matches evaluated value from base node' do
-      expression = parser.parse('.def[name=initialize][body.0.left_value="@{{body.0.right_value}}"]')
+      expression = parser.parse('.def[name=initialize][body.0.variable="@{{body.0.value}}"]')
       expect(expression.query_nodes(node)).to eq node.body.first.body
     end
 
     it 'matches ,' do
-      expression = parser.parse('.ivasgn[left_value=@id], .ivasgn[left_value=@name]')
+      expression = parser.parse('.ivasgn[variable=@id], .ivasgn[variable=@name]')
       expect(expression.query_nodes(node)).to eq node.body.first.body.first.body
     end
 

@@ -51,12 +51,12 @@ RSpec.describe NodeQuery::NodeRules do
     end
 
     it 'matches in' do
-      rules = described_class.new({ node_type: 'ivasgn', left_value: { in: ['@id', '@name'] } })
+      rules = described_class.new({ node_type: 'ivasgn', variable: { in: ['@id', '@name'] } })
       expect(rules.query_nodes(node)).to eq node.body.first.body.first.body
     end
 
     it 'matches not_in' do
-      rules = described_class.new({ node_type: 'ivasgn', left_value: { not_in: ['@id', '@name'] } })
+      rules = described_class.new({ node_type: 'ivasgn', variable: { not_in: ['@id', '@name'] } })
       expect(rules.query_nodes(node)).to eq []
     end
 
@@ -113,19 +113,19 @@ RSpec.describe NodeQuery::NodeRules do
 
     it 'matches arguments' do
       rules = described_class.new({ node_type: 'send', arguments: { size: 2, first: { node_type: 'int' }, last: { node_type: 'str' } } })
-      expect(rules.query_nodes(node)).to eq [node.body.last.right_value]
+      expect(rules.query_nodes(node)).to eq [node.body.last.value]
 
       rules = described_class.new({ node_type: 'send', arguments: { size: 2, '0': { node_type: 'int' }, '-1': { node_type: 'str' } } })
-      expect(rules.query_nodes(node)).to eq [node.body.last.right_value]
+      expect(rules.query_nodes(node)).to eq [node.body.last.value]
     end
 
     it 'matches evaluated value' do
-      rules = described_class.new({ node_type: 'ivasgn', left_value: '@{{right_value}}' })
+      rules = described_class.new({ node_type: 'ivasgn', variable: '@{{value}}' })
       expect(rules.query_nodes(node)).to eq node.body.first.body.first.body
     end
 
     it 'matches evaluated value from base node' do
-      rules = described_class.new({ node_type: 'def', name: 'initialize', body: { '0': { left_value: "@{{body.0.right_value}}" } }})
+      rules = described_class.new({ node_type: 'def', name: 'initialize', body: { '0': { variable: "@{{body.0.value}}" } }})
       expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 

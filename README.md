@@ -115,7 +115,7 @@ It matches class node whose parent class name is Base
 ### nql matches evaluated value
 
 ```
-.ivasgn[left_value="@{{right_value}}"]
+.ivasgn[variable="@{{value}}"]
 ```
 
 It matches ivasgn node whose left value equals '@' plus the evaluated value of right value.
@@ -271,7 +271,7 @@ It matches send node whose parent is def node.
 #### Adjacent sibling combinator
 
 ```
-.send[left_value=@id] + .send
+.send[variable=@id] + .send
 ```
 
 It matches send node only if it is immediately follows the send node whose left value is @id.
@@ -279,7 +279,7 @@ It matches send node only if it is immediately follows the send node whose left 
 #### General sibling combinator
 
 ```
-.send[left_value=@id] ~ .send
+.send[variable=@id] ~ .send
 ```
 
 It matches send node only if it is follows the send node whose left value is @id.
@@ -323,7 +323,7 @@ It matches the last def node.
 ### nql matches multiple expressions
 
 ```
-.ivasgn[left_value=@id], .ivasgn[left_value=@name]
+.ivasgn[variable=@id], .ivasgn[variable=@name]
 ```
 
 It matches ivasgn node whose left value is either @id or @name.
@@ -363,7 +363,7 @@ It matches class node whose parent class name is Base
 ### rules matches evaluated value
 
 ```
-{ node_type: 'ivasgn', left_value: '@{{right_value}}' }
+{ node_type: 'ivasgn', variable: '@{{value}}' }
 ```
 
 It matches ivasgn node whose left value equals '@' plus the evaluated value of right value.

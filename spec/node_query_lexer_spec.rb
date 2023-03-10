@@ -276,13 +276,13 @@ RSpec.describe NodeQueryLexer do
     end
 
     it 'matches evaluated value with identifier value' do
-      source = '.ivasgn[left_value="@{{right_value}}"]'
+      source = '.ivasgn[variable="@{{value}}"]'
       expected_tokens = [
         [:tNODE_TYPE, "ivasgn"],
         [:tOPEN_ATTRIBUTE, "["],
-        [:tKEY, "left_value"],
+        [:tKEY, "variable"],
         [:tOPERATOR, "=="],
-        [:tSTRING, "@{{right_value}}"],
+        [:tSTRING, "@{{value}}"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
       assert_tokens source, expected_tokens

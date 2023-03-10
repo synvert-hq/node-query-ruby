@@ -43,7 +43,7 @@ class NodeQuery::Helper
     # Evaluate node value.
     # @example
     #     source code of the node is @id = id
-    #     evaluated_node_value(node, "@{{right_value}}") # => @id
+    #     evaluated_node_value(node, "@{{value}}") # => @id
     # @param node [Node] ast node
     # @param str [String] string to be evaluated
     # @return [String] evaluated string
