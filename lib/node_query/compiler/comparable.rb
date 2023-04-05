@@ -114,7 +114,7 @@ module NodeQuery::Compiler
     # Get the expected value
     # @param base_node [Node] the base node for evaluated value
     # @return expected value, could be integer, float, string, boolean, nil, range, and etc.
-    def expected_value(base_node)
+    def expected_value(_base_node)
       @value
     end
 
