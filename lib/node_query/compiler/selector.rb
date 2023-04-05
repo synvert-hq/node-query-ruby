@@ -12,7 +12,15 @@ module NodeQuery::Compiler
     # @param attribute_list [NodeQuery::Compiler::AttributeList] the attribute list
     # @param pseudo_class [String] the pseudo class, can be <code>has</code> or <code>not_has</code>
     # @param pseudo_selector [NodeQuery::Compiler::Expression] the pseudo selector
-    def initialize(goto_scope: nil, relationship: nil, rest: nil, basic_selector: nil, position: nil, pseudo_class: nil, pseudo_selector: nil)
+    def initialize(
+      goto_scope: nil,
+      relationship: nil,
+      rest: nil,
+      basic_selector: nil,
+      position: nil,
+      pseudo_class: nil,
+      pseudo_selector: nil
+    )
       @goto_scope = goto_scope
       @relationship = relationship
       @rest = rest
@@ -36,7 +44,10 @@ module NodeQuery::Compiler
           return false
         end
       end
-      NodeQuery.adapter.is_node?(node) && (!@basic_selector || (operator == "!=" ? !@basic_selector.match?(node, base_node) : @basic_selector.match?(node, base_node))) && match_pseudo_class?(node)
+      NodeQuery.adapter.is_node?(node) && (!@basic_selector || (operator == "!=" ? !@basic_selector.match?(
+        node,
+        base_node
+      ) : @basic_selector.match?(node, base_node))) && match_pseudo_class?(node)
     end
 
     # Query nodes by the selector.

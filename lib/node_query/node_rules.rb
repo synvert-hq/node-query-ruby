@@ -22,7 +22,7 @@ class NodeQuery::NodeRules
       return match_node?(node) ? [node] : []
     end
 
-    matching_nodes  = []
+    matching_nodes = []
     if options[:including_self] && match_node?(node)
       matching_nodes.push(node)
       return matching_nodes if options[:stop_at_first_match]
@@ -51,9 +51,10 @@ class NodeQuery::NodeRules
   def match_node?(node)
     flat_hash(@rules).keys.all? do |multi_keys|
       last_key = multi_keys.last
-      actual = KEYWORDS.include?(last_key) ?
-        NodeQuery::Helper.get_target_node(node, multi_keys[0...-1].join('.')) :
-        NodeQuery::Helper.get_target_node(node, multi_keys.join('.'))
+      actual =
+        KEYWORDS.include?(last_key) ?
+               NodeQuery::Helper.get_target_node(node, multi_keys[0...-1].join('.')) :
+               NodeQuery::Helper.get_target_node(node, multi_keys.join('.'))
       expected = expected_value(@rules, multi_keys)
       expected = NodeQuery::Helper.evaluate_node_value(node, expected) if expected.is_a?(String)
       case last_key
