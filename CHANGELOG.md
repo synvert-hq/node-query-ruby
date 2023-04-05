@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.12.1 (2023-04-06)
+
+* Fix when `actual` is nil
+
 ## 1.12.0 (2023-01-16)
 
 * Drop `activesupport`
