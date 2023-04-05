@@ -25,7 +25,9 @@ module NodeQuery::Compiler
       when '!='
         if expected.is_a?(::Array)
           !actual.is_a?(::Array) || actual.size != expected.size ||
-            actual.zip(expected).any? { |actual_child, expected_child| expected_child.match?(actual_child, base_node, '!=') }
+            actual.zip(expected).any? { |actual_child, expected_child|
+              expected_child.match?(actual_child, base_node, '!=')
+            }
         else
           !is_equal?(actual, expected)
         end
@@ -66,7 +68,9 @@ module NodeQuery::Compiler
       else
         if expected.is_a?(::Array)
           actual.is_a?(::Array) && actual.size == expected.size &&
-            actual.zip(expected).all? { |actual_child, expected_child| expected_child.match?(actual_child, base_node, '==') }
+            actual.zip(expected).all? { |actual_child, expected_child|
+              expected_child.match?(actual_child, base_node, '==')
+            }
         else
           is_equal?(actual, expected)
         end

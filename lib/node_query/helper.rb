@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NodeQuery::Helper
-  class <<self
+  class << self
     # Get target node by the keys.
     # @param node [Node] ast node
     # @param keys [String|Array] keys of child node.

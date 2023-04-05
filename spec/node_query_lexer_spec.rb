@@ -630,12 +630,7 @@ RSpec.describe NodeQueryLexer do
   context 'goto_scope' do
     it 'matches' do
       source = '.block body > .def'
-      expected_tokens = [
-        [:tNODE_TYPE, "block"],
-        [:tGOTO_SCOPE, "body"],
-        [:tRELATIONSHIP, ">"],
-        [:tNODE_TYPE, "def"]
-      ]
+      expected_tokens = [[:tNODE_TYPE, "block"], [:tGOTO_SCOPE, "body"], [:tRELATIONSHIP, ">"], [:tNODE_TYPE, "def"]]
       assert_tokens source, expected_tokens
     end
   end

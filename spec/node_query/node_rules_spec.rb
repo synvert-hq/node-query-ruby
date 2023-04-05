@@ -112,10 +112,20 @@ RSpec.describe NodeQuery::NodeRules do
     end
 
     it 'matches arguments' do
-      rules = described_class.new({ node_type: 'send', arguments: { size: 2, first: { node_type: 'int' }, last: { node_type: 'str' } } })
+      rules = described_class.new(
+        {
+          node_type: 'send',
+          arguments: { size: 2, first: { node_type: 'int' }, last: { node_type: 'str' } }
+        }
+      )
       expect(rules.query_nodes(node)).to eq [node.body.last.value]
 
-      rules = described_class.new({ node_type: 'send', arguments: { size: 2, '0': { node_type: 'int' }, '-1': { node_type: 'str' } } })
+      rules = described_class.new(
+        {
+          node_type: 'send',
+          arguments: { size: 2, '0': { node_type: 'int' }, '-1': { node_type: 'str' } }
+        }
+      )
       expect(rules.query_nodes(node)).to eq [node.body.last.value]
     end
 
@@ -125,7 +135,13 @@ RSpec.describe NodeQuery::NodeRules do
     end
 
     it 'matches evaluated value from base node' do
-      rules = described_class.new({ node_type: 'def', name: 'initialize', body: { '0': { variable: "@{{body.0.value}}" } }})
+      rules = described_class.new(
+        {
+          node_type: 'def',
+          name: 'initialize',
+          body: { '0': { variable: "@{{body.0.value}}" } }
+        }
+      )
       expect(rules.query_nodes(node)).to eq node.body.first.body
     end
 
@@ -161,7 +177,13 @@ RSpec.describe NodeQuery::NodeRules do
 
     it 'raises error' do
       node = parse("Foobar.stub :new, &block")
-      rules = described_class.new({ node_type: 'send', message: 'stub', arguments: [ {type:'sym'}, {type: 'block_pass'} ] })
+      rules = described_class.new(
+        {
+          node_type: 'send',
+          message: 'stub',
+          arguments: [{ type: 'sym' }, { type: 'block_pass' }]
+        }
+      )
       expect {
         rules.query_nodes(node)
       }.to raise_error(NodeQuery::MethodNotSupported, '{:type=>"sym"} is not supported')
@@ -176,7 +198,12 @@ RSpec.describe NodeQuery::NodeRules do
 
     it 'sets options stop_at_first_match to true' do
       rules = described_class.new({ node_type: 'ivasgn' })
-      expect(rules.query_nodes(node.children.first, { stop_at_first_match: true })).to eq [node.children.first.body.first.body.first]
+      expect(
+        rules.query_nodes(
+          node.children.first,
+          { stop_at_first_match: true }
+        )
+      ).to eq [node.children.first.body.first.body.first]
 
       # expect(rules.query_nodes(node.children.first)).to eq node.children.first.body.first.body
     end
