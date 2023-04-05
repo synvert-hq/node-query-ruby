@@ -131,9 +131,9 @@ class NodeQuery::NodeRules
         actual == expected
       end
     when TrueClass
-      :true == actual.type
+      :true == actual&.type
     when FalseClass
-      :false == actual.type
+      :false == actual&.type
     when Parser::AST::Node
       actual == expected
     else
