@@ -17,14 +17,14 @@ NodeQuery defines a NQL (node query language) and node rules to query AST nodes.
     - [nql matches method result](#nql-matches-method-result)
     - [nql matches operators](#nql-matches-operators)
     - [nql matches array node attribute](#nql-matches-array-node-attribute)
-    - [nql matches * in attribute key](#nql-matches--in-attribute-key)
+    - [nql matches \* in attribute key](#nql-matches--in-attribute-key)
     - [nql matches multiple selectors](#nql-matches-multiple-selectors)
       - [Descendant combinator](#descendant-combinator)
       - [Child combinator](#child-combinator)
       - [Adjacent sibling combinator](#adjacent-sibling-combinator)
       - [General sibling combinator](#general-sibling-combinator)
     - [nql matches goto scope](#nql-matches-goto-scope)
-    - [nql matches :has and :not_has pseudo selector](#nql-matches-has-and-not_has-pseudo-selector)
+    - [nql matches :has and :not\_has pseudo selector](#nql-matches-has-and-not_has-pseudo-selector)
     - [nql matches :first-child and :last-child pseudo selector](#nql-matches-first-child-and-last-child-pseudo-selector)
     - [nql matches multiple expressions](#nql-matches-multiple-expressions)
   - [Node Rules](#node-rules)
@@ -474,17 +474,18 @@ It matches def node whose arguments are id and name.
 
 ## Write Adapter
 
-Different parser, like parser, will generate different AST nodes, to make NodeQuery work for them all,
+Different parser, like parser, syntax_tree, will generate different AST nodes, to make NodeQuery work for them all,
 we define an [Adapter](https://github.com/xinminlabs/node-query-ruby/blob/main/lib/node_query/adapter.rb) interface,
 if you implement the Adapter interface, you can set it as NodeQuery's adapter.
 
+It provides 2 adapters
+
+1. `ParserAdapter`
+2. `SyntaxTreeAdapter`
+
 ```ruby
-NodeQuery.configure(adapter: ParserAdapter.new)
+NodeQuery.configure(adapter: SyntaxTreeAdapter.new) # default is ParserAdapter
 ```
-
-Here is the ParserAdapter implementation:
-
-[ParserAdapter](https://github.com/xinminlabs/node-query-ruby/blob/main/lib/node_query/parser_adapter.rb)
 
 ## Development
 
