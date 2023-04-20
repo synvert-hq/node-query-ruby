@@ -42,6 +42,7 @@ GEM
       ast (~> 2.4.1)
     parser_node_ext (1.0.0)
       parser
+    prettier_print (1.2.1)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -64,6 +65,10 @@ GEM
       rspec-support (~> 3.11.0)
     rspec-support (3.11.0)
     shellany (0.0.1)
+    syntax_tree (6.1.1)
+      prettier_print (>= 1.2.0)
+    syntax_tree_ext (0.1.0)
+      syntax_tree
     thor (1.2.1)
 
 PLATFORMS
@@ -82,6 +87,7 @@ DEPENDENCIES
   racc
   rake (~> 13.0)
   rspec (~> 3.0)
+  syntax_tree_ext
 
 BUNDLED WITH
    2.3.7
