@@ -9,6 +9,7 @@ class NodeQuery
 
   autoload :Adapter, "node_query/adapter"
   autoload :ParserAdapter, "node_query/adapter/parser"
+  autoload :SyntaxTreeAdapter, "node_query/adapter/syntax_tree"
   autoload :Compiler, "node_query/compiler"
   autoload :Helper, "node_query/helper"
   autoload :NodeRules, "node_query/node_rules"
