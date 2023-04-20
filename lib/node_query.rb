@@ -8,7 +8,7 @@ class NodeQuery
   class MethodNotSupported < StandardError; end
 
   autoload :Adapter, "node_query/adapter"
-  autoload :ParserAdapter, "node_query/parser_adapter"
+  autoload :ParserAdapter, "node_query/adapter/parser"
   autoload :Compiler, "node_query/compiler"
   autoload :Helper, "node_query/helper"
   autoload :NodeRules, "node_query/node_rules"
