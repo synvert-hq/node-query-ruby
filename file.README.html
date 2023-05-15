@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.28
+    &mdash; Documentation by YARD 0.9.34
   
 </title>
 
@@ -515,14 +515,17 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 
 <h2 id="label-Write+Adapter">Write Adapter</h2>
 
-<p>Different parser, like parser, will generate different AST nodes, to make NodeQuery work for them all, we define an <a href="https://github.com/xinminlabs/node-query-ruby/blob/main/lib/node_query/adapter.rb">Adapter</a> interface, if you implement the Adapter interface, you can set it as NodeQuery’s adapter.</p>
+<p>Different parser, like parser, syntax_tree, will generate different AST nodes, to make NodeQuery work for them all, we define an <a href="https://github.com/xinminlabs/node-query-ruby/blob/main/lib/node_query/adapter.rb">Adapter</a> interface, if you implement the Adapter interface, you can set it as NodeQuery’s adapter.</p>
 
-<pre class="code ruby"><code class="ruby"><span class='const'><span class='object_link'><a href="NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'><span class='object_link'><a href="NodeQuery.html#configure-class_method" title="NodeQuery.configure (method)">configure</a></span></span><span class='lparen'>(</span><span class='label'>adapter:</span> <span class='const'>ParserAdapter</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span>
-</code></pre>
+<p>It provides 2 adapters</p>
+<ol><li>
+<p><code>ParserAdapter</code></p>
+</li><li>
+<p><code>SyntaxTreeAdapter</code></p>
+</li></ol>
 
-<p>Here is the ParserAdapter implementation:</p>
-
-<p><a href="https://github.com/xinminlabs/node-query-ruby/blob/main/lib/node_query/parser_adapter.rb">ParserAdapter</a></p>
+<pre class="code ruby"><code class="ruby"><span class='const'><span class='object_link'><a href="NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'><span class='object_link'><a href="NodeQuery.html#configure-class_method" title="NodeQuery.configure (method)">configure</a></span></span><span class='lparen'>(</span><span class='label'>adapter:</span> <span class='const'>SyntaxTreeAdapter</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span> <span class='comment'># default is ParserAdapter
+</span></code></pre>
 
 <h2 id="label-Development">Development</h2>
 
@@ -536,9 +539,9 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 </div></div>
 
       <div id="footer">
-  Generated on Wed Apr  5 23:57:20 2023 by
+  Generated on Mon May 15 05:34:51 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.28 (ruby-3.2.2).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

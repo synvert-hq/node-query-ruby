@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: NodeQuery::ParserAdapter
+  Class: NodeQuery::SyntaxTreeAdapter
   
     &mdash; Documentation by YARD 0.9.34
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
 <script type="text/javascript">
-  pathId = "NodeQuery::ParserAdapter";
+  pathId = "NodeQuery::SyntaxTreeAdapter";
   relpath = '../';
 </script>
 
@@ -36,10 +36,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../_index.html">Index (P)</a> &raquo;
+    <a href="../_index.html">Index (S)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span>
      &raquo; 
-    <span class="title">ParserAdapter</span>
+    <span class="title">SyntaxTreeAdapter</span>
   
 </div>
 
@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Class: NodeQuery::ParserAdapter
+      <div id="content"><h1>Class: NodeQuery::SyntaxTreeAdapter
   
   
   
@@ -74,7 +74,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">NodeQuery::ParserAdapter</li>
+            <li class="next">NodeQuery::SyntaxTreeAdapter</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -94,7 +94,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/node_query/adapter/parser.rb</dd>
+    <dd>lib/node_query/adapter/syntax_tree.rb</dd>
   </dl>
   
 </div>
@@ -253,10 +253,10 @@
 18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/parser.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/syntax_tree.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_children'>get_children</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_children'>children</span>
+  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_child_nodes'>child_nodes</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -283,10 +283,10 @@
 10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/parser.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/syntax_tree.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_node_type'>get_node_type</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>
+  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>::</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -310,15 +310,13 @@
 
 20
 21
-22
-23</pre>
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/parser.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/syntax_tree.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_siblings'>get_siblings</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_index'>index</span> <span class='op'>=</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_children'>children</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_children'>children</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span> <span class='op'>+</span> <span class='int'>1</span><span class='op'>..</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_siblings'>siblings</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -345,10 +343,10 @@
 14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/parser.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/syntax_tree.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_source'>get_source</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_loc'>loc</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span><span class='period'>.</span><span class='id identifier rubyid_source'>source</span>
+  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_source'>source</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -397,10 +395,10 @@
 6</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/parser.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/adapter/syntax_tree.rb', line 4</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_is_node?'>is_node?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Parser</span><span class='op'>::</span><span class='const'>AST</span><span class='op'>::</span><span class='const'>Node</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>SyntaxTree</span><span class='op'>::</span><span class='const'>Node</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
