@@ -18,7 +18,7 @@ class NodeQuery
   # @param [Hash] options options to configure
   # @option options [NodeQuery::Adapter] :adapter the adpater
   def self.configure(options)
-    @adapter = options.adapter
+    @adapter = options[:adapter]
   end
 
   # Get the adapter
