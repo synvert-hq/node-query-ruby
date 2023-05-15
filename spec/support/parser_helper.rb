@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require "parser"
-require "parser/current"
-require "parser_node_ext"
-require "syntax_tree_ext"
+require 'parser/current'
+require 'syntax_tree'
 
 module ParserHelper
   def parse(code)

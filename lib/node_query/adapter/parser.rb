@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'parser'
+require 'parser_node_ext'
+
 class NodeQuery::ParserAdapter
   def is_node?(node)
     node.is_a?(Parser::AST::Node)

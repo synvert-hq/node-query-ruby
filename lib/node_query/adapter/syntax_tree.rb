@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'syntax_tree'
+require 'syntax_tree_ext'
+
 class NodeQuery::SyntaxTreeAdapter
   def is_node?(node)
     node.is_a?(SyntaxTree::Node)
