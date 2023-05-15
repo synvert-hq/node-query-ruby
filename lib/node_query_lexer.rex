@@ -7,7 +7,7 @@ macros
   CLOSE_ARRAY              /\)/
   OPEN_SELECTOR            /\(/
   CLOSE_SELECTOR           /\)/
-  NODE_TYPE                /\.[a-z]+/
+  NODE_TYPE                /\.[a-zA-Z]+/
   IDENTIFIER               /[@\*\-\.\w]*\w/
   IDENTIFIER_VALUE         /[@\.\w!&:\?<>=]+/
   FALSE                    /false/
