@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.13.1 (2023-05-16)
+
+* Require `parser` and `syntax_tree` in adapter
+* `SyntaxTreeParser#get_node_type` returns a symbol
+* Node type can be upcase
+
 ## 1.13.0 (2023-05-15)
 
 * Add `SyntaxTreeParser`
