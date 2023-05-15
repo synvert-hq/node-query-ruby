@@ -9,7 +9,7 @@ class NodeQuery::SyntaxTreeAdapter
   end
 
   def get_node_type(node)
-    node.class.name.split('::').last
+    node.class.name.split('::').last.to_sym
   end
 
   def get_source(node)

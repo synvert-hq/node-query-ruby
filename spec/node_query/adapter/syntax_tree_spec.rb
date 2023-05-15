@@ -19,7 +19,7 @@ RSpec.describe NodeQuery::SyntaxTreeAdapter do
   describe "#get_node_type" do
     it "gets the type of node" do
       node = syntax_tree_parse("class Synvert; end")
-      expect(adapter.get_node_type(node)).to eq 'ClassDeclaration'
+      expect(adapter.get_node_type(node)).to eq :ClassDeclaration
     end
   end
 
