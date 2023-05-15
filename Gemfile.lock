@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    node_query (1.12.1)
+    node_query (1.13.0)
 
 GEM
   remote: https://rubygems.org/

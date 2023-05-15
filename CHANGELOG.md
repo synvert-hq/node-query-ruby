@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.0 (2023-05-15)
+
+* Add `SyntaxTreeParser`
+
 ## 1.12.1 (2023-04-06)
 
 * Fix when `actual` is nil
