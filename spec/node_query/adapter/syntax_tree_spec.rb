@@ -7,7 +7,7 @@ RSpec.describe NodeQuery::SyntaxTreeAdapter do
 
   describe "#is_node?" do
     it 'gets true for node' do
-      node = syntax_tree_parse("class Synvert; end")
+      node = syntax_tree_parse("class Synvert; end").body.first
       expect(adapter.is_node?(node)).to be_truthy
     end
 
@@ -18,7 +18,7 @@ RSpec.describe NodeQuery::SyntaxTreeAdapter do
 
   describe "#get_node_type" do
     it "gets the type of node" do
-      node = syntax_tree_parse("class Synvert; end")
+      node = syntax_tree_parse("class Synvert; end").body.first
       expect(adapter.get_node_type(node)).to eq :ClassDeclaration
     end
   end
@@ -26,14 +26,14 @@ RSpec.describe NodeQuery::SyntaxTreeAdapter do
   describe "#get_source" do
     it "gets the source code of node" do
       code = "class Synvert; end"
-      node = syntax_tree_parse(code)
+      node = syntax_tree_parse(code).body.first
       expect(adapter.get_source(node)).to eq code
     end
   end
 
   describe "#get_children" do
     it "gets the children of node" do
-      node = syntax_tree_parse("class Synvert; end")
+      node = syntax_tree_parse("class Synvert; end").body.first
       child_nodes = adapter.get_children(node)
       expect(child_nodes.size).to eq 3
       expect(child_nodes[0].class).to eq SyntaxTree::ConstRef
@@ -44,7 +44,7 @@ RSpec.describe NodeQuery::SyntaxTreeAdapter do
 
   describe "#get_siblings" do
     it "gets the siblings of node" do
-      node = syntax_tree_parse("class Synvert; end").constant
+      node = syntax_tree_parse("class Synvert; end").body.first.constant
       siblings = adapter.get_siblings(node)
       expect(siblings.size).to eq 2
       expect(siblings[0]).to be_nil

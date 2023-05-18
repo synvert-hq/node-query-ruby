@@ -24,6 +24,10 @@ RSpec.describe NodeQuery do
   }
 
   describe "#query_nodes" do
+    before do
+      NodeQuery.configure(adapter: NodeQuery::ParserAdapter.new)
+    end
+
     it "matches nql" do
       query = described_class.new('.class[name=Synvert]')
       expect(query.query_nodes(node)).to eq [node]

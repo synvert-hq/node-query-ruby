@@ -9,6 +9,6 @@ module ParserHelper
   end
 
   def syntax_tree_parse(code)
-    SyntaxTree::Parser.new(code).parse.statements.body.first
+    SyntaxTree::Parser.new(code).parse.statements
   end
 end
