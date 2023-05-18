@@ -31,8 +31,8 @@ module NodeQuery::Compiler
     end
 
     # Check if node matches the selector.
-    # @param node [Parser::AST::Node] the node
-    # @param base_node [Parser::AST::Node] the base node for evaluated node
+    # @param node [Node] the node
+    # @param base_node [Node] the base node for evaluated node
     def match?(node, base_node, operator = "==")
       if node.is_a?(::Array)
         case operator
@@ -153,9 +153,9 @@ module NodeQuery::Compiler
             nodes << child_node if @rest.match?(child_node, child_node)
           end
         else
-          node.children.each do |child_node|
+          NodeQuery.adapter.get_children(node).each do |child_node|
             if NodeQuery.adapter.is_node?(child_node) && :begin == NodeQuery.adapter.get_node_type(child_node)
-              child_node.children.each do |child_child_node|
+              NodeQuery.adapter.get_children(child_node).each do |child_child_node|
                 nodes << child_child_node if @rest.match?(child_child_node, child_child_node)
               end
             elsif @rest.match?(child_node, child_node)

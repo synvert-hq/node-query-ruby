@@ -95,14 +95,14 @@ class NodeQuery::NodeRules
 
     case expected
     when Symbol
-      if actual.is_a?(Parser::AST::Node)
+      if NodeQuery.adapter.is_node?(actual)
         actual_source = NodeQuery.adapter.get_source(actual)
         actual_source == ":#{expected}" || actual_source == expected.to_s
       else
         actual.to_sym == expected
       end
     when String
-      if actual.is_a?(Parser::AST::Node)
+      if NodeQuery.adapter.is_node?(actual)
         actual_source = NodeQuery.adapter.get_source(actual)
         actual_source == expected || actual_source == unwrap_quote(expected) ||
           unwrap_quote(actual_source) == expected || unwrap_quote(actual_source) == unwrap_quote(expected)
@@ -110,7 +110,7 @@ class NodeQuery::NodeRules
         actual.to_s == expected || wrap_quote(actual.to_s) == expected
       end
     when Regexp
-      if actual.is_a?(Parser::AST::Node)
+      if NodeQuery.adapter.is_node?(actual)
         actual.to_source =~ Regexp.new(expected.to_s, Regexp::MULTILINE)
       else
         actual.to_s =~ Regexp.new(expected.to_s, Regexp::MULTILINE)
@@ -120,13 +120,13 @@ class NodeQuery::NodeRules
 
       actual.zip(expected).all? { |a, e| match_value?(a, e) }
     when NilClass
-      if actual.is_a?(Parser::AST::Node)
+      if NodeQuery.adapter.is_node?(actual)
         :nil == actual.type
       else
         actual.nil?
       end
     when Numeric
-      if actual.is_a?(Parser::AST::Node)
+      if NodeQuery.adapter.is_node?(actual)
         actual.children[0] == expected
       else
         actual == expected
@@ -135,10 +135,12 @@ class NodeQuery::NodeRules
       :true == actual&.type
     when FalseClass
       :false == actual&.type
-    when Parser::AST::Node
-      actual == expected
     else
-      raise NodeQuery::MethodNotSupported, "#{expected} is not supported"
+      if NodeQuery.adapter.is_node?(expected)
+        actual == expected
+      else
+        raise NodeQuery::MethodNotSupported, "#{expected} is not supported"
+      end
     end
   end
 

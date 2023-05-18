@@ -30,7 +30,7 @@ class NodeQuery::Helper
     # Recursively handle child nodes.
     # @param node [Node] ast node
     # @yield [child] Gives a child node.
-    # @yieldparam child [Parser::AST::Node] child node
+    # @yieldparam child [Node] child node
     def handle_recursive_child(node, &block)
       NodeQuery.adapter.get_children(node).each do |child|
         if NodeQuery.adapter.is_node?(child)
