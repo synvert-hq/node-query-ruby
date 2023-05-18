@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.2 (2023-05-18)
+
+* Replace `Parser` specific code
+
 ## 1.13.1 (2023-05-16)
 
 * Require `parser` and `syntax_tree` in adapter
