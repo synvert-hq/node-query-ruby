@@ -13,7 +13,7 @@ class NodeQuery::SyntaxTreeAdapter
   end
 
   def get_source(node)
-    node.source
+    node.to_source
   end
 
   def get_children(node)

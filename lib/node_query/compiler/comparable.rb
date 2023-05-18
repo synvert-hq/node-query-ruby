@@ -90,22 +90,7 @@ module NodeQuery::Compiler
     # @return the node value, could be integer, float, string, boolean, nil, range, and etc.
     def actual_value(node)
       if NodeQuery.adapter.is_node?(node)
-        case NodeQuery.adapter.get_node_type(node)
-        when :int, :float, :str, :sym
-          NodeQuery.adapter.get_children(node).last
-        when :true
-          true
-        when :false
-          false
-        when :nil
-          nil
-        when :array
-          NodeQuery.adapter.get_children(node).map { |child_node| actual_value(child_node) }
-        when :begin
-          actual_value(NodeQuery.adapter.get_children(node).first)
-        else
-          node
-        end
+        node.to_value
       else
         node
       end
