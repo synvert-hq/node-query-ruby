@@ -250,7 +250,12 @@ RSpec.describe NodeQuery::NodeRules do
       end
 
       it 'matches multiple attributes' do
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: { size: 2, '0': 'id', '1': 'name' } } } })
+        rules = described_class.new(
+          {
+            node_type: 'DefNode',
+            params: { contents: { requireds: { size: 2, '0': 'id', '1': 'name' } } }
+          }
+        )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
 
@@ -293,7 +298,12 @@ RSpec.describe NodeQuery::NodeRules do
       end
 
       it 'matches not_includes' do
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: { not_includes: 'foobar' } } } })
+        rules = described_class.new(
+          {
+            node_type: 'DefNode',
+            params: { contents: { requireds: { not_includes: 'foobar' } } }
+          }
+        )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
 
@@ -306,15 +316,30 @@ RSpec.describe NodeQuery::NodeRules do
       end
 
       it 'matches not equal array' do
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: { not: ['id', 'name'] } } } })
+        rules = described_class.new(
+          {
+            node_type: 'DefNode',
+            params: { contents: { requireds: { not: ['id', 'name'] } } }
+          }
+        )
         expect(rules.query_nodes(node)).to eq []
 
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: { not: ['name', 'id'] } } } })
+        rules = described_class.new(
+          {
+            node_type: 'DefNode',
+            params: { contents: { requireds: { not: ['name', 'id'] } } }
+          }
+        )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
 
       it 'matches nested selector' do
-        rules = described_class.new({ node_type: 'DefNode', bodystmt: { statements: { body: { '0': { node_type: 'Assign' } } } } })
+        rules = described_class.new(
+          {
+            node_type: 'DefNode',
+            bodystmt: { statements: { body: { '0': { node_type: 'Assign' } } } }
+          }
+        )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
 
@@ -342,7 +367,15 @@ RSpec.describe NodeQuery::NodeRules do
         rules = described_class.new(
           {
             node_type: 'CallNode',
-            arguments: { arguments: { parts: { size: 2, first: { node_type: 'Int' }, last: { node_type: 'StringLiteral' } } } }
+            arguments: {
+              arguments: {
+                parts: {
+                  size: 2,
+                  first: { node_type: 'Int' },
+                  last: { node_type: 'StringLiteral' }
+                }
+              }
+            }
           }
         )
         expect(rules.query_nodes(node)).to eq [node.body.last.value]
@@ -350,7 +383,15 @@ RSpec.describe NodeQuery::NodeRules do
         rules = described_class.new(
           {
             node_type: 'CallNode',
-            arguments: { arguments: { parts: { size: 2, '0': { node_type: 'Int' }, '-1': { node_type: 'StringLiteral' } } } }
+            arguments: {
+              arguments: {
+                parts: {
+                  size: 2,
+                  '0': { node_type: 'Int' },
+                  '-1': { node_type: 'StringLiteral' }
+                }
+              }
+            }
           }
         )
         expect(rules.query_nodes(node)).to eq [node.body.last.value]
@@ -374,7 +415,13 @@ RSpec.describe NodeQuery::NodeRules do
 
       it 'matches empty string' do
         node = syntax_tree_parse("call('')")
-        rules = described_class.new({ node_type: 'CallNode', message: :call, arguments: { arguments: { parts: { first: '' } } } })
+        rules = described_class.new(
+          {
+            node_type: 'CallNode',
+            message: :call,
+            arguments: { arguments: { parts: { first: '' } } }
+          }
+        )
         expect(rules.query_nodes(node)).to eq [node.body.first]
       end
 
