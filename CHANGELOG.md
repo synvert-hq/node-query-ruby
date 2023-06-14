@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.13.3 (2023-06-14)
+
+* Use `deconstruct_key` to get syntax_tree node children
+* `handle_recursive_child` handles Array child node
+
 ## 1.13.2 (2023-05-18)
 
 * Replace `Parser` specific code
