@@ -17,7 +17,7 @@ class NodeQuery::SyntaxTreeAdapter
   end
 
   def get_children(node)
-    node.child_nodes
+    node.deconstruct_keys([]).except(:location, :comments).values
   end
 
   def get_siblings(node)
