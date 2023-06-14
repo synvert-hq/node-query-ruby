@@ -36,6 +36,11 @@ class NodeQuery::Helper
         if NodeQuery.adapter.is_node?(child)
           block.call(child)
           handle_recursive_child(child, &block)
+        elsif child.is_a?(Array)
+          child.each do |child_child|
+            block.call(child_child)
+            handle_recursive_child(child_child, &block)
+          end
         end
       end
     end
