@@ -3,6 +3,14 @@
 require 'syntax_tree'
 require 'syntax_tree_ext'
 
+if RUBY_VERSION.to_i < 3
+  class Hash
+    def except(*keys)
+      self.reject { |k, _| keys.include?(k) }
+    end
+  end
+end
+
 class NodeQuery::SyntaxTreeAdapter
   def is_node?(node)
     node.is_a?(SyntaxTree::Node)
