@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.4 (2023-06-15)
+
+* Support `Hash#except` for ruby 2
+
 ## 1.13.3 (2023-06-14)
 
 * Use `deconstruct_key` to get syntax_tree node children
