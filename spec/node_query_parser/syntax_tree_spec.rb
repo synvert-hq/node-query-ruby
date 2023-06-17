@@ -183,8 +183,13 @@ RSpec.describe NodeQueryParser do
       end
 
       it 'matches root has selector' do
-        expression = parser.parse(':has(.DefNode[name=initialize])')
+        expression = parser.parse(':has(> .ClassDeclaration)')
         expect(expression.query_nodes(node)).to eq [node]
+      end
+
+      it 'matches root not_has selector' do
+        expression = parser.parse(':not_has(> .ClassDeclaration)')
+        expect(expression.query_nodes(node)).to eq []
       end
 
       it 'matches >=' do

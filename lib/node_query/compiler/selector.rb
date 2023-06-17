@@ -154,7 +154,11 @@ module NodeQuery::Compiler
           end
         else
           NodeQuery.adapter.get_children(node).each do |child_node|
-            if NodeQuery.adapter.is_node?(child_node) && :begin == NodeQuery.adapter.get_node_type(child_node)
+            if child_node.is_a?(Array) # SyntaxTree may return an array in child node.
+              child_node.each do |child_child_node|
+                nodes << child_child_node if @rest.match?(child_child_node, child_child_node)
+              end
+            elsif NodeQuery.adapter.is_node?(child_node) && :begin == NodeQuery.adapter.get_node_type(child_node)
               NodeQuery.adapter.get_children(child_node).each do |child_child_node|
                 nodes << child_child_node if @rest.match?(child_child_node, child_child_node)
               end
