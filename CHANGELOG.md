@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.13.5 (2023-06-17)
+
+* Separate syntax_tree tests from parser tests
+* Flatten child iteration for syntax_tree
+
 ## 1.13.4 (2023-06-15)
 
 * Support `Hash#except` for ruby 2
