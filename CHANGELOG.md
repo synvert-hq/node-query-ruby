@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.6 (2023-06-26)
+
+* Flatten syntax_tree children
+
 ## 1.13.5 (2023-06-17)
 
 * Separate syntax_tree tests from parser tests
