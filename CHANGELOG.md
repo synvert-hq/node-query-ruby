@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.7 (2023-06-26)
+
+* Revert "Flatten syntax_tree children"
+
 ## 1.13.6 (2023-06-26)
 
 * Flatten syntax_tree children
