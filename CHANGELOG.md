@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.8 (2023-06-28)
+
+* Check `.to_value` instead of `.type`
+
 ## 1.13.7 (2023-06-26)
 
 * Revert "Flatten syntax_tree children"
