@@ -121,7 +121,7 @@ class NodeQuery::NodeRules
       actual.zip(expected).all? { |a, e| match_value?(a, e) }
     when NilClass
       if NodeQuery.adapter.is_node?(actual)
-        :nil == actual.type
+        actual.to_value.nil?
       else
         actual.nil?
       end
@@ -132,9 +132,9 @@ class NodeQuery::NodeRules
         actual == expected
       end
     when TrueClass
-      :true == actual&.type
+      true == actual&.to_value
     when FalseClass
-      :false == actual&.type
+      false == actual&.to_value
     else
       if NodeQuery.adapter.is_node?(expected)
         actual == expected
