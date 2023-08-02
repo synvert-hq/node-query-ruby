@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.13.9 (2023-08-02)
+
+* Add `OPERATOR` macro
+* Use operator `=` instead of `==`
+
 ## 1.13.8 (2023-06-28)
 
 * Check `.to_value` instead of `.type`
