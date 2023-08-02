@@ -33,7 +33,7 @@ module NodeQuery::Compiler
     # Check if node matches the selector.
     # @param node [Node] the node
     # @param base_node [Node] the base node for evaluated node
-    def match?(node, base_node, operator = "==")
+    def match?(node, base_node, operator = "=")
       if node.is_a?(::Array)
         case operator
         when "not_includes"

@@ -10,7 +10,7 @@ macros
   NODE_TYPE                /\.[a-zA-Z]+/
   IDENTIFIER               /[@\*\-\.\w]*\w/
   IDENTIFIER_VALUE         /[@\.\w!&:\?<>=]+/
-  OPERATOR                 /(\^=|\$=|\*=|!=|=~|!~|>=|<=|>|<|not includes|includes|not in|in)/i
+  OPERATOR                 /(\^=|\$=|\*=|!=|=~|!~|>=|<=|>|<|=|not includes|includes|not in|in)/i
   FALSE                    /false/
   FLOAT                    /\-?\d+\.\d+/
   INTEGER                  /\-?\d+/
@@ -41,7 +41,6 @@ rules
                     /#{OPEN_ATTRIBUTE}/           { @nested_count += 1; @state = :KEY; [:tOPEN_ATTRIBUTE, text] }
 :KEY                /\s+/
 :KEY                /#{OPERATOR}/                 { @state = :VALUE; [:tOPERATOR, text.downcase.sub(' ', '_')] }
-:KEY                /=/                           { @state = :VALUE; [:tOPERATOR, '=='] }
 :KEY                /#{IDENTIFIER}/               { [:tKEY, text] }
 :VALUE              /\s+/
 :VALUE              /\[\]=/                       { [:tIDENTIFIER_VALUE, text] }

@@ -27,7 +27,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tIDENTIFIER_VALUE, "create"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -40,7 +40,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "receiver"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tNIL, nil],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -53,7 +53,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tSTRING, "create"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -66,7 +66,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tSTRING, "[]"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -79,7 +79,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tSYMBOL, :create],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -91,7 +91,7 @@ RSpec.describe NodeQueryLexer do
       expected_tokens = [
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "value"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tINTEGER, 1],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -103,7 +103,7 @@ RSpec.describe NodeQueryLexer do
       expected_tokens = [
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "value"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tINTEGER, -1],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -116,7 +116,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "value"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tFLOAT, 1.1],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -129,7 +129,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "value"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tFLOAT, -1.1],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -142,7 +142,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "value"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tBOOLEAN, true],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -155,7 +155,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tIDENTIFIER_VALUE, "create!"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -168,7 +168,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tIDENTIFIER_VALUE, "empty?"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -181,7 +181,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tIDENTIFIER_VALUE, "<"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -192,7 +192,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tIDENTIFIER_VALUE, "="],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -203,7 +203,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tIDENTIFIER_VALUE, ">"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -216,7 +216,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "arguments.first"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tSTRING, ""],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -229,7 +229,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tIDENTIFIER_VALUE, "[]"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -242,7 +242,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tSYMBOL, :[]=],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -255,7 +255,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tIDENTIFIER_VALUE, "nil?"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -268,7 +268,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "pair"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "key"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tSTRING, "{{value}}"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -281,7 +281,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "ivasgn"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "variable"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tSTRING, "@{{value}}"],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]
@@ -299,11 +299,11 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "receiver"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tSYMBOL, :create],
         [:tCLOSE_ATTRIBUTE, "]"],
         [:tCLOSE_ATTRIBUTE, "]"]
@@ -321,20 +321,20 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "arguments"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "size"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tINTEGER, 2],
         [:tCLOSE_ATTRIBUTE, "]"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "first"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tNODE_TYPE, "str"],
         [:tCLOSE_ATTRIBUTE, "]"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "last"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tNODE_TYPE, "str"],
         [:tCLOSE_ATTRIBUTE, "]"],
         [:tCLOSE_ATTRIBUTE, "]"]
@@ -437,7 +437,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "arguments"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tOPEN_ARRAY, "("],
         [:tCLOSE_ARRAY, ")"],
         [:tCLOSE_ATTRIBUTE, "]"]
@@ -451,7 +451,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "arguments"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tOPEN_ARRAY, "("],
         [:tSYMBOL, :create],
         [:tCLOSE_ARRAY, ")"],
@@ -557,7 +557,7 @@ RSpec.describe NodeQueryLexer do
         [:tNODE_TYPE, "send"],
         [:tOPEN_ATTRIBUTE, "["],
         [:tKEY, "receiver.message"],
-        [:tOPERATOR, "=="],
+        [:tOPERATOR, "="],
         [:tSYMBOL, :create],
         [:tCLOSE_ATTRIBUTE, "]"]
       ]

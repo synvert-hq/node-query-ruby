@@ -3,17 +3,17 @@
 module NodeQuery::Compiler
   # Compare acutal value with expected value.
   module Comparable
-    SIMPLE_VALID_OPERATORS = ['==', '!=', 'includes', 'not_includes']
-    STRING_VALID_OPERATORS = ['==', '!=', '^=', '$=', '*=', 'includes', 'not_includes']
-    NUMBER_VALID_OPERATORS = ['==', '!=', '>', '>=', '<', '<=', 'includes', 'not_includes']
-    ARRAY_VALID_OPERATORS = ['==', '!=', 'in', 'not_in']
+    SIMPLE_VALID_OPERATORS = ['=', '!=', 'includes', 'not_includes']
+    STRING_VALID_OPERATORS = ['=', '!=', '^=', '$=', '*=', 'includes', 'not_includes']
+    NUMBER_VALID_OPERATORS = ['=', '!=', '>', '>=', '<', '<=', 'includes', 'not_includes']
+    ARRAY_VALID_OPERATORS = ['=', '!=', 'in', 'not_in']
     REGEXP_VALID_OPERATORS = ['=~', '!~']
 
     # Check if the actual value matches the expected value.
     #
     # @param node [Node] node to calculate actual value
     # @param base_node [Node] the base node for evaluated value
-    # @param operator [String] operator to compare with expected value, operator can be <code>'=='</code>, <code>'!='</code>, <code>'>'</code>, <code>'>='</code>, <code>'<'</code>, <code>'<='</code>, <code>'includes'</code>, <code>'in'</code>, <code>'not_in'</code>, <code>'=~'</code>, <code>'!~'</code>
+    # @param operator [String] operator to compare with expected value, operator can be <code>'='</code>, <code>'!='</code>, <code>'>'</code>, <code>'>='</code>, <code>'<'</code>, <code>'<='</code>, <code>'includes'</code>, <code>'in'</code>, <code>'not_in'</code>, <code>'=~'</code>, <code>'!~'</code>
     # @return [Boolean] true if actual value matches the expected value
     # @raise [NodeQuery::Compiler::InvalidOperatorError] if operator is invalid
     def match?(node, base_node, operator)
@@ -51,9 +51,9 @@ module NodeQuery::Compiler
         actual <= expected
       when 'in'
         if node.is_a?(Array)
-          node.all? { |child| expected.any? { |expected_child| expected_child.match?(child, base_node, '==') } }
+          node.all? { |child| expected.any? { |expected_child| expected_child.match?(child, base_node, '=') } }
         else
-          expected.any? { |expected_child| expected_child.match?(node, base_node, '==') }
+          expected.any? { |expected_child| expected_child.match?(node, base_node, '=') }
         end
       when 'not_in'
         if node.is_a?(Array)
@@ -69,7 +69,7 @@ module NodeQuery::Compiler
         if expected.is_a?(::Array)
           actual.is_a?(::Array) && actual.size == expected.size &&
             actual.zip(expected).all? { |actual_child, expected_child|
-              expected_child.match?(actual_child, base_node, '==')
+              expected_child.match?(actual_child, base_node, '=')
             }
         else
           is_equal?(actual, expected)

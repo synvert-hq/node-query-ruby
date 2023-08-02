@@ -7,7 +7,7 @@ module NodeQuery::Compiler
     # @param key [String] the key
     # @param value the value can be any class implement {NodeQuery::Compiler::Comparable}
     # @param operator [String] the operator
-    def initialize(key:, value:, operator: '==')
+    def initialize(key:, value:, operator: '=')
       @key = key
       @value = value
       @operator = operator

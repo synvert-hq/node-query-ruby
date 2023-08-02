@@ -15,7 +15,7 @@ module NodeQuery::Compiler
     # @param node [Node] the node
     # @param base_node [Node] the base node for evaluated value
     # @return [Boolean]
-    def match?(node, base_node, _operator = '==')
+    def match?(node, base_node, _operator = '=')
       return false unless node
 
       @node_type.to_sym == NodeQuery.adapter.get_node_type(node) && (!@attribute_list || @attribute_list.match?(
