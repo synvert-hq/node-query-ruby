@@ -10,6 +10,7 @@ macros
   NODE_TYPE                /\.[a-zA-Z]+/
   IDENTIFIER               /[@\*\-\.\w]*\w/
   IDENTIFIER_VALUE         /[@\.\w!&:\?<>=]+/
+  OPERATOR                 /(\^=|\$=|\*=|!=|=~|!~|>=|<=|>|<|not includes|includes|not in|in)/i
   FALSE                    /false/
   FLOAT                    /\-?\d+\.\d+/
   INTEGER                  /\-?\d+/
@@ -39,21 +40,8 @@ rules
                     /#{CLOSE_SELECTOR}/           { [:tCLOSE_SELECTOR, text] }
                     /#{OPEN_ATTRIBUTE}/           { @nested_count += 1; @state = :KEY; [:tOPEN_ATTRIBUTE, text] }
 :KEY                /\s+/
-:KEY                /\^=/                         { @state = :VALUE; [:tOPERATOR, '^='] }
-:KEY                /\$=/                         { @state = :VALUE; [:tOPERATOR, '$='] }
-:KEY                /\*=/                         { @state = :VALUE; [:tOPERATOR, '*='] }
-:KEY                /!=/                          { @state = :VALUE; [:tOPERATOR, '!='] }
-:KEY                /=~/                          { @state = :VALUE; [:tOPERATOR, '=~'] }
-:KEY                /!~/                          { @state = :VALUE; [:tOPERATOR, '!~'] }
-:KEY                />=/                          { @state = :VALUE; [:tOPERATOR, '>='] }
-:KEY                /<=/                          { @state = :VALUE; [:tOPERATOR, '<='] }
-:KEY                />/                           { @state = :VALUE; [:tOPERATOR, '>'] }
-:KEY                /</                           { @state = :VALUE; [:tOPERATOR, '<'] }
+:KEY                /#{OPERATOR}/                 { @state = :VALUE; [:tOPERATOR, text.downcase.sub(' ', '_')] }
 :KEY                /=/                           { @state = :VALUE; [:tOPERATOR, '=='] }
-:KEY                /not includes/i               { @state = :VALUE; [:tOPERATOR, 'not_includes'] }
-:KEY                /includes/i                   { @state = :VALUE; [:tOPERATOR, 'includes'] }
-:KEY                /not in/i                     { @state = :VALUE; [:tOPERATOR, 'not_in'] }
-:KEY                /in/i                         { @state = :VALUE; [:tOPERATOR, 'in'] }
 :KEY                /#{IDENTIFIER}/               { [:tKEY, text] }
 :VALUE              /\s+/
 :VALUE              /\[\]=/                       { [:tIDENTIFIER_VALUE, text] }
