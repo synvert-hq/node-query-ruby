@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.10 (2023-08-12)
+
+* Update `node_query_parser.y`
+
 ## 1.13.9 (2023-08-02)
 
 * Add `OPERATOR` macro
