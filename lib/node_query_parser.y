@@ -1,6 +1,6 @@
 class NodeQueryParser
 options no_result_var
-token tCOMMA tNODE_TYPE tGOTO_SCOPE tATTRIBUTE tKEY tIDENTIFIER tIDENTIFIER_VALUE tPSEUDO_CLASS tRELATIONSHIP
+token tCOMMA tNODE_TYPE tGOTO_SCOPE tKEY tIDENTIFIER_VALUE tPSEUDO_CLASS tRELATIONSHIP
       tOPEN_ATTRIBUTE tCLOSE_ATTRIBUTE tOPEN_ARRAY tCLOSE_ARRAY tOPEN_SELECTOR tCLOSE_SELECTOR tPOSITION
       tOPERATOR tARRAY_VALUE tBOOLEAN tFLOAT tINTEGER tNIL tREGEXP tSTRING tSYMBOL
 rule
@@ -24,13 +24,13 @@ rule
     | tNODE_TYPE attribute_list { NodeQuery::Compiler::BasicSelector.new(node_type: val[0], attribute_list: val[1]) }
 
   attribute_list
-    : tOPEN_ATTRIBUTE attribute tCLOSE_ATTRIBUTE attribute_list { NodeQuery::Compiler::AttributeList.new(attribute: val[1], rest: val[3]) }
-    | tOPEN_ATTRIBUTE attribute tCLOSE_ATTRIBUTE { NodeQuery::Compiler::AttributeList.new(attribute: val[1]) }
+    : attribute attribute_list { NodeQuery::Compiler::AttributeList.new(attribute: val[0], rest: val[1]) }
+    | attribute { NodeQuery::Compiler::AttributeList.new(attribute: val[0]) }
 
   attribute
-    : tKEY tOPERATOR value { NodeQuery::Compiler::Attribute.new(key: val[0], value: val[2], operator: val[1]) }
-    | tKEY tOPERATOR tOPEN_ARRAY tCLOSE_ARRAY { NodeQuery::Compiler::Attribute.new(key: val[0], value: NodeQuery::Compiler::ArrayValue.new, operator: val[1]) }
-    | tKEY tOPERATOR tOPEN_ARRAY array_value tCLOSE_ARRAY { NodeQuery::Compiler::Attribute.new(key: val[0], value: val[3], operator: val[1]) }
+    : tOPEN_ATTRIBUTE tKEY tOPERATOR value tCLOSE_ATTRIBUTE { NodeQuery::Compiler::Attribute.new(key: val[1], value: val[3], operator: val[2]) }
+    | tOPEN_ATTRIBUTE tKEY tOPERATOR tOPEN_ARRAY tCLOSE_ARRAY tCLOSE_ATTRIBUTE { NodeQuery::Compiler::Attribute.new(key: val[1], value: NodeQuery::Compiler::ArrayValue.new, operator: val[2]) }
+    | tOPEN_ATTRIBUTE tKEY tOPERATOR tOPEN_ARRAY array_value tCLOSE_ARRAY tCLOSE_ATTRIBUTE { NodeQuery::Compiler::Attribute.new(key: val[1], value: val[4], operator: val[2]) }
 
   array_value
     : value array_value { NodeQuery::Compiler::ArrayValue.new(value: val[0], rest: val[1]) }
