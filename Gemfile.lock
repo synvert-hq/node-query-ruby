@@ -67,7 +67,7 @@ GEM
     shellany (0.0.1)
     syntax_tree (6.1.1)
       prettier_print (>= 1.2.0)
-    syntax_tree_ext (0.6.2)
+    syntax_tree_ext (0.6.4)
       syntax_tree
     thor (1.2.1)
 
