@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.11 (2023-08-17)
+
+* Do not handle if `child_node` is nil
+
 ## 1.13.10 (2023-08-12)
 
 * Update `node_query_parser.y`
