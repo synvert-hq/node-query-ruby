@@ -33,15 +33,7 @@ class NodeQuery::Helper
     # @yieldparam child [Node] child node
     def handle_recursive_child(node, &block)
       NodeQuery.adapter.get_children(node).each do |child|
-        if NodeQuery.adapter.is_node?(child)
-          block.call(child)
-          handle_recursive_child(child, &block)
-        elsif child.is_a?(Array)
-          child.each do |child_child|
-            block.call(child_child)
-            handle_recursive_child(child_child, &block)
-          end
-        end
+        handle_child(child, &block)
       end
     end
 
@@ -66,6 +58,19 @@ class NodeQuery::Helper
       end
 
       node.to_s
+    end
+
+    private
+
+    def handle_child(node, &block)
+      if NodeQuery.adapter.is_node?(node)
+        block.call(node)
+        handle_recursive_child(node, &block)
+      elsif node.is_a?(Array)
+        node.each do |child_node|
+          handle_child(child_node, &block) unless child_node.nil?
+        end
+      end
     end
   end
 end
