@@ -306,16 +306,16 @@
       <pre class="lines">
 
 
-55
-56
-57
-58
-59
-60
-61</pre>
+47
+48
+49
+50
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/helper.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/helper.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_evaluate_node_value'>evaluate_node_value</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_scan'>scan</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>{{(.+?)}}</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_match_data'>match_data</span><span class='op'>|</span>
@@ -546,30 +546,14 @@
 35
 36
 37
-38
-39
-40
-41
-42
-43
-44
-45
-46</pre>
+38</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/node_query/helper.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_handle_recursive_child'>handle_recursive_child</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_adapter'><span class='object_link'><a href="../NodeQuery.html#adapter-class_method" title="NodeQuery.adapter (method)">adapter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_children'><span class='object_link'><a href="Adapter.html#get_children-instance_method" title="NodeQuery::Adapter#get_children (method)">get_children</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_child'>child</span><span class='op'>|</span>
-    <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_adapter'><span class='object_link'><a href="../NodeQuery.html#adapter-class_method" title="NodeQuery.adapter (method)">adapter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_is_node?'><span class='object_link'><a href="Adapter.html#is_node%3F-instance_method" title="NodeQuery::Adapter#is_node? (method)">is_node?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_child'>child</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_child'>child</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_handle_recursive_child'>handle_recursive_child</span><span class='lparen'>(</span><span class='id identifier rubyid_child'>child</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>elsif</span> <span class='id identifier rubyid_child'>child</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_child'>child</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_child_child'>child_child</span><span class='op'>|</span>
-        <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_child_child'>child_child</span><span class='rparen'>)</span>
-        <span class='id identifier rubyid_handle_recursive_child'>handle_recursive_child</span><span class='lparen'>(</span><span class='id identifier rubyid_child_child'>child_child</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-      <span class='kw'>end</span>
-    <span class='kw'>end</span>
+    <span class='id identifier rubyid_handle_child'>handle_child</span><span class='lparen'>(</span><span class='id identifier rubyid_child'>child</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -592,16 +576,16 @@
       <pre class="lines">
 
 
-63
-64
-65
-66
-67
-68
-69</pre>
+55
+56
+57
+58
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query/helper.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query/helper.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_string'>to_string</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="../NodeQuery.html" title="NodeQuery (class)">NodeQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_adapter'><span class='object_link'><a href="../NodeQuery.html#adapter-class_method" title="NodeQuery.adapter (method)">adapter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_is_node?'><span class='object_link'><a href="Adapter.html#is_node%3F-instance_method" title="NodeQuery::Adapter#is_node? (method)">is_node?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
@@ -620,7 +604,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Aug 12 03:49:51 2023 by
+  Generated on Thu Aug 17 02:40:05 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
