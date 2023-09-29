@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.13.12 (2023-09-29)
+
+* `NODE_TYPE` can contain `_`
+* Update `syntax_tree_ext` to 0.6.4
+
 ## 1.13.11 (2023-08-17)
 
 * Do not handle if `child_node` is nil
