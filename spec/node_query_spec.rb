@@ -24,29 +24,25 @@ RSpec.describe NodeQuery do
   }
 
   describe "#query_nodes" do
-    before do
-      NodeQuery.configure(adapter: NodeQuery::ParserAdapter.new)
-    end
-
     it "matches nql" do
-      query = described_class.new('.class[name=Synvert]')
+      query = described_class.new('.class[name=Synvert]', adapter: :parser)
       expect(query.query_nodes(node)).to eq [node]
     end
 
     it "matches rules" do
-      query = described_class.new({ node_type: 'class', name: 'Synvert' })
+      query = described_class.new({ node_type: 'class', name: 'Synvert' }, adapter: :parser)
       expect(query.query_nodes(node)).to eq [node]
     end
   end
 
   describe "#match_node?" do
     it "matches nql" do
-      query = described_class.new('.class[name=Synvert]')
+      query = described_class.new('.class[name=Synvert]', adapter: :parser)
       expect(query.match_node?(node)).to be_truthy
     end
 
     it "matches rules" do
-      query = described_class.new({ node_type: 'class', name: 'Synvert' })
+      query = described_class.new({ node_type: 'class', name: 'Synvert' }, adapter: :parser)
       expect(query.match_node?(node)).to be_truthy
     end
   end

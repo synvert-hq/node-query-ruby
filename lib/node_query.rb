@@ -29,11 +29,13 @@ class NodeQuery
 
   # Initialize a NodeQuery.
   # @param nql_or_ruls [String | Hash] node query language or node rules
-  def initialize(nql_or_ruls)
+  # @param adapter [Symbol] :parser or :syntax_tree
+  def initialize(nql_or_ruls, adapter: :parser)
+    adapter_instance = get_adapter_instance(adapter)
     if nql_or_ruls.is_a?(String)
-      @expression = NodeQueryParser.new.parse(nql_or_ruls)
+      @expression = NodeQueryParser.new(adapter: adapter_instance).parse(nql_or_ruls)
     else
-      @rules = NodeRules.new(nql_or_ruls)
+      @rules = NodeRules.new(nql_or_ruls, adapter: adapter_instance)
     end
   end
 
@@ -64,6 +66,17 @@ class NodeQuery
       @rules.match_node?(node)
     else
       false
+    end
+  end
+
+  private
+
+  def get_adapter_instance(adapter)
+    case adapter
+    when :parser
+      ParserAdapter.new
+    when :syntax_tree
+      SyntaxTreeAdapter.new
     end
   end
 end
