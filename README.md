@@ -82,8 +82,8 @@ source = `
 node = Parser::CurrentRuby.parse(source)
 
 # It will get the node of initialize.
-NodeQuery.new('.def[name=initialize]').query_nodes(node)
-NodeQuery.new({ node_type: 'def', name: 'initialize' }).query_nodes(node)
+NodeQuery.new('.def[name=initialize]', adapter: :parser).query_nodes(node)
+NodeQuery.new({ node_type: 'def', name: 'initialize' }, adapter: :parser).query_nodes(node)
 ```
 
 ## Node Query Language
@@ -482,10 +482,6 @@ It provides 2 adapters
 
 1. `ParserAdapter`
 2. `SyntaxTreeAdapter`
-
-```ruby
-NodeQuery.configure(adapter: SyntaxTreeAdapter.new) # default is ParserAdapter
-```
 
 ## Development
 
