@@ -1,11 +1,7 @@
 class NodeQuery[T]
   VERSION: String
 
-  def self.configure: (options: { adapter: NodeQuery::Adapter }) -> void
-
-  def self.adapter: () -> NodeQuery::Adapter
-
-  def initialize: (nqlOrRues: String | Hash) -> NodeQuery
+  def initialize: (nqlOrRues: String | Hash, adapter: NodeQuery::Adapter) -> NodeQuery
 
   def query_nodes: (node: T, options: Hash) -> Array[T]
 
