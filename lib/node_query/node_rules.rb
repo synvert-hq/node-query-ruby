@@ -5,8 +5,9 @@ class NodeQuery::NodeRules
 
   # Initialize a NodeRules.
   # @param rules [Hash] the nod rules
-  def initialize(rules)
+  def initialize(rules, adapter:)
     @rules = rules
+    @adapter = adapter
   end
 
   # Query nodes by the rules.
@@ -28,14 +29,14 @@ class NodeQuery::NodeRules
       return matching_nodes if options[:stop_at_first_match]
     end
     if options[:recursive]
-      NodeQuery::Helper.handle_recursive_child(node) do |child_node|
+      NodeQuery::Helper.handle_recursive_child(node, @adapter) do |child_node|
         if match_node?(child_node)
           matching_nodes.push(child_node)
           break if options[:stop_at_first_match]
         end
       end
     else
-      NodeQuery.adapter.get_children(node).each do |child_node|
+      @adapter.get_children(node).each do |child_node|
         if match_node?(child_node)
           matching_nodes.push(child_node)
           break if options[:stop_at_first_match]
@@ -53,10 +54,10 @@ class NodeQuery::NodeRules
       last_key = multi_keys.last
       actual =
         KEYWORDS.include?(last_key) ?
-               NodeQuery::Helper.get_target_node(node, multi_keys[0...-1].join('.')) :
-               NodeQuery::Helper.get_target_node(node, multi_keys.join('.'))
+               NodeQuery::Helper.get_target_node(node, multi_keys[0...-1].join('.'), @adapter) :
+               NodeQuery::Helper.get_target_node(node, multi_keys.join('.'), @adapter)
       expected = expected_value(@rules, multi_keys)
-      expected = NodeQuery::Helper.evaluate_node_value(node, expected) if expected.is_a?(String)
+      expected = NodeQuery::Helper.evaluate_node_value(node, expected, @adapter) if expected.is_a?(String)
       case last_key
       when :includes
         actual.any? { |actual_value| match_value?(actual_value, expected) }
@@ -95,22 +96,22 @@ class NodeQuery::NodeRules
 
     case expected
     when Symbol
-      if NodeQuery.adapter.is_node?(actual)
-        actual_source = NodeQuery.adapter.get_source(actual)
+      if @adapter.is_node?(actual)
+        actual_source = @adapter.get_source(actual)
         actual_source == ":#{expected}" || actual_source == expected.to_s
       else
         actual.to_sym == expected
       end
     when String
-      if NodeQuery.adapter.is_node?(actual)
-        actual_source = NodeQuery.adapter.get_source(actual)
+      if @adapter.is_node?(actual)
+        actual_source = @adapter.get_source(actual)
         actual_source == expected || actual_source == unwrap_quote(expected) ||
           unwrap_quote(actual_source) == expected || unwrap_quote(actual_source) == unwrap_quote(expected)
       else
         actual.to_s == expected || wrap_quote(actual.to_s) == expected
       end
     when Regexp
-      if NodeQuery.adapter.is_node?(actual)
+      if @adapter.is_node?(actual)
         actual.to_source =~ Regexp.new(expected.to_s, Regexp::MULTILINE)
       else
         actual.to_s =~ Regexp.new(expected.to_s, Regexp::MULTILINE)
@@ -120,13 +121,13 @@ class NodeQuery::NodeRules
 
       actual.zip(expected).all? { |a, e| match_value?(a, e) }
     when NilClass
-      if NodeQuery.adapter.is_node?(actual)
+      if @adapter.is_node?(actual)
         actual.to_value.nil?
       else
         actual.nil?
       end
     when Numeric
-      if NodeQuery.adapter.is_node?(actual)
+      if @adapter.is_node?(actual)
         actual.children[0] == expected
       else
         actual == expected
@@ -136,7 +137,7 @@ class NodeQuery::NodeRules
     when FalseClass
       false == actual&.to_value
     else
-      if NodeQuery.adapter.is_node?(expected)
+      if @adapter.is_node?(expected)
         actual == expected
       else
         raise NodeQuery::MethodNotSupported, "#{expected} is not supported"
