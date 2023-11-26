@@ -14,19 +14,6 @@ class NodeQuery
   autoload :Helper, "node_query/helper"
   autoload :NodeRules, "node_query/node_rules"
 
-  # Configure NodeQuery
-  # @param [Hash] options options to configure
-  # @option options [NodeQuery::Adapter] :adapter the adpater
-  def self.configure(options)
-    @adapter = options[:adapter]
-  end
-
-  # Get the adapter
-  # @return [NodeQuery::Adapter] current adapter, by default is {NodeQuery::ParserAdapter}
-  def self.adapter
-    @adapter ||= ParserAdapter.new
-  end
-
   # Initialize a NodeQuery.
   # @param nql_or_ruls [String | Hash] node query language or node rules
   # @param adapter [Symbol] :parser or :syntax_tree
