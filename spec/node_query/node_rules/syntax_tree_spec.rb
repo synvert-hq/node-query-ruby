@@ -32,7 +32,8 @@ RSpec.describe NodeQuery::NodeRules do
           {
             node_type: 'DefNode',
             params: { contents: { requireds: { size: 2, '0': 'id', '1': 'name' } } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
@@ -71,7 +72,10 @@ RSpec.describe NodeQuery::NodeRules do
       end
 
       it 'matches includes' do
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: { includes: 'id' } } } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'DefNode', params: { contents: { requireds: { includes: 'id' } } } },
+          adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
 
@@ -80,16 +84,23 @@ RSpec.describe NodeQuery::NodeRules do
           {
             node_type: 'DefNode',
             params: { contents: { requireds: { not_includes: 'foobar' } } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
 
       it 'matches equal array' do
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: ['id', 'name'] } } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'DefNode', params: { contents: { requireds: ['id', 'name'] } } },
+          adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
 
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: ['name', 'id'] } } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'DefNode', params: { contents: { requireds: ['name', 'id'] } } },
+          adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq []
       end
 
@@ -98,7 +109,8 @@ RSpec.describe NodeQuery::NodeRules do
           {
             node_type: 'DefNode',
             params: { contents: { requireds: { not: ['id', 'name'] } } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq []
 
@@ -106,7 +118,8 @@ RSpec.describe NodeQuery::NodeRules do
           {
             node_type: 'DefNode',
             params: { contents: { requireds: { not: ['name', 'id'] } } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
@@ -116,28 +129,39 @@ RSpec.describe NodeQuery::NodeRules do
           {
             node_type: 'DefNode',
             bodystmt: { statements: { body: { '0': { node_type: 'Assign' } } } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
 
       it 'matches gte' do
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: { size: { gte: 2 } } } } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'DefNode', params: { contents: { requireds: { size: { gte: 2 } } } } }, adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
 
       it 'matches gt' do
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: { size: { ge: 2 } } } } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'DefNode', params: { contents: { requireds: { size: { ge: 2 } } } } },
+          adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq []
       end
 
       it 'matches lte' do
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: { size: { lte: 2 } } } } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'DefNode', params: { contents: { requireds: { size: { lte: 2 } } } } }, adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
 
       it 'matches lt' do
-        rules = described_class.new({ node_type: 'DefNode', params: { contents: { requireds: { size: { lt: 2 } } } } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'DefNode', params: { contents: { requireds: { size: { lt: 2 } } } } },
+          adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq []
       end
 
@@ -154,7 +178,8 @@ RSpec.describe NodeQuery::NodeRules do
                 }
               }
             }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.last.value]
 
@@ -170,7 +195,8 @@ RSpec.describe NodeQuery::NodeRules do
                 }
               }
             }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.last.value]
       end
@@ -186,7 +212,8 @@ RSpec.describe NodeQuery::NodeRules do
             node_type: 'DefNode',
             name: 'initialize',
             bodystmt: { statements: { body: { '0': { target: "@{{bodystmt.statements.body.0.value}}" } } } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first]
       end
@@ -198,7 +225,8 @@ RSpec.describe NodeQuery::NodeRules do
             node_type: 'CallNode',
             message: :call,
             arguments: { arguments: { parts: { first: '' } } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.first]
       end
