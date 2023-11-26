@@ -89,7 +89,7 @@ module NodeQuery::Compiler
     # @param node [Node] ast node
     # @return the node value, could be integer, float, string, boolean, nil, range, and etc.
     def actual_value(node)
-      if NodeQuery.adapter.is_node?(node)
+      if @adapter.is_node?(node)
         node.to_value
       else
         node

@@ -6,9 +6,10 @@ module NodeQuery::Compiler
     # Initialize a BasicSelector.
     # @param node_type [String] the node type
     # @param attribute_list [NodeQuery::Compiler::AttributeList] the attribute list
-    def initialize(node_type:, attribute_list: nil)
+    def initialize(node_type:, attribute_list: nil, adapter:)
       @node_type = node_type
       @attribute_list = attribute_list
+      @adapter = adapter
     end
 
     # Check if node matches the selector.
@@ -18,7 +19,7 @@ module NodeQuery::Compiler
     def match?(node, base_node, _operator = '=')
       return false unless node
 
-      @node_type.to_sym == NodeQuery.adapter.get_node_type(node) && (!@attribute_list || @attribute_list.match?(
+      @node_type.to_sym == @adapter.get_node_type(node) && (!@attribute_list || @attribute_list.match?(
         node,
         base_node
       ))

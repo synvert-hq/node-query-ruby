@@ -7,8 +7,9 @@ module NodeQuery::Compiler
 
     # Initliaze a Symobol.
     # @param value [Symbol] the symbol value
-    def initialize(value:)
+    def initialize(value:, adapter:)
       @value = value
+      @adapter = adapter
     end
 
     # Get valid operators.

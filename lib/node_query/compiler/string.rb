@@ -7,8 +7,9 @@ module NodeQuery::Compiler
 
     # Initialize a String.
     # @param value [String] the string value
-    def initialize(value:)
+    def initialize(value:, adapter:)
       @value = value
+      @adapter = adapter
     end
 
     # Get the expected value.
@@ -19,7 +20,7 @@ module NodeQuery::Compiler
     # @param base_node [Node] the base node for evaluated value
     # @return [String] the expected string, if it contains evaluated value, evaluate the node value.
     def expected_value(base_node)
-      NodeQuery::Helper.evaluate_node_value(base_node, @value)
+      NodeQuery::Helper.evaluate_node_value(base_node, @value, @adapter)
     end
 
     # Check if the actual value equals the node value.
@@ -27,7 +28,7 @@ module NodeQuery::Compiler
     # @param base_node [Node] the base node for evaluated value
     # @return [Boolean] true if the actual value equals the node value.
     def is_equal?(actual, expected)
-      NodeQuery::Helper.to_string(actual) == expected
+      NodeQuery::Helper.to_string(actual, @adapter) == expected
     end
 
     # Get valid operators.

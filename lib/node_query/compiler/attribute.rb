@@ -7,10 +7,11 @@ module NodeQuery::Compiler
     # @param key [String] the key
     # @param value the value can be any class implement {NodeQuery::Compiler::Comparable}
     # @param operator [String] the operator
-    def initialize(key:, value:, operator: '=')
+    def initialize(key:, value:, operator: '=', adapter:)
       @key = key
       @value = value
       @operator = operator
+      @adapter = adapter
     end
 
     # Check if the node matches the attribute.
@@ -18,7 +19,7 @@ module NodeQuery::Compiler
     # @param base_node [Node] the bae node for evaluated value
     # @return [Boolean]
     def match?(node, base_node)
-      node && @value.match?(NodeQuery::Helper.get_target_node(node, @key), base_node, @operator)
+      node && @value.match?(NodeQuery::Helper.get_target_node(node, @key, @adapter), base_node, @operator)
     end
 
     def to_s

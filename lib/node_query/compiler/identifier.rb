@@ -8,8 +8,9 @@ module NodeQuery::Compiler
 
     # Initialize an Identifier.
     # @param value [String] the identifier value
-    def initialize(value:)
+    def initialize(value:, adapter:)
       @value = value
+      @adapter = adapter
     end
 
     # Get the actual value.
@@ -19,8 +20,8 @@ module NodeQuery::Compiler
     # if the node is an Array, return the array of each element's actual value,
     # otherwise, return the String value.
     def actual_value(node)
-      if NodeQuery.adapter.is_node?(node)
-        NodeQuery.adapter.get_source(node)
+      if @adapter.is_node?(node)
+        @adapter.get_source(node)
       elsif node.is_a?(::Array)
         node.map { |n| actual_value(n) }
       else

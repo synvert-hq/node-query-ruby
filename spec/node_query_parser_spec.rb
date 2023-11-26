@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'oedipus_lex'
 
 RSpec.describe NodeQueryParser do
-  let(:parser) { described_class.new }
+  let(:parser) { described_class.new(adapter: :parser) }
 
   describe '#toString' do
     it 'parses node ype' do

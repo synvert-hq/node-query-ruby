@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'oedipus_lex'
 
 RSpec.describe NodeQueryParser do
-  let(:parser) { described_class.new }
+  let(:parser) { described_class.new(adapter: NodeQuery::ParserAdapter.new) }
 
   describe '#query_nodes' do
     context 'parser' do
@@ -18,10 +18,6 @@ RSpec.describe NodeQueryParser do
           user = User.new(1, "Murphy")
         EOS
       }
-
-      before do
-        NodeQuery.configure(adapter: NodeQuery::ParserAdapter.new)
-      end
 
       it 'matches node type' do
         expression = parser.parse('.def')

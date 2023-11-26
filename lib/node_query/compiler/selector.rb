@@ -19,7 +19,8 @@ module NodeQuery::Compiler
       basic_selector: nil,
       position: nil,
       pseudo_class: nil,
-      pseudo_selector: nil
+      pseudo_selector: nil,
+      adapter:
     )
       @goto_scope = goto_scope
       @relationship = relationship
@@ -28,6 +29,7 @@ module NodeQuery::Compiler
       @position = position
       @pseudo_class = pseudo_class
       @pseudo_selector = pseudo_selector
+      @adapter = adapter
     end
 
     # Check if node matches the selector.
@@ -44,7 +46,7 @@ module NodeQuery::Compiler
           return false
         end
       end
-      NodeQuery.adapter.is_node?(node) && (!@basic_selector || (operator == "!=" ? !@basic_selector.match?(
+      @adapter.is_node?(node) && (!@basic_selector || (operator == "!=" ? !@basic_selector.match?(
         node,
         base_node
       ) : @basic_selector.match?(node, base_node))) && match_pseudo_class?(node)
@@ -83,7 +85,7 @@ module NodeQuery::Compiler
       end
       if @basic_selector
         if options[:recursive]
-          NodeQuery::Helper.handle_recursive_child(node) do |child_node|
+          NodeQuery::Helper.handle_recursive_child(node, @adapter) do |child_node|
             if match?(child_node, child_node)
               nodes << child_node
               break if options[:stop_at_first_match]
@@ -153,13 +155,13 @@ module NodeQuery::Compiler
             nodes << child_node if @rest.match?(child_node, child_node)
           end
         else
-          NodeQuery.adapter.get_children(node).each do |child_node|
+          @adapter.get_children(node).each do |child_node|
             if child_node.is_a?(Array) # SyntaxTree may return an array in child node.
               child_node.each do |child_child_node|
                 nodes << child_child_node if @rest.match?(child_child_node, child_child_node)
               end
-            elsif NodeQuery.adapter.is_node?(child_node) && :begin == NodeQuery.adapter.get_node_type(child_node)
-              NodeQuery.adapter.get_children(child_node).each do |child_child_node|
+            elsif @adapter.is_node?(child_node) && :begin == @adapter.get_node_type(child_node)
+              @adapter.get_children(child_node).each do |child_child_node|
                 nodes << child_child_node if @rest.match?(child_child_node, child_child_node)
               end
             elsif @rest.match?(child_node, child_node)

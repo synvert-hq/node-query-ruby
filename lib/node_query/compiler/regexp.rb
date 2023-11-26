@@ -7,8 +7,9 @@ module NodeQuery::Compiler
 
     # Initialize a Regexp.
     # @param value [Regexp] the regexp value
-    def initialize(value:)
+    def initialize(value:, adapter:)
       @value = value
+      @adapter = adapter
     end
 
     # Check if the regexp value matches the node value.
@@ -18,8 +19,8 @@ module NodeQuery::Compiler
     # @return [Boolean] true if the regexp value matches the node value, otherwise, false.
     def match?(node, _base_node, operator = '=~')
       match =
-        if NodeQuery.adapter.is_node?(node)
-          @value.match(NodeQuery.adapter.get_source(node))
+        if @adapter.is_node?(node)
+          @value.match(@adapter.get_source(node))
         else
           @value.match(node.to_s)
         end

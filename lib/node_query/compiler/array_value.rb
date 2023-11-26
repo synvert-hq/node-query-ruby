@@ -8,9 +8,10 @@ module NodeQuery::Compiler
     # Initialize an Array.
     # @param value the first value of the array
     # @param rest the rest value of the array
-    def initialize(value: nil, rest: nil)
+    def initialize(value: nil, rest: nil, adapter:)
       @value = value
       @rest = rest
+      @adapter = adapter
     end
 
     # Get the expected value.
