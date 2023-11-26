@@ -7,6 +7,7 @@ module NodeQuery::Compiler
 
     # Initialize a Regexp.
     # @param value [Regexp] the regexp value
+    # @param adapter [NodeQuery::Adapter]
     def initialize(value:, adapter:)
       @value = value
       @adapter = adapter

@@ -8,6 +8,7 @@ module NodeQuery::Compiler
 
     # Initialize an Identifier.
     # @param value [String] the identifier value
+    # @param adapter [NodeQuery::Adapter]
     def initialize(value:, adapter:)
       @value = value
       @adapter = adapter

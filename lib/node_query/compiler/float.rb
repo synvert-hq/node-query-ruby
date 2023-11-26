@@ -7,6 +7,7 @@ module NodeQuery::Compiler
 
     # Initialize a Float.
     # @param value [Float] the float value
+    # @param adapter [NodeQuery::Adapter]
     def initialize(value:, adapter:)
       @value = value
       @adapter = adapter

@@ -5,6 +5,7 @@ class NodeQuery::NodeRules
 
   # Initialize a NodeRules.
   # @param rules [Hash] the nod rules
+  # @param adapter [NodeQuery::Adapter]
   def initialize(rules, adapter:)
     @rules = rules
     @adapter = adapter

@@ -16,6 +16,7 @@ module NodeQuery::Compiler
     # @param operator [String] operator to compare with expected value, operator can be <code>'='</code>, <code>'!='</code>, <code>'>'</code>, <code>'>='</code>, <code>'<'</code>, <code>'<='</code>, <code>'includes'</code>, <code>'in'</code>, <code>'not_in'</code>, <code>'=~'</code>, <code>'!~'</code>
     # @return [Boolean] true if actual value matches the expected value
     # @raise [NodeQuery::Compiler::InvalidOperatorError] if operator is invalid
+    # @param adapter [NodeQuery::Adapter]
     def match?(node, base_node, operator)
       raise InvalidOperatorError, "invalid operator #{operator}" unless valid_operator?(operator)
 

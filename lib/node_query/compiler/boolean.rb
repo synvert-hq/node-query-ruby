@@ -7,6 +7,7 @@ module NodeQuery::Compiler
 
     # Initialize a Boolean.
     # @param value [Boolean] the boolean value
+    # @param adapter [NodeQuery::Adapter]
     def initialize(value:, adapter:)
       @value = value
       @adapter = adapter

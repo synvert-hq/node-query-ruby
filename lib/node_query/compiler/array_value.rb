@@ -8,6 +8,7 @@ module NodeQuery::Compiler
     # Initialize an Array.
     # @param value the first value of the array
     # @param rest the rest value of the array
+    # @param adapter [NodeQuery::Adapter]
     def initialize(value: nil, rest: nil, adapter:)
       @value = value
       @rest = rest

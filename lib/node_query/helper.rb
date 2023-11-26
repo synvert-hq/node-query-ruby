@@ -5,7 +5,7 @@ class NodeQuery::Helper
     # Get target node by the keys.
     # @param node [Node] ast node
     # @param keys [String|Array] keys of child node.
-    # @param adapter [NodeQuery::Adapter] adapter
+    # @param adapter [NodeQuery::Adapter]
     # @return [Node|] the target node.
     def get_target_node(node, keys, adapter)
       return unless node

@@ -7,6 +7,7 @@ module NodeQuery::Compiler
 
     # Initialize a Nil.
     # @param value [nil] the nil value
+    # @param adapter [NodeQuery::Adapter]
     def initialize(value:, adapter:)
       @value = value
       @adapter = adapter

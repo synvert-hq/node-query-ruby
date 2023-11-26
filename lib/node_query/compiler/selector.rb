@@ -12,6 +12,7 @@ module NodeQuery::Compiler
     # @param attribute_list [NodeQuery::Compiler::AttributeList] the attribute list
     # @param pseudo_class [String] the pseudo class, can be <code>has</code> or <code>not_has</code>
     # @param pseudo_selector [NodeQuery::Compiler::Expression] the pseudo selector
+    # @param adapter [NodeQuery::Adapter]
     def initialize(
       goto_scope: nil,
       relationship: nil,

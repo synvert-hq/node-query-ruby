@@ -7,6 +7,7 @@ module NodeQuery::Compiler
 
     # Initialize a Integer.
     # @param value [Integer] the integer value
+    # @param adapter [NodeQuery::Adapter]
     def initialize(value:, adapter:)
       @value = value
       @adapter = adapter

@@ -6,6 +6,7 @@ module NodeQuery::Compiler
     # Initialize a BasicSelector.
     # @param node_type [String] the node type
     # @param attribute_list [NodeQuery::Compiler::AttributeList] the attribute list
+    # @param adapter [NodeQuery::Adapter]
     def initialize(node_type:, attribute_list: nil, adapter:)
       @node_type = node_type
       @attribute_list = attribute_list
