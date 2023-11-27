@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.14.1 (2023-11-27)
+
+* Fix `ArrayValue` with `adapter` parameter
+
 ## 1.14.0 (2023-11-27)
 
 * Add `adapter` parameter to `NodeQuery`
