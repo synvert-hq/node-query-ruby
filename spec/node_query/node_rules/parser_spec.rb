@@ -28,7 +28,10 @@ RSpec.describe NodeQuery::NodeRules do
       end
 
       it 'matches multiple attributes' do
-        rules = described_class.new({ node_type: 'def', arguments: { size: 2, '0': 'id', '1': 'name' } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'def', arguments: { size: 2, '0': 'id', '1': 'name' } },
+          adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq node.body.first.body
       end
 
@@ -118,7 +121,8 @@ RSpec.describe NodeQuery::NodeRules do
           {
             node_type: 'send',
             arguments: { size: 2, first: { node_type: 'int' }, last: { node_type: 'str' } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.last.value]
 
@@ -126,7 +130,8 @@ RSpec.describe NodeQuery::NodeRules do
           {
             node_type: 'send',
             arguments: { size: 2, '0': { node_type: 'int' }, '-1': { node_type: 'str' } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq [node.body.last.value]
       end
@@ -142,7 +147,8 @@ RSpec.describe NodeQuery::NodeRules do
             node_type: 'def',
             name: 'initialize',
             body: { '0': { variable: "@{{body.0.value}}" } }
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect(rules.query_nodes(node)).to eq node.body.first.body
       end
@@ -184,7 +190,8 @@ RSpec.describe NodeQuery::NodeRules do
             node_type: 'send',
             message: 'stub',
             arguments: [{ type: 'sym' }, { type: 'block_pass' }]
-          }, adapter: adapter
+          },
+          adapter: adapter
         )
         expect {
           rules.query_nodes(node)
