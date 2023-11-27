@@ -29,7 +29,7 @@ rule
 
   attribute
     : tOPEN_ATTRIBUTE tKEY tOPERATOR value tCLOSE_ATTRIBUTE { NodeQuery::Compiler::Attribute.new(key: val[1], value: val[3], operator: val[2], adapter: @adapter) }
-    | tOPEN_ATTRIBUTE tKEY tOPERATOR tOPEN_ARRAY tCLOSE_ARRAY tCLOSE_ATTRIBUTE { NodeQuery::Compiler::Attribute.new(key: val[1], value: NodeQuery::Compiler::ArrayValue.new, operator: val[2], adapter: @adapter) }
+    | tOPEN_ATTRIBUTE tKEY tOPERATOR tOPEN_ARRAY tCLOSE_ARRAY tCLOSE_ATTRIBUTE { NodeQuery::Compiler::Attribute.new(key: val[1], value: NodeQuery::Compiler::ArrayValue.new(adapter: @adapter), operator: val[2], adapter: @adapter) }
     | tOPEN_ATTRIBUTE tKEY tOPERATOR tOPEN_ARRAY array_value tCLOSE_ARRAY tCLOSE_ATTRIBUTE { NodeQuery::Compiler::Attribute.new(key: val[1], value: val[4], operator: val[2], adapter: @adapter) }
 
   array_value
