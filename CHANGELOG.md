@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.14.0 (2023-11-27)
+
+* Add `adapter` parameter to `NodeQuery`
+* Do not allow to configure an `adapter` globally
+
 ## 1.13.12 (2023-09-29)
 
 * `NODE_TYPE` can contain `_`
