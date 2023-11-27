@@ -6,6 +6,7 @@ require_relative "./node_query_parser.racc"
 
 class NodeQuery
   class MethodNotSupported < StandardError; end
+  class InvalidAdapterError < StandardError; end
 
   autoload :Adapter, "node_query/adapter"
   autoload :ParserAdapter, "node_query/adapter/parser"
@@ -59,11 +60,13 @@ class NodeQuery
   private
 
   def get_adapter_instance(adapter)
-    case adapter
+    case adapter.to_sym
     when :parser
       ParserAdapter.new
     when :syntax_tree
       SyntaxTreeAdapter.new
+    else
+      raise InvalidAdapterError, "adapter #{adapter} is not supported"
     end
   end
 end

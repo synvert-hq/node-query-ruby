@@ -23,6 +23,12 @@ RSpec.describe NodeQuery do
     EOS
   }
 
+  it 'initializes with invalid adapter' do
+    expect {
+      described_class.new('.send', adapter: :invalid)
+    }.to raise_error(NodeQuery::InvalidAdapterError)
+  end
+
   describe "#query_nodes" do
     it "matches nql" do
       query = described_class.new('.class[name=Synvert]', adapter: :parser)
