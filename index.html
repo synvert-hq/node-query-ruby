@@ -158,7 +158,7 @@
 
 <p>It provides two apis: <code>query_nodes</code> and <code>match_node?</code></p>
 
-<pre class="code ruby"><code class="ruby">node_query = NodeQuery.new(nql_or_rules: String | Hash) # Initialize NodeQuery
+<pre class="code ruby"><code class="ruby">node_query = NodeQuery.new(nql_or_rules: String | Hash, adapter: Symbol) # Initialize NodeQuery
 node_query.query_nodes(node: Node, options = { including_self: true, stop_at_first_match: false, recursive: true }): Node[] # Get the matching nodes.
 node_query.match_node?(node: Node): boolean # Check if the node matches nql or rules.
 </code></pre>
@@ -536,7 +536,7 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 </div></div>
 
       <div id="footer">
-  Generated on Sun Nov 26 10:49:02 2023 by
+  Generated on Mon Nov 27 00:19:36 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
