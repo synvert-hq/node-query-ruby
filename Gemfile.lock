@@ -44,6 +44,7 @@ GEM
     parser_node_ext (1.2.1)
       parser
     prettier_print (1.2.1)
+    prism (0.19.0)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -75,6 +76,7 @@ GEM
 PLATFORMS
   x86_64-darwin-21
   x86_64-darwin-22
+  x86_64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -85,6 +87,7 @@ DEPENDENCIES
   oedipus_lex
   parser
   parser_node_ext
+  prism
   racc
   rake (~> 13.0)
   rspec (~> 3.0)
