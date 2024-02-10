@@ -43,7 +43,7 @@ RSpec.describe NodeQuery::PrismAdapter do
   end
 
   describe "#get_siblings" do
-    xit "gets the siblings of node" do
+    it "gets the siblings of node" do
       node = prism_parse("class Synvert; end").body.first.constant_path
       siblings = adapter.get_siblings(node)
       expect(siblings.size).to eq 2
