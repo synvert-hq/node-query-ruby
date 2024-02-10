@@ -38,19 +38,19 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     oedipus_lex (2.6.0)
-    parser (3.2.2.3)
+    parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
-    parser_node_ext (1.2.1)
+    parser_node_ext (1.2.2)
       parser
     prettier_print (1.2.1)
     prism (0.22.0)
-    prism_ext (0.1.0)
+    prism_ext (0.2.0)
       prism
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    racc (1.6.2)
+    racc (1.7.3)
     rake (13.0.6)
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
@@ -69,9 +69,9 @@ GEM
       rspec-support (~> 3.11.0)
     rspec-support (3.11.0)
     shellany (0.0.1)
-    syntax_tree (6.1.1)
+    syntax_tree (6.2.0)
       prettier_print (>= 1.2.0)
-    syntax_tree_ext (0.6.4)
+    syntax_tree_ext (0.7.0)
       syntax_tree
     thor (1.2.1)
 
