@@ -13,3 +13,5 @@
 lib/node_query_lexer.rex.rb
 lib/node_query_parser.racc.rb
 lib/node_query_parser.output
+
+.vscode/
