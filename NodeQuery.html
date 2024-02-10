@@ -109,7 +109,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="NodeQuery/Adapter.html" title="NodeQuery::Adapter (class)">Adapter</a></span>, <span class='object_link'><a href="NodeQuery/Helper.html" title="NodeQuery::Helper (class)">Helper</a></span>, <span class='object_link'><a href="NodeQuery/InvalidAdapterError.html" title="NodeQuery::InvalidAdapterError (class)">InvalidAdapterError</a></span>, <span class='object_link'><a href="NodeQuery/MethodNotSupported.html" title="NodeQuery::MethodNotSupported (class)">MethodNotSupported</a></span>, <span class='object_link'><a href="NodeQuery/NodeRules.html" title="NodeQuery::NodeRules (class)">NodeRules</a></span>, <span class='object_link'><a href="NodeQuery/ParserAdapter.html" title="NodeQuery::ParserAdapter (class)">ParserAdapter</a></span>, <span class='object_link'><a href="NodeQuery/SyntaxTreeAdapter.html" title="NodeQuery::SyntaxTreeAdapter (class)">SyntaxTreeAdapter</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="NodeQuery/Adapter.html" title="NodeQuery::Adapter (class)">Adapter</a></span>, <span class='object_link'><a href="NodeQuery/Helper.html" title="NodeQuery::Helper (class)">Helper</a></span>, <span class='object_link'><a href="NodeQuery/InvalidAdapterError.html" title="NodeQuery::InvalidAdapterError (class)">InvalidAdapterError</a></span>, <span class='object_link'><a href="NodeQuery/MethodNotSupported.html" title="NodeQuery::MethodNotSupported (class)">MethodNotSupported</a></span>, <span class='object_link'><a href="NodeQuery/NodeRules.html" title="NodeQuery::NodeRules (class)">NodeRules</a></span>, <span class='object_link'><a href="NodeQuery/ParserAdapter.html" title="NodeQuery::ParserAdapter (class)">ParserAdapter</a></span>, <span class='object_link'><a href="NodeQuery/PrismAdapter.html" title="NodeQuery::PrismAdapter (class)">PrismAdapter</a></span>, <span class='object_link'><a href="NodeQuery/SyntaxTreeAdapter.html" title="NodeQuery::SyntaxTreeAdapter (class)">SyntaxTreeAdapter</a></span>
     
   
 </p>
@@ -288,17 +288,17 @@
       <pre class="lines">
 
 
-21
 22
 23
 24
 25
 26
 27
-28</pre>
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_nql_or_ruls'>nql_or_ruls</span><span class='comma'>,</span> <span class='label'>adapter:</span> <span class='symbol'>:parser</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_adapter_instance'>adapter_instance</span> <span class='op'>=</span> <span class='id identifier rubyid_get_adapter_instance'>get_adapter_instance</span><span class='lparen'>(</span><span class='id identifier rubyid_adapter'>adapter</span><span class='rparen'>)</span>
@@ -379,7 +379,6 @@
       <pre class="lines">
 
 
-50
 51
 52
 53
@@ -387,10 +386,11 @@
 55
 56
 57
-58</pre>
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_match_node?'>match_node?</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@expression</span>
@@ -538,7 +538,6 @@
       <pre class="lines">
 
 
-37
 38
 39
 40
@@ -546,10 +545,11 @@
 42
 43
 44
-45</pre>
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/node_query.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_nodes'>query_nodes</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@expression</span>
@@ -570,9 +570,9 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jan  1 23:16:38 2024 by
+  Generated on Sat Feb 10 14:32:34 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.2).
+  0.9.34 (ruby-3.2.3).
 </div>
 
     </div>
