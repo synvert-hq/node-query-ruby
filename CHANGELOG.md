@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.15.0 (2024-02-10)
+
+* Support `prism`
+
 ## 1.14.1 (2023-11-27)
 
 * Fix `ArrayValue` with `adapter` parameter
