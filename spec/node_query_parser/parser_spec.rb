@@ -7,7 +7,7 @@ RSpec.describe NodeQueryParser do
   describe '#query_nodes' do
     context 'parser' do
       let(:node) {
-        parse(<<~EOS)
+        parser_parse(<<~EOS)
           class User < Base
             def initialize(id, name)
               @id = id
@@ -164,7 +164,7 @@ RSpec.describe NodeQueryParser do
       end
 
       it 'matches multiple goto scope' do
-        node = parse("RSpec.describe User do\nend")
+        node = parser_parse("RSpec.describe User do\nend")
         expression = parser.parse('.block caller.arguments .const[name=User]')
         expect(expression.query_nodes(node)).to eq [node.caller.arguments.first]
       end
@@ -255,31 +255,31 @@ RSpec.describe NodeQueryParser do
       end
 
       it 'matches []' do
-        node = parse("user[:error]")
+        node = parser_parse("user[:error]")
         expression = parser.parse('.send[message=[]]')
         expect(expression.query_nodes(node)).to eq [node]
       end
 
       it 'matches []=' do
-        node = parse("user[:error] = 'error'")
+        node = parser_parse("user[:error] = 'error'")
         expression = parser.parse('.send[message=:[]=]')
         expect(expression.query_nodes(node)).to eq [node]
       end
 
       it 'matches nil and nil?' do
-        node = parse("nil.nil?")
+        node = parser_parse("nil.nil?")
         expression = parser.parse('.send[receiver=nil][message=nil?]')
         expect(expression.query_nodes(node)).to eq [node]
       end
 
       it 'matches empty string' do
-        node = parse("call('')")
+        node = parser_parse("call('')")
         expression = parser.parse('.send[message=call][arguments.first=""]')
         expect(expression.query_nodes(node)).to eq [node]
       end
 
       it 'matches hash value' do
-        node = parse("{ foo: 'bar' }")
+        node = parser_parse("{ foo: 'bar' }")
         expression = parser.parse(".hash[foo_value='bar']")
         expect(expression.query_nodes(node)).to eq [node]
       end

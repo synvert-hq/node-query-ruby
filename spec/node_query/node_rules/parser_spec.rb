@@ -5,7 +5,7 @@ RSpec.describe NodeQuery::NodeRules do
     context 'parser' do
       let(:adapter) { NodeQuery::ParserAdapter.new }
       let(:node) {
-        parse(<<~EOS)
+        parser_parse(<<~EOS)
           class User < Base
             def initialize(id, name)
               @id = id
@@ -154,37 +154,37 @@ RSpec.describe NodeQuery::NodeRules do
       end
 
       it 'matches []' do
-        node = parse("user[:error]")
+        node = parser_parse("user[:error]")
         rules = described_class.new({ node_type: 'send', message: :[] }, adapter: adapter)
         expect(rules.query_nodes(node)).to eq [node]
       end
 
       it 'matches []=' do
-        node = parse("user[:error] = 'error'")
+        node = parser_parse("user[:error] = 'error'")
         rules = described_class.new({ node_type: 'send', message: :[]= }, adapter: adapter)
         expect(rules.query_nodes(node)).to eq [node]
       end
 
       it 'matches nil and nil?' do
-        node = parse("nil.nil?")
+        node = parser_parse("nil.nil?")
         rules = described_class.new({ node_type: 'send', reciever: nil, message: :nil? }, adapter: adapter)
         expect(rules.query_nodes(node)).to eq [node]
       end
 
       it 'matches empty string' do
-        node = parse("call('')")
+        node = parser_parse("call('')")
         rules = described_class.new({ node_type: 'send', message: :call, arguments: { first: '' } }, adapter: adapter)
         expect(rules.query_nodes(node)).to eq [node]
       end
 
       it 'matches hash value' do
-        node = parse("{ foo: 'bar' }")
+        node = parser_parse("{ foo: 'bar' }")
         rules = described_class.new({ node_type: 'hash', foo_value: 'bar' }, adapter: adapter)
         expect(rules.query_nodes(node)).to eq [node]
       end
 
       it 'raises error' do
-        node = parse("Foobar.stub :new, &block")
+        node = parser_parse("Foobar.stub :new, &block")
         rules = described_class.new(
           {
             node_type: 'send',
