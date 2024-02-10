@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
-require 'syntax_tree'
-require 'syntax_tree_ext'
+require 'prism'
+require 'prism_ext'
 
-if RUBY_VERSION.to_i < 3
-  class Hash
-    def except(*keys)
-      self.reject { |k, _| keys.include?(k) }
-    end
-  end
-end
-
-class NodeQuery::SyntaxTreeAdapter
+class NodeQuery::PrismAdapter
   def is_node?(node)
-    node.is_a?(SyntaxTree::Node)
+    node.is_a?(Prism::Node)
   end
 
   def get_node_type(node)
@@ -21,15 +13,15 @@ class NodeQuery::SyntaxTreeAdapter
   end
 
   def get_source(node)
-    node.to_source
+    node.slice
   end
 
   def get_children(node)
-    node.deconstruct_keys([]).except(:location, :comments).values
+    node.child_nodes
   end
 
   def get_siblings(node)
-    child_nodes = node.parent_node.deconstruct_keys([]).except(:location, :comments).values
+    child_nodes = node.parent_node.child_nodes
     if child_nodes.is_a?(Array) && child_nodes.size == 1 && child_nodes.first.is_a?(Array)
       index = child_nodes.first.index(node)
       return child_nodes.first[index + 1...]

@@ -2,7 +2,7 @@
 
 RSpec.describe NodeQuery do
   let(:node) {
-    parse(<<~EOS)
+    parser_parse(<<~EOS)
       class Synvert
         def foo
           FactoryBot.create(:user, name: 'foo')

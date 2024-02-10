@@ -258,7 +258,7 @@ It matches def node whose arguments are either id or name.
 .class .send
 ```
 
-It matches send node whose ansestor is class node.
+It matches send node whose ancestor is class node.
 
 #### Child combinator
 
