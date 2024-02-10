@@ -93,7 +93,7 @@ module NodeQuery::Compiler
             end
           end
         else
-          NodeQuery.adapter.get_children(node).each do |child_node|
+          @adapter.get_children(node).each do |child_node|
             if match?(child_node, child_node)
               nodes << child_node
               break if options[:stop_at_first_match]
@@ -171,10 +171,10 @@ module NodeQuery::Compiler
           end
         end
       when '+'
-        next_sibling = node.siblings.first
+        next_sibling = @adapter.get_siblings(node).first
         nodes << next_sibling if @rest.match?(next_sibling, next_sibling)
       when '~'
-        node.siblings.each do |sibling_node|
+        @adapter.get_siblings(node).each do |sibling_node|
           nodes << sibling_node if @rest.match?(sibling_node, sibling_node)
         end
       end
