@@ -59,7 +59,10 @@ RSpec.describe NodeQuery::NodeRules do
       end
 
       it 'matches in' do
-        rules = described_class.new({ node_type: 'InstanceVariableWriteNode', name: { in: ['@id', '@name'] } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'InstanceVariableWriteNode', name: { in: ['@id', '@name'] } },
+          adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq [
           node.body.first.body.body.first.body.body.first,
           node.body.first.body.body.first.body.body.last
@@ -67,7 +70,10 @@ RSpec.describe NodeQuery::NodeRules do
       end
 
       it 'matches not_in' do
-        rules = described_class.new({ node_type: 'InstanceVariableWriteNode', name: { not_in: ['@id', '@name'] } }, adapter: adapter)
+        rules = described_class.new(
+          { node_type: 'InstanceVariableWriteNode', name: { not_in: ['@id', '@name'] } },
+          adapter: adapter
+        )
         expect(rules.query_nodes(node)).to eq []
       end
 
