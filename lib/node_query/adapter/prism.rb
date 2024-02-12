@@ -17,7 +17,7 @@ class NodeQuery::PrismAdapter
   end
 
   def get_children(node)
-    node.child_nodes
+    node.deconstruct_keys([]).filter { |key| !key.ends_with?('_loc') && [:flags, :lcoations].include?(key) }.values
   end
 
   def get_siblings(node)
