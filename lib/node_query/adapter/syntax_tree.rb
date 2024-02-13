@@ -17,7 +17,8 @@ class NodeQuery::SyntaxTreeAdapter
   end
 
   def get_children(node)
-    node.deconstruct_keys([]).filter { |key, _value| ![:location, :comments].include?(key) }.values
+    node.deconstruct_keys([]).filter { |key, _value| ![:location, :comments].include?(key) }
+        .values
   end
 
   def get_siblings(node)
