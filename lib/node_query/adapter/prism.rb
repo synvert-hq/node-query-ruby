@@ -9,7 +9,7 @@ class NodeQuery::PrismAdapter
   end
 
   def get_node_type(node)
-    node.class.name.split('::').last.to_sym
+    node.type
   end
 
   def get_source(node)

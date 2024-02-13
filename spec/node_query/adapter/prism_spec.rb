@@ -19,7 +19,7 @@ RSpec.describe NodeQuery::PrismAdapter do
   describe "#get_node_type" do
     it "gets the type of node" do
       node = prism_parse("class Synvert; end").body.first
-      expect(adapter.get_node_type(node)).to eq :ClassNode
+      expect(adapter.get_node_type(node)).to eq :class_node
     end
   end
 
