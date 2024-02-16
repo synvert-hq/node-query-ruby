@@ -17,11 +17,29 @@ class NodeQuery::PrismAdapter
   end
 
   def get_children(node)
-    node.deconstruct_keys([]).filter { |key| !key.ends_with?('_loc') && [:flags, :lcoations].include?(key) }.values
+    keys = []
+    children = []
+    node.deconstruct_keys([]).each do |key, value|
+      next if [:flags, :location].include?(key)
+
+      if key.to_s.end_with?('_loc')
+        new_key = key.to_s[0..-5]
+        unless keys.include?(new_key)
+          keys << new_key
+          children << node.send(new_key)
+        end
+      else
+        unless keys.include?(key.to_s)
+          keys << key.to_s
+          children << value
+        end
+      end
+    end
+    children
   end
 
   def get_siblings(node)
-    child_nodes = node.parent_node.child_nodes
+    child_nodes = get_children(node.parent_node)
     if child_nodes.is_a?(Array) && child_nodes.size == 1 && child_nodes.first.is_a?(Array)
       index = child_nodes.first.index(node)
       return child_nodes.first[index + 1...]
