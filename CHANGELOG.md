@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.15.1 (2024-02-16)
+
+* Use `deconstruct_keys` to get prism children
+* Get `PrismAdapter`
+* Read prism node type
+
 ## 1.15.0 (2024-02-10)
 
 * Support `prism`

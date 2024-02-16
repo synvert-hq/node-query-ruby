@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class NodeQuery
-  VERSION = "1.15.0"
+  VERSION = "1.15.1"
 end
