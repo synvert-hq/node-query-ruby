@@ -22,7 +22,7 @@ class NodeQuery::SyntaxTreeAdapter
   end
 
   def get_siblings(node)
-    child_nodes = node.parent_node.deconstruct_keys([]).except(:location, :comments).values
+    child_nodes = get_children(node.parent_node)
     if child_nodes.is_a?(Array) && child_nodes.size == 1 && child_nodes.first.is_a?(Array)
       index = child_nodes.first.index(node)
       return child_nodes.first[index + 1...]
