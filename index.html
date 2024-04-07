@@ -517,10 +517,12 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 
 <h2 id="label-Write+Adapter">Write Adapter</h2>
 
-<p>Different parser, like parser, syntax_tree, will generate different AST nodes, to make NodeQuery work for them all, we define an <a href="https://github.com/synvert-hq/node-query-ruby/blob/main/lib/node_query/adapter.rb">Adapter</a> interface, if you implement the Adapter interface, you can set it as NodeQuery’s adapter.</p>
+<p>Different parser, like prism, parser, syntax_tree, will generate different AST nodes, to make NodeQuery work for them all, we define an <a href="https://github.com/synvert-hq/node-query-ruby/blob/main/lib/node_query/adapter.rb">Adapter</a> interface, if you implement the Adapter interface, you can set it as NodeQuery’s adapter.</p>
 
-<p>It provides 2 adapters</p>
+<p>It provides 3 adapters</p>
 <ol><li>
+<p><code>PrismAdapter</code></p>
+</li><li>
 <p><code>ParserAdapter</code></p>
 </li><li>
 <p><code>SyntaxTreeAdapter</code></p>
@@ -538,7 +540,7 @@ node_query.match_node?(node: Node): boolean # Check if the node matches nql or r
 </div></div>
 
       <div id="footer">
-  Generated on Sun Apr  7 07:07:50 2024 by
+  Generated on Sun Apr  7 07:38:31 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.3).
 </div>
