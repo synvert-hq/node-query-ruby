@@ -475,7 +475,7 @@ It matches def node whose arguments are id and name.
 ## Write Adapter
 
 Different parser, like parser, syntax_tree, will generate different AST nodes, to make NodeQuery work for them all,
-we define an [Adapter](https://github.com/xinminlabs/node-query-ruby/blob/main/lib/node_query/adapter.rb) interface,
+we define an [Adapter](https://github.com/synvert-hq/node-query-ruby/blob/main/lib/node_query/adapter.rb) interface,
 if you implement the Adapter interface, you can set it as NodeQuery's adapter.
 
 It provides 2 adapters
@@ -491,4 +491,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/xinminlabs/node-query-ruby.
+Bug reports and pull requests are welcome on GitHub at https://github.com/synvert-hq/node-query-ruby.
