@@ -145,14 +145,18 @@ RSpec.describe NodeQueryParser do
         expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body.first]
       end
 
-      it 'matches next sibling node' do
-        expression = parser.parse('.ivasgn[variable=@id] + .ivasgn[variable=@name]')
-        expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body[1]]
-      end
+      if ENV['TEST_SIBLINGS'] == 'true'
+        require 'parser_node_ext/parent_node_ext'
 
-      it 'matches sebsequent sibling node' do
-        expression = parser.parse('.ivasgn[variable=@id] ~ .ivasgn[variable=@name]')
-        expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body[1]]
+        it 'matches next sibling node' do
+          expression = parser.parse('.ivasgn[variable=@id] + .ivasgn[variable=@name]')
+          expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body[1]]
+        end
+
+        it 'matches sebsequent sibling node' do
+          expression = parser.parse('.ivasgn[variable=@id] ~ .ivasgn[variable=@name]')
+          expect(expression.query_nodes(node)).to eq [node.body.first.body.first.body[1]]
+        end
       end
 
       it 'matches goto scope' do

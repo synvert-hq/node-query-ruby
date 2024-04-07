@@ -148,14 +148,18 @@ RSpec.describe NodeQueryParser do
         expect(expression.query_nodes(node)).to eq [node.body.first.body.body.first.body.body.first.value]
       end
 
-      it 'matches next sibling node' do
-        expression = parser.parse('.instance_variable_write_node[name=@id] + .instance_variable_write_node[name=@name]')
-        expect(expression.query_nodes(node)).to eq [node.body.first.body.body.first.body.body.last]
-      end
+      if ENV['TEST_SIBLINGS'] == 'true'
+        require 'prism_ext/parent_node_ext'
 
-      it 'matches sebsequent sibling node' do
-        expression = parser.parse('.instance_variable_write_node[name=@id] ~ .instance_variable_write_node[name=@name]')
-        expect(expression.query_nodes(node)).to eq [node.body.first.body.body.first.body.body.last]
+        it 'matches next sibling node' do
+          expression = parser.parse('.instance_variable_write_node[name=@id] + .instance_variable_write_node[name=@name]')
+          expect(expression.query_nodes(node)).to eq [node.body.first.body.body.first.body.body.last]
+        end
+
+        it 'matches sebsequent sibling node' do
+          expression = parser.parse('.instance_variable_write_node[name=@id] ~ .instance_variable_write_node[name=@name]')
+          expect(expression.query_nodes(node)).to eq [node.body.first.body.body.first.body.body.last]
+        end
       end
 
       it 'matches goto scope' do
