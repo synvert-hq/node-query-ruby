@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.15.2 (2024-04-07)
+
+* Update `prism_ext` to 0.3.0
+* Update `syntax_tree_ext` to 0.8.1
+* Update `parser_node_ext` to 1.3.0
+* Require `parent_node_ext` only when necessary
+
 ## 1.15.1 (2024-02-16)
 
 * Use `deconstruct_keys` to get prism children
