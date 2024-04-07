@@ -1,5 +1,8 @@
 # NodeQuery
 
+[![Build Status](https://github.com/synvert-hq/node-query-ruby/actions/workflows/main.yml/badge.svg)](https://github.com/synvert-hq/node-query-ruby/actions/workflows/main.yml)
+[![Gem Version](https://img.shields.io/gem/v/node_query.svg)](https://rubygems.org/gems/node_query)
+
 NodeQuery defines a NQL (node query language) and node rules to query AST nodes.
 
 ## Table of Contents
