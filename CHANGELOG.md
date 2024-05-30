@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.15.3 (2024-05-30)
+
+* Fix actual value is nil
+
 ## 1.15.2 (2024-04-07)
 
 * Update `prism_ext` to 0.3.0
