@@ -238,6 +238,12 @@ RSpec.describe NodeQuery::NodeRules do
         rules = described_class.new({ node_type: 'hash_node', foo_value: 'bar' }, adapter: adapter)
         expect(rules.query_nodes(node)).to eq [node.body.first]
       end
+
+      it 'matches missing hash value' do
+        node = prism_parse("{ foo: 'bar' }")
+        rules = described_class.new({ node_type: 'hash_node', bar_value: :foo }, adapter: adapter)
+        expect(rules.query_nodes(node)).to eq []
+      end
     end
   end
 end

@@ -101,7 +101,7 @@ class NodeQuery::NodeRules
         actual_source = @adapter.get_source(actual)
         actual_source == ":#{expected}" || actual_source == expected.to_s
       else
-        actual.to_sym == expected
+        actual&.to_sym == expected
       end
     when String
       if @adapter.is_node?(actual)
