@@ -13,7 +13,7 @@ class NodeQuery::PrismAdapter
   end
 
   def get_source(node)
-    node.slice
+    node.to_source
   end
 
   def get_children(node)
