@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.15.4 (2024-07-02)
+
+* Drop support ruby 2.6
+* Update `prism_ext` to 0.3.3
+* Use `Prism::Node#to_source`
+
 ## 1.15.3 (2024-05-30)
 
 * Fix actual value is nil
