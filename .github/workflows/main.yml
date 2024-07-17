@@ -22,8 +22,6 @@ jobs:
         bundler-cache: true
     - name: Run tests
       run: bundle exec rake
-    - name: Run tests for siblings
-      run: TEST_SIBLINGS=true bundle exec rake
 
   deploy:
     runs-on: ubuntu-latest

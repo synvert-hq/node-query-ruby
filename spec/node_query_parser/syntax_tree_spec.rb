@@ -148,18 +148,14 @@ RSpec.describe NodeQueryParser do
         expect(expression.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first.bodystmt.statements.body.first.target]
       end
 
-      if ENV['TEST_SIBLINGS'] == 'true'
-        require 'syntax_tree_ext/parent_node_ext'
+      it 'matches next sibling node' do
+        expression = parser.parse('.Assign[target=@id] + .Assign[target=@name]')
+        expect(expression.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first.bodystmt.statements.body.last]
+      end
 
-        it 'matches next sibling node' do
-          expression = parser.parse('.Assign[target=@id] + .Assign[target=@name]')
-          expect(expression.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first.bodystmt.statements.body.last]
-        end
-
-        it 'matches sebsequent sibling node' do
-          expression = parser.parse('.Assign[target=@id] ~ .Assign[target=@name]')
-          expect(expression.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first.bodystmt.statements.body.last]
-        end
+      it 'matches sebsequent sibling node' do
+        expression = parser.parse('.Assign[target=@id] ~ .Assign[target=@name]')
+        expect(expression.query_nodes(node)).to eq [node.body.first.bodystmt.statements.body.first.bodystmt.statements.body.last]
       end
 
       it 'matches goto scope' do

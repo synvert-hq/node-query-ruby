@@ -43,18 +43,14 @@ RSpec.describe NodeQuery::PrismAdapter do
     end
   end
 
-  if ENV['TEST_SIBLINGS'] == 'true'
-    require 'prism_ext/parent_node_ext'
-
-    describe "#get_siblings" do
-      it "gets the siblings of node" do
-        node = prism_parse("class Synvert; end").body.first.constant_path
-        siblings = adapter.get_siblings(node)
-        expect(siblings.size).to eq 5
-        expect(siblings[0]).to be_nil
-        expect(siblings[1]).to be_nil
-        expect(siblings[4]).to eq :Synvert
-      end
+  describe "#get_siblings" do
+    it "gets the siblings of node" do
+      node = prism_parse("class Synvert; end").body.first.constant_path
+      siblings = adapter.get_siblings(node)
+      expect(siblings.size).to eq 5
+      expect(siblings[0]).to be_nil
+      expect(siblings[1]).to be_nil
+      expect(siblings[4]).to eq :Synvert
     end
   end
 end

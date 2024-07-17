@@ -38,14 +38,10 @@ RSpec.describe NodeQuery::ParserAdapter do
     end
   end
 
-  if ENV['TEST_SIBLINGS'] == 'true'
-    require 'parser_node_ext/parent_node_ext'
-
-    describe "#get_siblings" do
-      it "gets the siblings of node" do
-        node = parser_parse("class Synvert; end").children.first
-        expect(adapter.get_siblings(node)).to eq [nil, nil]
-      end
+  describe "#get_siblings" do
+    it "gets the siblings of node" do
+      node = parser_parse("class Synvert; end").children.first
+      expect(adapter.get_siblings(node)).to eq [nil, nil]
     end
   end
 end

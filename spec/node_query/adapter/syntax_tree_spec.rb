@@ -42,17 +42,13 @@ RSpec.describe NodeQuery::SyntaxTreeAdapter do
     end
   end
 
-  if ENV['TEST_SIBLINGS'] == 'true'
-    require 'syntax_tree_ext/parent_node_ext'
-
-    describe "#get_siblings" do
-      it "gets the siblings of node" do
-        node = syntax_tree_parse("class Synvert; end").body.first.constant
-        siblings = adapter.get_siblings(node)
-        expect(siblings.size).to eq 2
-        expect(siblings[0]).to be_nil
-        expect(siblings[1].class).to eq SyntaxTree::BodyStmt
-      end
+  describe "#get_siblings" do
+    it "gets the siblings of node" do
+      node = syntax_tree_parse("class Synvert; end").body.first.constant
+      siblings = adapter.get_siblings(node)
+      expect(siblings.size).to eq 2
+      expect(siblings[0]).to be_nil
+      expect(siblings[1].class).to eq SyntaxTree::BodyStmt
     end
   end
 end
