@@ -41,11 +41,11 @@ GEM
     parser (3.3.4.0)
       ast (~> 2.4.1)
       racc
-    parser_node_ext (1.4.1)
+    parser_node_ext (1.4.2)
       parser
     prettier_print (1.2.1)
     prism (0.30.0)
-    prism_ext (0.4.1)
+    prism_ext (0.4.2)
       prism
     pry (0.14.1)
       coderay (~> 1.1)
@@ -71,7 +71,7 @@ GEM
     shellany (0.0.1)
     syntax_tree (6.2.0)
       prettier_print (>= 1.2.0)
-    syntax_tree_ext (0.9.1)
+    syntax_tree_ext (0.9.2)
       syntax_tree
     thor (1.2.1)
 
