@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.16.0 (2024-12-27)
+
+* Support `prism` 1.3.0
+
 ## 1.15.4 (2024-07-02)
 
 * Drop support ruby 2.6
