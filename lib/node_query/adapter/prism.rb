@@ -20,7 +20,7 @@ class NodeQuery::PrismAdapter
     keys = []
     children = []
     node.deconstruct_keys([]).each do |key, value|
-      next if [:flags, :location].include?(key)
+      next if [:node_id, :flags, :location].include?(key)
 
       if key.to_s.end_with?('_loc')
         new_key = key.to_s[0..-5]
