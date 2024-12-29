@@ -193,9 +193,16 @@ RSpec.describe NodeQuery::NodeRules do
           },
           adapter: adapter
         )
+
+        expected_error_message = if RUBY_VERSION >= '3.4.0'
+          '{type: "sym"} is not supported'
+        else
+          '{:type=>"sym"} is not supported'
+        end
+
         expect {
           rules.query_nodes(node)
-        }.to raise_error(NodeQuery::MethodNotSupported, '{:type=>"sym"} is not supported')
+        }.to raise_error(NodeQuery::MethodNotSupported, expected_error_message)
       end
 
       it 'sets option including_self to false' do
