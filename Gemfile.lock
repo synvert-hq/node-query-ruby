@@ -38,6 +38,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     oedipus_lex (2.6.3)
+    ostruct (0.6.3)
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
@@ -89,6 +90,7 @@ DEPENDENCIES
   guard-rspec
   node_query!
   oedipus_lex
+  ostruct (~> 0.6)
   parser_node_ext
   prism_ext
   racc
