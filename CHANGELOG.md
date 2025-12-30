@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.17.0 (2025-12-30)
+
+* Support ruby 4.0
+* Drop support ruby 2.7, 3.0, 3.1
+
 ## 1.16.0 (2024-12-27)
 
 * Support `prism` 1.3.0
